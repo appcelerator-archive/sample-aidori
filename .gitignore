@@ -2,5 +2,6 @@
 .project
 .settings
 api.jsca 
-
+build/iphone/*
+build/android/*
 
