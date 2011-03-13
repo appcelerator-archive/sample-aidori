@@ -4,7 +4,7 @@ var cc ={win:Ti.UI.currentWindow};
 
 (function(){
 	cc.aboutImage = Ti.UI.createImageView({
-	  url:'../images/about.png',
+	  //url:'../images/about.png',
 	});
 	cc.win.add(cc.aboutImage);
 	
