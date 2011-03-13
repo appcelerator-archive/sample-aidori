@@ -13,12 +13,15 @@ var cc ={win:Ti.UI.currentWindow};
 	});
 	
 	//Titanium.Locale.currentCountry
-	cc.getCountry = function() {
-		return(Ti.Locale.currentCountry=='ja') ? 'ja' : 'en';
-	};
-	var f = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '/htmlfiles/'+cc.getCountry()+'/about.html');
+	try {
+		f = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '/htmlfiles/'+cc.getCountry()+'/about.html');
+		var  html = f.read();
+	} catch (e) {
+		f = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '/htmlfiles/en/about.html');
+		var  html = f.read();		
+	}
 	
-	var  html = f.read();
+	
 	
 	cc.webView = Ti.UI.createWebView({
 	  top: 0,
