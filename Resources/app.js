@@ -41,7 +41,7 @@ var volunteerTab = Titanium.UI.createTab({
 
 var aboutWin = Titanium.UI.createWindow({  
   url:'javascript/about.js',
-  backgroundColor:'#476e8b',
+  backgroundColor:'#000',
   title:L('title_about'),
   barColor:"#333",
   backTitle:'Back'
