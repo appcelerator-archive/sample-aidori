@@ -37,6 +37,8 @@
 	<string name="twitter_refresh">Refresh Tweets</string>
 	<string name="contribute_detail_title">Charity Details</string>
 	<string name="contribute_page_title">Ways To Contribute</string>
-	<string name="contribute_detail_phone_button">Phone</string>
-	<string name="contribute_detail_web_button">Phone</string>	
+	<string name="contribute_detail_phone_donate">Phone:</string>
+	<string name="contribute_detail_address_donate">Address:</string>
+	<string name="contribute_detail_phone_button">Phone</string>	
+	<string name="contribute_detail_web_button">Website</string>
 </resources>
