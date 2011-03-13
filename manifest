@@ -1,8 +1,8 @@
-#appname: HonshuQuake
-#publisher: fusion94
-#url: http://developer.appcelerator.com
-#image: appicon.png
-#appid: com.appcelerator.honshuquake
-#desc: undefined
-#type: mobile
-#guid: 80641603-5e95-461e-ba22-735a07d23e1a
+#appname:SendaiQuake
+#publisher:Appcelerator
+#url:http://developer.appcelerator.com
+#image:appicon.png
+#appid:com.appcelerator.sendaiquake
+#desc:Crisis App for Sendai Earthquake
+#type:mobile
+#guid:80641603-5e95-461e-ba22-735a07d23e1a

@@ -4,12 +4,12 @@
         <target device="iphone">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <id>com.appcelerator.honshuquake</id>
+    <id>com.appcelerator.sendaiquake</id>
     <name>HonshuQuake</name>
     <version>1.0</version>
     <publisher>Appcelerator</publisher>
     <url>http://developer.appcelerator.com</url>
-    <description>Crisis App for Honshu Earthquake</description>
+    <description>Crisis App for Sendai Earthquake</description>
     <copyright>2006-2011</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
