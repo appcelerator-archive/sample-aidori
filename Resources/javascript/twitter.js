@@ -92,6 +92,18 @@ Ti.App.fireEvent('show_indicator');
 	}
 
 	if(Ti.Platform.name == "android") {
+/*
+		var activity = Ti.Android.currentActivity;
+		activity.onCreateOptionsMenu = function(e) {
+			var menu = e.menu;
+			var menuItem = menu.add({ title: L("twitter_refresh")});
+			menuItem.addEventListner('click', function(e) {
+				Ti.App.fireEvent('show_indicator',{});
+				cc.retrieveTwitterFeed();								
+			});
+			menu.data[0] = menuItem;
+		};
+*/
 	  var menu = Ti.UI.Android.OptionMenu.createMenu();
 	  var refreshMenuItem = Ti.UI.Android.OptionMenu.createMenuItem({
 	      title : Ti.Locale.getString('twitter_refresh')
@@ -102,6 +114,7 @@ Ti.App.fireEvent('show_indicator');
 	  });
 	  menu.add(refreshMenuItem);
 	  Ti.UI.Android.OptionMenu.setMenu(menu); 
+
 	}
 
 	//--------------------------------------------

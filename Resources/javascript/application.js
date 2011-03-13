@@ -2,7 +2,7 @@ var DEFAULT_BAR_COLOR = "#000";
 var TWITTER_ACCOUNT = 'prayforjapan';
 
 // Set orientation
-Ti.UI.orientation = Ti.UI.PORTRAIT;
+//Ti.UI.orientation = Ti.UI.PORTRAIT;
 
 function noNetworkAlert() {
     Ti.App.fireEvent('hide_indicator',{});
