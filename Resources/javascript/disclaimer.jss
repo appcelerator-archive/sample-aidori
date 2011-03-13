@@ -21,3 +21,18 @@
   font-weight:'normal';
   textid: 'disclaimer_text'
 }
+
+#bgImage {
+  top:0;
+  left:0;
+  height:'auto';
+  width:'auto';
+}
+
+#scrollView {
+  top: 0;
+  left: 0;
+  bottom:80;
+  contentHeight: 'auto';
+  contentWidth: 320;
+}
