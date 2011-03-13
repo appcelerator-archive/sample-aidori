@@ -29,13 +29,13 @@ var twitterTab = Titanium.UI.createTab({
 var contributeWin = Titanium.UI.createWindow({  
   url:'javascript/contribute.js',
   backgroundImage:'images/back.png',
-  title:L('title_volunteer'),
+  title:L('title_contribute'),
   barColor:"#333",
   backTitle:'Back'
 });
 var contributeTab = Titanium.UI.createTab({  
   icon:'images/icon_volunteer.png',
-  title:L('tab_volunteer'),
+  title:L('tab_contribute'),
   window:contributeWin
 });
 
