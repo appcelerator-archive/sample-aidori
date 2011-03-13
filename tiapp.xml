@@ -5,7 +5,7 @@
         <target device="android">true</target>
     </deployment-targets>
     <id>com.appcelerator.sendaiquake</id>
-    <name>HonshuQuake</name>
+    <name>SendaiQuake</name>
     <version>1.0</version>
     <publisher>Appcelerator</publisher>
     <url>http://developer.appcelerator.com</url>
