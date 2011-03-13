@@ -18,59 +18,29 @@ function buildData(tweet) {
   row.tweetId = tweet.id;
   row.tweetText = tweet.text;
   
-  var nameLabel = Ti.UI.createLabel({
-   color:'#fff',
-   font:{fontSize:13, fontWeight:'bold'},
-   text:tweet.from_user,
-   top:8,
-   left:68,
-   width:120,
-   height:16,
-   textAlign:'left'
-  });
+  var nameLabel = Ti.UI.createLabel({text:tweet.from_user,id:'nameLabel'});
   row.add(nameLabel);
   
   var dateLabel = Ti.UI.createLabel({
-   color:'#eee',
-   font:{fontSize:10, fontWeight:'normal'},
    text:DateHelper.time_ago_in_words_with_parsing(tweet.created_at+""),
-   top:8,
-   left:198,
-   width:110,
-   height:16,
-   textAlign:'right'
+	id:'dateLabel'
   });
   row.add(dateLabel);
   
-  var avatarView = Ti.UI.createView({
-  	top:10,
-  	left:10,
-  	width:48,
-  	height:48,
-  	borderRadius:4
-  });
+  var avatarView = Ti.UI.createView({id:'avatarView',borderRadius:4});
   
   var avatarImage = Ti.UI.createImageView({
-    url:tweet.profile_image_url,
-  	top:0,
-  	left:0,
-  	width:48,
-  	height:48,
-  	preventDefaultImage:true
+	    image:tweet.profile_image_url,
+	  	preventDefaultImage:true,
+		id:'avatarImage'
   });
   
   avatarView.add(avatarImage);
   row.add(avatarView);
     
   var tweetLabel = Ti.UI.createLabel({
-  	color:'#fff',
-  	font:{fontSize:14, fontWeight:'normal'},
-  	text:(tweet.text.replace(/&amp;/g,"&"))+"\n\n",
-  	top:30,
-  	left:68,
-  	width:236,
-  	height:'auto',
-  	textAlign:'left'
+	  	text:(tweet.text.replace(/&amp;/g,"&"))+"\n\n",
+		id:'tweetLabel'
   });
   row.add(tweetLabel);
   
@@ -80,14 +50,22 @@ function buildData(tweet) {
     id:tweet.id,
     text:tweet.text
   });
-}
+};
+
+function noNetworkAlert(){
+    Ti.App.fireEvent('hide_indicator',{});
+  	Titanium.UI.createAlertDialog({
+  	  title:Ti.Locale.getString('twitter_no_network_title'),
+  	  message:Ti.Locale.getString('twitter_no_network_msg')
+  	}).show();	
+};
 
 function getTimeFromDate(dateString) {
 	var hour = dateString.substring(11,13)*1;
 	var min = dateString.substring(14,16);
 	if(hour > 12) { hour = hour - 12; }
 	return hour+':'+min;
-}
+};
 
 function timeOfDay(hour) {
 	if(hour > 11) {
@@ -95,20 +73,20 @@ function timeOfDay(hour) {
 	} else {
 		return "AM";
 	}
-}
+};
 
 function retrieveTwitterFeed() {
 	var url = "http://search.twitter.com/search.json?q="+encodeURIComponent(TWITTER_ACCOUNT);
-	var xhr = Titanium.Network.createHTTPClient();
+	var xhr = Ti.Network.createHTTPClient();
  
-  Titanium.API.info(url);
+  	Ti.API.info(url);
 	xhr.open("GET",url);
 	xhr.onreadystatechange = function() {
-	  Titanium.API.info(this.readyState);
-	  Titanium.API.info(this.status);
+	  Ti.API.info(this.readyState);
+	  Ti.API.info(this.status);
     if (this.readyState == 4) {
 			var tweets = eval('(' + this.responseText + ')');
-			Titanium.API.info(this.responseText);
+			Ti.API.info(this.responseText);
 			var results = tweets.results;
 
   		for(var index in results) {
@@ -131,37 +109,32 @@ function retrieveTwitterFeed() {
 				
         win.add(tableView);
 			} else {
-				tableView.setData(data,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.UP});
+				tableView.setData(data,{animationStyle:Ti.UI.iPhone.RowAnimationStyle.UP});
 			}
       Titanium.App.fireEvent('hide_indicator',{});
 		}
 	};
 	xhr.send();
-}
+};
  
-var refreshButton = Titanium.UI.createButton({systemButton:Titanium.UI.iPhone.SystemButton.REFRESH});
+var refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
 refreshButton.addEventListener('click',function()	{
-  if (Titanium.Network.online == false){
-    Titanium.App.fireEvent('hide_indicator',{});
-  	Titanium.UI.createAlertDialog({
-  	  title:"Connection Required",
-  	  message:"We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features."
-  	}).show();
+  if (!Ti.Network.online){
+    Ti.App.fireEvent('hide_indicator',{});
+	noNetworkAlert();
   } else {
-    Titanium.App.fireEvent('show_indicator',{});
+    Ti.App.fireEvent('show_indicator',{});
     data = [];
     rowData = [];
     retrieveTwitterFeed();
   }
 });
+
 Titanium.UI.currentWindow.setLeftNavButton(refreshButton);
 
-if (Titanium.Network.online == false){
-  Titanium.App.fireEvent('hide_indicator',{});
-	Titanium.UI.createAlertDialog({
-	  title:"Connection Required",
-	  message:"We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features."
-	}).show();
+if (!Ti.Network.online){
+  	Ti.App.fireEvent('hide_indicator',{});
+	noNetworkAlert();
 } else {
 	retrieveTwitterFeed();
 }
