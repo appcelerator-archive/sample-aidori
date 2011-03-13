@@ -41,4 +41,9 @@
 	<string name="contribute_detail_address_donate">Address:</string>
 	<string name="contribute_detail_phone_button">Phone</string>	
 	<string name="contribute_detail_web_button">Website</string>
+	<string name="about_quake">About Sendai Earthquake</string>
+	<string name="about_cc">About Crisis Commons</string>
+	<string name="about_app">About this Application</string>
+	<string name="about_cancel">Cancel</string>
+	<string name="about_dialog_title">About</string>
 </resources>
