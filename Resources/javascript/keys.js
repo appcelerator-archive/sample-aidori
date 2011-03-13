@@ -1,1 +1,1 @@
-var api_key = "";
+var TWITTER_ACCOUNT = 'prayforjapan';

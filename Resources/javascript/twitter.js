@@ -1,4 +1,4 @@
-Ti.include('./application.js','./date_extensions.js');
+Ti.include('./application.js','./date_extensions.js','./keys.js');
 
 var cc ={win:Ti.UI.currentWindow};
 Ti.App.fireEvent('show_indicator');
