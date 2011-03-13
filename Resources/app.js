@@ -52,23 +52,10 @@ var aboutTab = Titanium.UI.createTab({
   window:aboutWin
 });
 
-var settingsWin = Titanium.UI.createWindow({  
-  url:'javascript/settings.js',
-  title:L('title_settings'),
-  barColor:"#333",
-  backTitle:'Back'
-});
-var settingsTab = Titanium.UI.createTab({  
-  icon:'images/icon_preferences.png',
-  title:L('tab_settings'),
-  window:settingsWin
-});
-
 tabGroup.addTab(reportTab);  
 tabGroup.addTab(twitterTab);  
 tabGroup.addTab(volunteerTab);  
 tabGroup.addTab(aboutTab);  
-tabGroup.addTab(settingsTab);  
 
 var disclaimerTabGroup = Titanium.UI.createTabGroup();
 var disclaimerWin = Titanium.UI.createWindow({
