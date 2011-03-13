@@ -94,7 +94,7 @@ Ti.App.fireEvent('show_indicator');
 	if(Ti.Platform.name == "android") {
 	  var menu = Ti.UI.Android.OptionMenu.createMenu();
 	  var refreshMenuItem = Ti.UI.Android.OptionMenu.createMenuItem({
-	      title : 'Refresh Tweets'
+	      title : Ti.Locale.getString('twitter_refresh')
 	  });
 	  refreshMenuItem.addEventListener('click', function(){
 	    Ti.App.fireEvent('show_indicator',{});

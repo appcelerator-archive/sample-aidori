@@ -35,4 +35,6 @@
 	<string name="twitter_yearago">about 1 year ago</string>
 	<string name="twitter_over">over </string>
 	<string name="twitter_yearsago"> years ago</string>
+	<string name="twitter_refresh">Refresh Tweets</string>
+	<string name="contribute_detail_title">Charity Details</string>
 </resources>
