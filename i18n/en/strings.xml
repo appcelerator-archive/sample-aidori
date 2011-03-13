@@ -36,4 +36,7 @@
 	<string name="twitter_yearsago"> years ago</string>
 	<string name="twitter_refresh">Refresh Tweets</string>
 	<string name="contribute_detail_title">Charity Details</string>
+	<string name="contribute_page_title">Ways To Contribute</string>
+	<string name="contribute_detail_phone_button">Phone</string>
+	<string name="contribute_detail_web_button">Phone</string>	
 </resources>
