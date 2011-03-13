@@ -11,3 +11,7 @@ function noNetworkAlert() {
   	  message:Ti.Locale.getString('twitter_no_network_msg')
   	}).show();	
 };
+
+function isAndroid(){
+	return (Ti.Platform.name == 'android');
+};
