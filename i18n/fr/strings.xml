@@ -36,7 +36,7 @@
 	<string name="twitter_yearsago"> ans</string>
 	<string name="twitter_refresh">Actualiser les Twits</string>
 	<string name="contribute_detail_title">Détails de charité</string>
-    <string name="contribute_page_title">Comment participer</string>
+	<string name="contribute_page_title">Comment participer</string>
 	<string name="contribute_detail_phone_button">Téléphone</string>
 	<string name="contribute_detail_web_button">Téléphone</string>	
 </resources>

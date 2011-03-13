@@ -271,19 +271,6 @@ wetSlider.addEventListener('change',function(e) {
 
 scrollView.add(wetView);
 
-var reportShoreLabel = Ti.UI.createLabel({
-  top: (Ti.Platform.name != 'android' ? 370 : 500),
-  left: 0,
-  width:320,
-  font:{fontSize:14, fontWeight:'normal'},
-  color:'#fff',
-  textAlign:'center',
-  text:'To report oiled shoreline call: \n(866) 448-5816\n\nTo report oiled wildlife call: \n(866) 557-1401'
-});
-
-scrollView.add(reportShoreLabel);
-
-
 win.add(scrollView);
 
 // Media management
