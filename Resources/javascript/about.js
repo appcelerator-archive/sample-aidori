@@ -28,6 +28,7 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.webView = Ti.UI.createWebView({
 	  scalesPageToFit:true,
 	  backgroundColor:'transparent',
+      touchEnabled: false, //Avoid bounce on iPhone
 	  html: "<html><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' /><body style='padding: 10px; font-size:14px;color:#fff;font-family:sans-serif;'>"+ cc.html + '</body></html>'
 	});
 	
