@@ -26,17 +26,17 @@ var twitterTab = Titanium.UI.createTab({
   window:twitterWin
 });
 
-var volunteerWin = Titanium.UI.createWindow({  
-  url:'javascript/volunteer.js',
+var contributeWin = Titanium.UI.createWindow({  
+  url:'javascript/contribute.js',
   backgroundImage:'images/back.png',
   title:L('title_volunteer'),
   barColor:"#333",
   backTitle:'Back'
 });
-var volunteerTab = Titanium.UI.createTab({  
+var contributeTab = Titanium.UI.createTab({  
   icon:'images/icon_volunteer.png',
   title:L('tab_volunteer'),
-  window:volunteerWin
+  window:contributeWin
 });
 
 var aboutWin = Titanium.UI.createWindow({  
@@ -54,7 +54,7 @@ var aboutTab = Titanium.UI.createTab({
 
 tabGroup.addTab(reportTab);  
 tabGroup.addTab(twitterTab);  
-tabGroup.addTab(volunteerTab);  
+tabGroup.addTab(contributeTab);  
 tabGroup.addTab(aboutTab);  
 
 var disclaimerTabGroup = Titanium.UI.createTabGroup();
@@ -82,15 +82,15 @@ Ti.App.addEventListener('remove_disclaimer', function() {
   tabGroup.open();
 });
 
-//if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
-//  tabGroup.open();
-//} else {
-//  if (Titanium.Platform.name == 'android') {
-//    disclaimerWin.open();
-//  } else {
+if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
+  tabGroup.open();
+} else {
+  if (Titanium.Platform.name == 'android') {
+    disclaimerWin.open();
+  } else {
     disclaimerTabGroup.open();
-//  }
-//}
+  }
+}
 
 
 // ---------------------------------------------------------------
