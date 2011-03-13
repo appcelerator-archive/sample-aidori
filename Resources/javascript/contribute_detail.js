@@ -11,7 +11,7 @@ Ti.include('./application.js');
 		cc.win.rightNavButton=cc.doneButton;
 	}
 	
-	cc.mainContainer = Ti.UI.createView({layout:'vertical'});
+	cc.mainContainer = Ti.UI.createView({top:isAndroid() ? 20 : 5 ,layout:'vertical'});
 	cc.win.add(cc.mainContainer);
 		
 	cc.nameBox = Ti.UI.createView({id:'nameBox'});
