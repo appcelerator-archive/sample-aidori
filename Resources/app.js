@@ -6,7 +6,7 @@ var reportWin = Titanium.UI.createWindow({
   url:'javascript/report.js',
   barColor:"#333",
   backgroundImage:'images/back.png',
-  titleid:'crisis_title'
+  titleid:L('crisis_title')
 });
 var reportTab = Titanium.UI.createTab({  
   icon:'images/icon_report.png',
@@ -16,71 +16,58 @@ var reportTab = Titanium.UI.createTab({
 
 var twitterWin = Titanium.UI.createWindow({  
   url:'javascript/twitter.js',
-  titleid:'crisis_title',
+  titleid:L('title_twitter'),
   barColor:"#333",
   backgroundColor:'#5a5c64'
 });
 var twitterTab = Titanium.UI.createTab({  
   icon:'images/icon_twitter2.png',
-  title:'Twitter',
+  title:L('tab_twitter'),
   window:twitterWin
 });
 
 var volunteerWin = Titanium.UI.createWindow({  
   url:'javascript/volunteer.js',
   backgroundImage:'images/back.png',
-  title:'Volunteer',
+  title:L('title_volunteer'),
   barColor:"#333",
   backTitle:'Back'
 });
 var volunteerTab = Titanium.UI.createTab({  
   icon:'images/icon_volunteer.png',
-  title:'Volunteer',
+  title:L('tab_volunteer'),
   window:volunteerWin
 });
 
 var aboutWin = Titanium.UI.createWindow({  
   url:'javascript/about.js',
   backgroundColor:'#476e8b',
-  title:'About Oil Reporter',
+  title:L('title_about'),
   barColor:"#333",
   backTitle:'Back'
 });
 var aboutTab = Titanium.UI.createTab({  
   icon:'images/icon_about.png',
-  title:'About',
+  title:L('tab_about'),
   window:aboutWin
-});
-
-var settingsWin = Titanium.UI.createWindow({  
-  url:'javascript/settings.js',
-  title:'Settings',
-  barColor:"#333",
-  backTitle:'Back'
-});
-var settingsTab = Titanium.UI.createTab({  
-  icon:'images/icon_preferences.png',
-  title:'Settings',
-  window:settingsWin
 });
 
 tabGroup.addTab(reportTab);  
 tabGroup.addTab(twitterTab);  
 tabGroup.addTab(volunteerTab);  
 tabGroup.addTab(aboutTab);  
-tabGroup.addTab(settingsTab);  
 
 var disclaimerTabGroup = Titanium.UI.createTabGroup();
 var disclaimerWin = Titanium.UI.createWindow({
   url:'javascript/disclaimer.js',
   backgroundColor:'#476e8b',
-  title:'Disclaimer',
+  title:L('disclaimer'),
   barColor:"#333",
   backTitle:'Close',
   tabBarHidden:true
 });
 var disclaimerTab = Titanium.UI.createTab({  
-  title:'Disclaimer',
+  title:L('disclaimer'),
   window:disclaimerWin
 });
 disclaimerTabGroup.addTab(disclaimerTab);
