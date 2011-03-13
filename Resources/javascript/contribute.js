@@ -1,6 +1,10 @@
 var cc ={win:Ti.UI.currentWindow};
 Ti.include('./application.js','./charity_data.js');
 (function(){
+	cc.win.orientationModes = [
+		Ti.UI.PORTRAIT,
+		Ti.UI.UPSIDE_PORTRAIT
+	];
 	cc.getDataRow=function(charityItem,countItem){
 		var row = Ti.UI.createTableViewRow({
 			height:120,
@@ -12,6 +16,7 @@ Ti.include('./application.js','./charity_data.js');
 			phone_text:charityItem.phone,
 			address:charityItem.address,
 			info_text:charityItem.info_text,
+			charity_logo:charityItem.logo,
 			isRowElement:true //hack for android touch event
 		});
 		
@@ -73,8 +78,9 @@ cc.tableView.addEventListener('click', function(e){
 		web_link:e.rowData.web_link,
 		phone_num:e.rowData.phone_num,
 		phone_text:e.rowData.phone_text,
-		address:e.rowData.address,
-		info_text:e.rowData.info_text
+		charity_address:e.rowData.address,
+		info_text:e.rowData.info_text,
+		charity_logo:e.rowData.charity_logo
 	});
 	
 	wPage.open({modal:true});
