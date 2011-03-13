@@ -452,8 +452,10 @@ clearButton.addEventListener('click',function()	{
 	});
 	clearAlert.show();
 });
-Titanium.UI.currentWindow.setLeftNavButton(clearButton);
 
+if(Ti.Platform.name != 'android') {
+ Titanium.UI.currentWindow.setLeftNavButton(clearButton);
+}
 
 function clearAllValues(){
   oilSlider.value = 5;
@@ -570,7 +572,10 @@ Ti.App.addEventListener('upload_picture', function(options) {
 });
 
 var submitButton = Titanium.UI.createButton({title:'Send'});
-Titanium.UI.currentWindow.setRightNavButton(submitButton);
+
+if(Ti.Platform.name != 'android') {
+	Titanium.UI.currentWindow.setRightNavButton(submitButton);
+}
 
 submitButton.addEventListener('click', function() {
   submitReport();
@@ -626,33 +631,33 @@ function submitReport() {
   }
 }
 
-if(Ti.Platform.name == "android") {
-  var menu = Ti.UI.Android.OptionMenu.createMenu();
-  var clearMenuItem = Ti.UI.Android.OptionMenu.createMenuItem({title : 'Clear Form'});
-  clearMenuItem.addEventListener('click', function(){
-    var clearAlert = Titanium.UI.createAlertDialog({
-    	title:'Clear All Values?',
-    	message:'Are you sure you want to clear all the values in the fields below?'
-    });
-    clearAlert.buttonNames = ['Yes', 'No'];
-  	clearAlert.addEventListener("click",function(e) {
-  	  if(e.index == 0) {
-        clearAllValues();
-  	  }
-  	});
-  	clearAlert.show();
-  });
-  var submitMenuItem = Ti.UI.Android.OptionMenu.createMenuItem({
-      title : 'Submit Report'
-  });
-  submitMenuItem.addEventListener('click', function(){
-    submitReport();
-  });
-
-  menu.add(clearMenuItem);
-  menu.add(submitMenuItem);
-  Ti.UI.Android.OptionMenu.setMenu(menu); 
-}
+//if(Ti.Platform.name == "android") {
+//  var menu = Ti.UI.Android.OptionMenu.createMenu();
+//  var clearMenuItem = Ti.UI.Android.OptionMenu.createMenuItem({title : 'Clear Form'});
+//  clearMenuItem.addEventListener('click', function(){
+//    var clearAlert = Titanium.UI.createAlertDialog({
+//    	title:'Clear All Values?',
+//    	message:'Are you sure you want to clear all the values in the fields below?'
+//    });
+//    clearAlert.buttonNames = ['Yes', 'No'];
+ // 	clearAlert.addEventListener("click",function(e) {
+//  	  if(e.index == 0) {
+ //       clearAllValues();
+//  	  }
+//  	});
+//  	clearAlert.show();
+//  });
+//  var submitMenuItem = Ti.UI.Android.OptionMenu.createMenuItem({
+//      title : 'Submit Report'
+//  });
+//  submitMenuItem.addEventListener('click', function(){
+//    submitReport();
+ // });
+//
+//  menu.add(clearMenuItem);
+//  menu.add(submitMenuItem);
+//  Ti.UI.Android.OptionMenu.setMenu(menu); 
+//}
 
 Ti.App.fireEvent('hide_indicator');
 

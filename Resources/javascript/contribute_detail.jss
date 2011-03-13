@@ -11,6 +11,7 @@
 	height:'auto';
 	left:3;
 	right:3;
+	color:'#000';
 	text-align:'center';
 	top:5;
 	bottom:5;
@@ -43,6 +44,7 @@
 	height:'auto';
 	left:3;
 	right:3;
+	color:'#000';
 	text-align:'left';
 	top:5;
 	font-size:14;
@@ -55,6 +57,7 @@
 	right:3;
 	text-align:'left';
 	top:5;
+	color:'#000';
 	font-size:12;
 	font-weight:'Bold';
 }
@@ -62,6 +65,7 @@
 #charityInfo {
 	height:'auto';
 	text-align:'left';
+	color:'#000';
 	font-size:12;
 	left:5;
 	right:5;
@@ -100,6 +104,7 @@
 #phoneButtonLabel {
 	textid:'contribute_detail_phone_button';
 	height:25;
+	color:'#000';
 	text-align:'center';
 	width:50;
 	font-size:16;
@@ -134,6 +139,7 @@
 	text-align:'center';
 	width:65;
 	font-size:16;
+	color:'#000';
 	font-weight:'Bold';
 	left:0;
 	top:10;
