@@ -33,43 +33,6 @@ var disclaimerLabel = Ti.UI.createLabel({
 });
 scrollView.add(disclaimerLabel);
 
-var orgView = Ti.UI.createView({
-  top: 520,
-  left: 10,
-  width: 300,
-  height: (Ti.Platform.name == 'android' ? 94 : 84),
-  backgroundColor:'#333',
-  borderRadius:6
-});
-
-var orgTitle = Ti.UI.createLabel({
-  top: 10,
-  left: 10,
-  width: 280,
-  height: 'auto',
-  color: '#fff',
-	font:{fontSize:16, fontWeight:'bold'},
-  text: "Organization ID (Optional)"
-});
-orgView.add(orgTitle);
-
-var orgField = Titanium.UI.createTextField({
-	color:'#000',
-	value:'',
-	hintText:'Special ID for your organization',
-	autocorrect:false,
-	height:(Ti.Platform.name == 'android' ? 40 : 30),
-	top:40,
-	left:10,
-	width:280,
-	font:{fontSize:14, fontWeight:'normal'},
-	clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ALWAYS,
-	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
-});
-
-orgView.add(orgField);
-scrollView.add(orgView);
-
 var tosButton = Ti.UI.createButton({
   width: 301,
   height: 57,
