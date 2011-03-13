@@ -51,15 +51,6 @@ Ti.App.fireEvent('show_indicator');
 
 	};
 
-	cc.noNetworkAlert=function(){
-	    Ti.App.fireEvent('hide_indicator',{});
-	  	Titanium.UI.createAlertDialog({
-	  	  title:Ti.Locale.getString('twitter_no_network_title'),
-	  	  message:Ti.Locale.getString('twitter_no_network_msg')
-	  	}).show();	
-	};
-
-
 	cc.retrieveTwitterFeed=function() {
 		var url = "http://search.twitter.com/search.json?q="+encodeURIComponent(TWITTER_ACCOUNT);
 		var xhr = Ti.Network.createHTTPClient();
@@ -95,7 +86,7 @@ Ti.App.fireEvent('show_indicator');
 
 	if (!Ti.Network.online){
 	  	Ti.App.fireEvent('hide_indicator',{});
-		cc.noNetworkAlert();
+		noNetworkAlert();
 	} else {
 		cc.retrieveTwitterFeed();
 	}
@@ -119,10 +110,9 @@ Ti.App.fireEvent('show_indicator');
 	cc.refreshButton.addEventListener('click',function()	{
 	  if (!Ti.Network.online){
 	    Ti.App.fireEvent('hide_indicator',{});
-		cc.noNetworkAlert();
+		noNetworkAlert();
 	  } else {
 	    Ti.App.fireEvent('show_indicator',{});
-	    cc.data = [];
 	    cc.retrieveTwitterFeed();
 	  }
 	});	
