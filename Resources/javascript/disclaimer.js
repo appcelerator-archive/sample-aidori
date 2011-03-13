@@ -31,6 +31,9 @@ var disclaimerLabel = Ti.UI.createLabel({
 });
 scrollView.add(disclaimerLabel);
 
+
+
+
 var tosButton = Ti.UI.createButton({
   width: 301,
   height: 57,
@@ -42,9 +45,6 @@ var tosButton = Ti.UI.createButton({
   title: 'I Accept'
 });
 tosButton.addEventListener('click', function() {
-  if(orgField.getValue() != null && orgField.getValue().length > 0) {
-    properties.setString("orgPin",orgField.getValue());
-  }
   Ti.App.fireEvent('remove_disclaimer');
 });
 scrollView.add(tosButton);

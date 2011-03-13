@@ -4,9 +4,9 @@ var indicatorShowing = false;
 var tabGroup = Titanium.UI.createTabGroup();
 var reportWin = Titanium.UI.createWindow({  
   url:'javascript/report.js',
-  title:'Honshu Quake',
   barColor:"#333",
-  backgroundImage:'images/back.png'
+  backgroundImage:'images/back.png',
+  titleid:'crisis_title'
 });
 var reportTab = Titanium.UI.createTab({  
   icon:'images/icon_report.png',
@@ -16,7 +16,7 @@ var reportTab = Titanium.UI.createTab({
 
 var twitterWin = Titanium.UI.createWindow({  
   url:'javascript/twitter.js',
-  title:'Twitter: Japan',
+  titleid:'crisis_title',
   barColor:"#333",
   backgroundColor:'#5a5c64'
 });
