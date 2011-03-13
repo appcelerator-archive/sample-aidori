@@ -16,7 +16,6 @@
 	<string name="about_body">Sendai Quake was built by ...</string>
 	<string name="volunteer_info">For more information on how to volunteer, please call (555) 555-1212</string>
 	<string name="twitter_loading">Loading...</string>
-	<string name="twitter_time_lessminute">less than a minute ago</string>
 	<string name="title_organization">Organization</string>
 	<string name="twitter_no_network_title">Connection Required</string>
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
