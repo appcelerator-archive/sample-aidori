@@ -159,7 +159,7 @@ var cc ={win:Ti.UI.currentWindow};
 	  } else {
 	    Ti.Platform.openURL(url);
 	  }
-	}	
+	};	
 	
 	//-------------------------------
 	//	Events

@@ -82,15 +82,15 @@ Ti.App.addEventListener('remove_disclaimer', function() {
   tabGroup.open();
 });
 
-if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
-  tabGroup.open();
-} else {
-  if (Titanium.Platform.name == 'android') {
-    disclaimerWin.open();
-  } else {
+//if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
+//  tabGroup.open();
+//} else {
+//  if (Titanium.Platform.name == 'android') {
+//    disclaimerWin.open();
+//  } else {
     disclaimerTabGroup.open();
-  }
-}
+//  }
+//}
 
 
 // ---------------------------------------------------------------
