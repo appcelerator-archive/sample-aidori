@@ -52,7 +52,7 @@ Ti.App.fireEvent('show_indicator');
 	};
 
 	cc.retrieveTwitterFeed=function() {
-		var url = "http://search.twitter.com/search.json?q="+encodeURIComponent(HASHTAG1);
+		var url = "http://search.twitter.com/search.json?q="+encodeURIComponent(HASHTAG2);
 		var xhr = Ti.Network.createHTTPClient();
 		var tableData =[];
 	  	Ti.API.info(url);
