@@ -1,17 +1,12 @@
-
-Ti.include('./application.js','./charity_data.js');
 var cc ={win:Ti.UI.currentWindow};
-	cc.tableView = Ti.UI.createTableView({
-		backgroundColor:'#fff'
-	});
-	cc.win.add(cc.tableView);
-		
+Ti.include('./application.js','./charity_data.js');
+(function(){
 	cc.getDataRow=function(charityItem,countItem){
 		var row = Ti.UI.createTableViewRow({
-			height:'auto',
+			height:120,
 			hasChild:true,
 			className:'charity_' + countItem,  //Add unique to force new template
-			name:charityItem.name,
+			charity_name:charityItem.name,
 			web_link:charityItem.web,
 			phone_num:charityItem.phone_num,
 			phone_text:charityItem.phone,
@@ -21,56 +16,27 @@ var cc ={win:Ti.UI.currentWindow};
 		});
 		
 		var vwRow = Ti.UI.createView({
-				layout:'horizontal',
-				left:5,
-				right:5,
-				height:50,
-				width:275,
-				parm_name:'vwRow'
+				width:(Ti.Platform.displayCaps.platformWidth-20),
+				id:'vwRow'
 		});
 
 
-		var vwCol1 = Ti.UI.createView({
-			borderRadius:3,
-			borderColor:'#000',
-			borderWidth:1,
-			backgroundColor:'#fff',
-			height:48,
-			layout:'vertical',
-			top:2,
-			right:5,
-			width:75
-		});
+		var vwCol1 = Ti.UI.createView({id:'vwCol1'});
+		vwRow.add(vwCol1);	
+		
+		var vwCol2 = Ti.UI.createView({id:'vwCol2'});	
+		vwRow.add(vwCol2);
 		
 		var logoImg = Ti.UI.createImageView({
-		    image:tweet.profile_image_url,
+		    image:charityItem.logo,
 		  	preventDefaultImage:true,
 			height:75,
 			width:75
 	    });
-	
 		vwCol1.add(logoImg);
-		vwRow.add(vwCol1);
-		
-		var vwCol2 = Ti.UI.createView({
-			width:30,
-			height:50,
-			layout:'vertical'
-		});	
-
-		var charityName = Ti.UI.createLabel({
-			text:charityItem.name,
-			top:0,
-			color:'#000',
-			height:50,
-			textAlign:'left',
-			width:120,
-			font:{fontSize:14}
-			});		
-		vwCol2.add(charityName);
-		
-		vwRow.add(vwCol2);	
-		
+			
+		var charityName = Ti.UI.createLabel({text:charityItem.name, id:'charityName'});		
+		vwCol2.add(charityName);				
 		row.add(vwRow);
 		return 	row;
 	};
@@ -78,16 +44,38 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.getTableData=function(){
 		var tableData =[];
 		var itemCount = cc.charityData.orgInfo.length;
-		Ti.API.info('itemCount=' + itemCount);
 		for (var iLoop=0;iLoop<itemCount;iLoop++){
-			Ti.API.info('iLoop=' + iLoop);
 			tableData.push(cc.getDataRow(cc.charityData.orgInfo[iLoop],iLoop));
 		}
-					
+		return tableData;
 	};
+	
+	cc.tableView = Ti.UI.createTableView({
+		backgroundColor:'#fff',
+		data:cc.getTableData()
+	});
+	cc.win.add(cc.tableView);	
+})();
+		
+
 //-------------------------------
 //	Events
 //-------------------------------
-cc.win.addEventListener('focus', function(){	
-	cc.tableView.setData(cc.getTableData());
+cc.tableView.addEventListener('click', function(e){
+
+	var wPage = Ti.UI.createWindow({  
+	    barColor:cc.win.barColor,
+		navBarHidden:false,
+		title:Ti.Locale.getString('contribute_detail_title'),
+		backgroundImage:'../images/back.png',
+		url:'contribute_detail.js',
+		charity_name:e.rowData.charity_name,
+		web_link:e.rowData.web_link,
+		phone_num:e.rowData.phone_num,
+		phone_text:e.rowData.phone_text,
+		address:e.rowData.address,
+		info_text:e.rowData.info_text
+	});
+	
+	wPage.open({modal:true});
 });

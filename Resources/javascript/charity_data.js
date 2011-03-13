@@ -3,7 +3,7 @@ cc.charityData ={
 	orgInfo:[
 		{
 			name:"Adventist Development and Relief Agency International's Response to Japan Tsunami",
-			logo:'../images/charity_logo/adra.png',
+			logo:'../images/charity_logos/adra.png',
 			phone:'Donation Phone #: 800-424-ADRA (2372)',
 			phone_num:'8004242372',
 			web:'http://www.adra.org',
@@ -12,7 +12,7 @@ cc.charityData ={
 		},
 		{
 			name:"American Red Cross International Services's Response to Japan Tsunami",
-			logo:'../images/charity_logo/adra.png',
+			logo:'../images/charity_logos/red_cross.png',
 			phone:'1-800-RED-CROSS',
 			phone_num:'80073327677',
 			web:'http://www.redcross.org',
@@ -21,7 +21,7 @@ cc.charityData ={
 		},
 		{
 			name:"Baptist World Alliance / Baptist World Aid's Response to Japan Tsunami",
-			logo:'../images/charity_logo/bwaid.png',
+			logo:'../images/charity_logos/bwaid.png',
 			phone:'703-790-8980',
 			phone_num:'7037908980',
 			web:'http://www.bwanet.org',
@@ -30,7 +30,7 @@ cc.charityData ={
 		},	
 		{
 			name:"Buddhist Tzu Chi Foundation's Response to Japan Tsunami",
-			logo:'../images/charity_logo/tzuchi.png',
+			logo:'../images/charity_logos/tzuchi.png',
 			phone:'1-888-989-8244',
 			phone_num:'8889898244',
 			web:'http://www.us.tzuchi.org/usa/home.nsf/other/donateCharity',
@@ -39,7 +39,7 @@ cc.charityData ={
 		},
 		{
 			name:"Christian Reformed World Relief Committee's Response to Japan Tsunami",
-			logo:'../images/charity_logo/crwrc.png',
+			logo:'../images/charity_logos/crwrc.png',
 			phone:'800-55-CRWRC',
 			phone_num:'8005527972',
 			web:'http://www.crwrc.org',
@@ -48,7 +48,7 @@ cc.charityData ={
 		},
 		{
 			name:"Direct Relief International's Response to Japan Tsunami",
-			logo:'../images/charity_logo/directrelief.png',
+			logo:'../images/charity_logos/directrelief.png',
 			phone:'805-964-4767',
 			phone_num:'8059644767',
 			web:'http://www.DirectRelief.org',
@@ -57,7 +57,7 @@ cc.charityData ={
 		},
 		{
 			name:"Habitat for Humanity International's Response to Japan Tsunami",
-			logo:'../images/charity_logo/habitat.png',
+			logo:'../images/charity_logos/habitat.png',
 			phone:'1-800-Habitat',
 			phone_num:'8004224828',
 			web:'http://habitat.org',
@@ -66,7 +66,7 @@ cc.charityData ={
 		},
 		{
 			name:"International Rescue Committee's Response to Japan Tsunami",
-			logo:'../images/charity_logo/irc.png',
+			logo:'../images/charity_logos/irc.png',
 			phone:'1-877-REFUGEE (733-8433)',
 			phone_num:'8777338433',
 			web:'http://www.rescue.org',
@@ -75,7 +75,7 @@ cc.charityData ={
 		},
 		{
 			name:"Operation Blessing's Response to Japan Tsunami",
-			logo:'../images/charity_logo/blessing.png',
+			logo:'../images/charity_logos/blessing.png',
 			phone:'800-730-2537',
 			phone_num:'8007302537',
 			web:'http://www.operationblessing.org',
@@ -84,7 +84,7 @@ cc.charityData ={
 		},
 		{
 			name:"Save the Children's Response to Japan Tsunami",
-			logo:'../images/charity_logo/stc.png',
+			logo:'../images/charity_logos/stc.png',
 			phone:'1-800-728-3843',
 			phone_num:'8007283843',
 			web:'http://savethechildren.org',
@@ -93,7 +93,7 @@ cc.charityData ={
 		},
 		{
 			name:"American Jewish Joint Distribution Committee's Response to Japan Tsunami",
-			logo:'../images/charity_logo/stc.png',
+			logo:'../images/charity_logos/stc.png',
 			phone:'212-687-6200',
 			phone_num:'2126876200',
 			web:'http://jdc.org',
@@ -102,7 +102,7 @@ cc.charityData ={
 		},
 		{
 			name:"AmeriCares's Response to Japan Tsunami",
-			logo:'../images/charity_logo/americares.png',
+			logo:'../images/charity_logos/americares.png',
 			phone:'203-658-9500',
 			phone_num:'2036589500',
 			web:'http://jdc.org',
@@ -111,7 +111,7 @@ cc.charityData ={
 		},
 		{
 			name:"Brother's Brother Foundation's Response to Japan Tsunami",
-			logo:'../images/charity_logo/brother.png',
+			logo:'../images/charity_logos/brother.png',
 			phone:'412-321-3160',
 			phone_num:'4123213160',
 			web:'http://brothersbrother.org',
@@ -120,7 +120,7 @@ cc.charityData ={
 		},
 		{
 			name:"Catholic Relief Services's Response to Japan Tsunami",
-			logo:'../images/charity_logo/crs.png',
+			logo:'../images/charity_logos/crs.png',
 			phone:'1-877-HELP-CRS',
 			phone_num:'8774357277',
 			web:'http://crs.org',
@@ -129,7 +129,7 @@ cc.charityData ={
 		},
 		{
 			name:"Church World Service's Response to Japan Tsunami",
-			logo:'../images/charity_logo/cws.png',
+			logo:'../images/charity_logos/cws.png',
 			phone:'1-800-297-1516',
 			phone_num:'8002971516',
 			web:'http://www.churchworldservice.org',
@@ -138,7 +138,7 @@ cc.charityData ={
 		},
 		{
 			name:"Giving Children Hope's Response to Japan Tsunami",
-			logo:'../images/charity_logo/hope.png',
+			logo:'../images/charity_logos/hope.png',
 			phone:'714-523-4454',
 			phone_num:'7145234454',
 			web:'http://gchope.org',
@@ -147,7 +147,7 @@ cc.charityData ={
 		},
 		{
 			name:"International Medical Corps's Response to Japan Tsunami",
-			logo:'../images/charity_logo/imc.png',
+			logo:'../images/charity_logos/imc.png',
 			phone:'800-481-4462',
 			phone_num:'8004814462',
 			web:'http://internationalmedicalcorps.org',
@@ -156,7 +156,7 @@ cc.charityData ={
 		},
 		{
 			name:"Mercy Corps's Response to Japan Tsunami",
-			logo:'../images/charity_logo/mercycorps.png',
+			logo:'../images/charity_logos/mercycorps.png',
 			phone:'800-852-2100',
 			phone_num:'800-852-2100',
 			web:'https://www.mercycorps.org/donate/japan',
@@ -165,7 +165,7 @@ cc.charityData ={
 		},
 		{
 			name:"Relief International's Response to Japan Tsunami",
-			logo:'../images/charity_logo/reliefInternational.png',
+			logo:'../images/charity_logos/reliefInternational.png',
 			phone:'310-478-1200',
 			phone_num:'3104781200',
 			web:'http://www.ri.org',
