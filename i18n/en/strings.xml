@@ -21,4 +21,6 @@
 	<string name="title_organization">Organization</string>
 	<string name="twitter_no_network_title">Connection Required</string>
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
+	<string name="disclaimer">Disclaimer</string>
+	<string name="title_twitter">Twitter</string>
 </resources>
