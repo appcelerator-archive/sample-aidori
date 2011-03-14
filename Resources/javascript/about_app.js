@@ -17,33 +17,57 @@ var cc ={win:Ti.UI.currentWindow};
 		cc.nameBox = Ti.UI.createView({id:'nameBox'});
 		cc.mainContainer.add(cc.nameBox);		
 		cc.aboutCC = Ti.UI.createLabel({
-			text:'About CrisisCommons',
+			text:'About This Application',
 			id:'aboutAp'
 		});	
 		cc.nameBox.add(cc.aboutCC);
 	}	
-	cc.logoBox = Ti.UI.createView({
-		top:isAndroid()?10:20,
-		id:'logoBox'
+	cc.middleSection = Ti.UI.createView({
+		width:(Ti.Platform.displayCaps.platformWidth-20),
+		top:isAndroid() ? 10 : 5 ,
+		id:'middleSection'
 	});
-	cc.mainContainer.add(cc.logoBox);
+	cc.mainContainer.add(cc.middleSection);
 		
 	cc.ccLogo = Ti.UI.createImageView({
-		    image:'../images/charity_logos/crisis_commons.png',
-			height:97,
-			width:250
+		    image:'../images/appcelerator.png',
+			height:100,
+			width:100
 	  });
 
-	cc.logoBox.add(cc.ccLogo);
-	
-	cc.descBox = Ti.UI.createView({
-		top:isAndroid()?10:20,
-		id:'descBox'
-	});
-	cc.mainContainer.add(cc.descBox);
+	cc.middleSection.add(cc.ccLogo);
 
-	cc.descCC = Ti.UI.createLabel({id:'descCC'});	
-	cc.descBox.add(cc.descCC);
+	cc.titanInfo = Ti.UI.createLabel({
+		textid:'Some meaningful message',
+		height:'auto',
+		left:5,
+		width:100,
+		color:'#000',
+		textAlign:'center',
+		top:5,
+		font:{fontSize:12,fontWeight:'Bold'}
+		});
+	cc.middleSection.add(cc.titanInfo);
+		
+	cc.teamInfo = Ti.UI.createLabel({
+		text:Ti.Locale.getString('about_app_team'),
+		height:'auto',
+		textAlign:'left',
+		color:'#000',
+		font:{fontSize:12},
+		left:5,
+		right:5,
+		top:5
+	});
+
+	cc.moreInfoScroll = Ti.UI.createScrollView({
+			width:(Ti.Platform.displayCaps.platformWidth-20),
+			top:isAndroid() ? 10 : 5 ,
+			id:'moreInfoScroll'
+		});
+
+	cc.moreInfoScroll.add(cc.teamInfo);
+	cc.mainContainer.add(cc.moreInfoScroll);
 	
 	cc.webButton = Ti.UI.createView({id:'webButton'});
 
@@ -72,6 +96,6 @@ cc.webButton.addEventListener('click', function(){
 	if (!Ti.Network.online){
 	 	  noNetworkAlert();
 	} else {
-	   Ti.Platform.openURL("http://crisiscommons.org/");
+	   Ti.Platform.openURL("http://wiki.appcelerator.org/display/titans/Japan+2011+Quake+Relief");
 	}
 });

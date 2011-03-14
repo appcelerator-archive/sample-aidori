@@ -52,4 +52,6 @@
 	<string name="about_d_desc">On 11 March 2011, the Sendal earthquake and tsunami struck the T-hoku region, it was an 8.9-9.0 megathrust earthquake.  The estimates of the Sendai earthquake's magnitude made it the most powerful earthquake to hit Japan and one of the five most powerful earthquakes in the world since modern recording time.  The earthquake and tsunami impacted at least 20 countries as far away as North and South America.  Japanese Prime Minister Naoto Kan stated In the 65 years after the World War II this is the toughest and most difficult crisis for Japan</string>	
 	<string name="hashtags">Hashtags</string>
 	<string name="hashtags_droidmenu">Hashtags</string>
+	<string name="about_app_more">Learn More About The Project</string>
+	<string name="about_app_team">Tony to put something here</string>
 </resources>

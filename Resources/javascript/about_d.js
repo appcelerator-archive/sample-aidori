@@ -1,7 +1,10 @@
 Ti.include('./application.js');
 var cc ={win:Ti.UI.currentWindow};
 (function(){
-
+	cc.win.orientationModes = [
+		Ti.UI.PORTRAIT,
+		Ti.UI.UPSIDE_PORTRAIT
+	];
 	cc.doneButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.DONE});
 	if(!isAndroid()){
 		cc.win.rightNavButton=cc.doneButton;
