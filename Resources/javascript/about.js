@@ -117,7 +117,6 @@ cc.infoButton.addEventListener('click', function(){
 		
 		var wPage = Ti.UI.createWindow({  
 		    barColor:cc.win.barColor,
-		    backgroundImage:'../images/back.png',
 			navBarHidden:false,
 			url:go2Page,
 			title:go2PageTitle
