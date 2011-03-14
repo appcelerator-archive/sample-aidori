@@ -10,8 +10,9 @@
 	<string name="tab_twitter">Twitter</string>
 	<string name="title_twitter">Twitter: Sendai Quake</string>
 	<string name="title_contribute">Contribute</string>
-	<string name="tab_map">Map</string>
-	<string name="title_map">Map</string>
+	<string name="tab_news">News</string>
+	<string name="tab_map">Shelter Map</string>
+	<string name="title_map">Shelter Map</string>
 	<string name="show_current_position_button_title">Current position</string>
 	<string name="synchronize_shelter_place">Sync</string>
 	<string name="can_not_get_geolocation">Can't get geolocation</string>
