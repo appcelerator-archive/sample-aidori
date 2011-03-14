@@ -60,9 +60,9 @@ Ti.App.fireEvent('show_indicator');
 	cc.retrieveTwitterFeed=function() {
 		// get saved hashtags:
 		var ht1 = Ti.App.Properties.getString("hashtag1", HASHTAG1);
-		var ht2 = Ti.App.Properties.getString("hashtag1", HASHTAG3);
-		var ht3 = Ti.App.Properties.getString("hashtag1", HASHTAG3);
-		var ht4 = Ti.App.Properties.getString("hashtag1", '');
+		var ht2 = Ti.App.Properties.getString("hashtag2", HASHTAG3);
+		var ht3 = Ti.App.Properties.getString("hashtag3", HASHTAG3);
+		var ht4 = Ti.App.Properties.getString("hashtag4", '');
 		var hashTags = encodeURIComponent('#'+ht1);
 		if (ht2 != '') {
 			hashTags += ('&' + encodeURIComponent('#' + ht2));
