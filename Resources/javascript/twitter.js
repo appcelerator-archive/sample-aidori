@@ -136,7 +136,7 @@ Ti.App.fireEvent('show_indicator');
 		backgroundImage:'../images/75percentblack.png'
 	 });
 	 var lbl_tw_header = Ti.UI.createLabel({
-	 	text:'Hashtags',
+	 	text:L("hashtags"),
 		color:'#ffffff',
 		fontWeight:'bold',
 		top:7,
@@ -155,7 +155,7 @@ Ti.App.fireEvent('show_indicator');
 	 var txt_hashtag1 = Ti.UI.createTextField({
 	 	value:HASHTAG1,
 		top:45,
-		height:35,
+		height:38,
 		width:240,
 		left:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -165,7 +165,7 @@ Ti.App.fireEvent('show_indicator');
 	 var txt_hashtag2 = Ti.UI.createTextField({
 	 	value:HASHTAG2,
 		top:85,
-		height:35,
+		height:38,
 		width:240,
 		left:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -175,7 +175,7 @@ Ti.App.fireEvent('show_indicator');
 	 var txt_hashtag3 = Ti.UI.createTextField({
 	 	value:HASHTAG3,
 		top:125,
-		height:35,
+		height:38,
 		width:240,
 		left:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -184,7 +184,7 @@ Ti.App.fireEvent('show_indicator');
 	 twConfigView.add(txt_hashtag3);
 	 var txt_hashtag4 = Ti.UI.createTextField({
 		top:165,
-		height:35,
+		height:38,
 		width:240,
 		left:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -245,7 +245,7 @@ if(isAndroid()){
 			Ti.App.fireEvent('show_indicator',{});
 			cc.retrieveTwitterFeed();								
 		});
-		var mTwitterConfig = menu.add({title: 'Hashtags' });
+		var mTwitterConfig = menu.add({title: L("hashtags_droidmenu") });
 			mTwitterConfig.setIcon('../../images/dark_gear.png');
 			mTwitterConfig.addEventListener("click", function(e) {
 				twConfigWrapper.show();
