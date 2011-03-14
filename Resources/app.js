@@ -1,8 +1,8 @@
 Titanium.include('javascript/application.js');
 var indicatorShowing = false;
 
-var tabGroup = Titanium.UI.createTabGroup();
-var reportWin = Titanium.UI.createWindow({  
+var tabGroup = Ti.UI.createTabGroup();
+var reportWin = Ti.UI.createWindow({  
   url:'javascript/report.js',
   barColor:"#333",
   backgroundImage:'images/back.png',
@@ -103,13 +103,13 @@ function showIndicator(title) {
   Ti.API.info("showIndicator with title " + title);
 	
   	// window container
-  	indWin = Titanium.UI.createWindow({
+  	indWin = Ti.UI.createWindow({
   		height:150,
   		width:150
   	});
 
   	// black view
-  	var indView = Titanium.UI.createView({
+  	var indView = Ti.UI.createView({
   		height:150,
   		width:150,
   		backgroundColor:'#000',
@@ -119,8 +119,8 @@ function showIndicator(title) {
   	indWin.add(indView);
 
   	// loading indicator
-  	actInd = Titanium.UI.createActivityIndicator({
-  		style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG,
+  	actInd = Ti.UI.createActivityIndicator({
+  		style:Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
   		height:30,
   		width:30
   	});
@@ -140,30 +140,43 @@ function showIndicator(title) {
   	actInd.show();
 };
 
+
+var droidActInd = Ti.UI.createActivityIndicator({height:30,width:30,message:'Loading...'});
 function hideIndicator() {
-  	actInd.hide();
-  	indWin.close({opacity:0,duration:500});
-  	indicatorShowing = false;
+	if(Ti.Platform.name == 'android'){
+		droidActInd.hide();
+	}else{
+	  	actInd.hide();
+	  	indWin.close({opacity:0,duration:500});
+	  	indicatorShowing = false;		
+	}
 };
 
 // ---------------------------------------------------------------
 // Add global event handlers to hide/show custom indicator
 // ---------------------------------------------------------------
-Titanium.App.addEventListener('show_indicator', function(e) {
+
+Ti.App.addEventListener('show_indicator', function(e) {
   if(Ti.Platform.name == 'android') {
-    return;
+    droidActInd.show();
+  }else{
+	  if(e.title == null) { 
+		 e.title = 'Loading'; 
+	   }
+	  if(indicatorShowing) { 
+		 hideIndicator(); 
+	  }
+	 showIndicator(e.title);	
   }
   
-  if(e.title == null) { e.title = 'Loading'; }
-  if(indicatorShowing == true) { hideIndicator(); }
-	showIndicator(e.title);
+
 });
-Titanium.App.addEventListener('change_title', function(e) {
+Ti.App.addEventListener('change_title', function(e) {
   if(e.title) {
     hideIndicator();
   	showIndicator(e.title);
   }
 });
-Titanium.App.addEventListener('hide_indicator', function(e) {
+Ti.App.addEventListener('hide_indicator', function(e) {
 	hideIndicator();
 });
