@@ -26,6 +26,18 @@ var twitterTab = Titanium.UI.createTab({
   window:twitterWin
 });
 
+var instagramWin = Titanium.UI.createWindow({  
+  url:'javascript/instagram.js',
+  titleid:L('title_instagram'),
+  barColor:"#333",
+  backgroundColor:'#5a5c64'
+});
+var instagramTab = Titanium.UI.createTab({  
+  icon:'images/icon_instagram.png',
+  title:L('tab_instagram'),
+  window: instagramWin
+});
+
 var contributeWin = Titanium.UI.createWindow({  
   url:'javascript/contribute.js',
   backgroundImage:'images/back.png',
@@ -53,7 +65,8 @@ var aboutTab = Titanium.UI.createTab({
 });
 
 tabGroup.addTab(shelterTab);  
-tabGroup.addTab(twitterTab);  
+tabGroup.addTab(twitterTab);
+tabGroup.addTab(instagramTab);
 tabGroup.addTab(contributeTab);  
 tabGroup.addTab(aboutTab);  
 
