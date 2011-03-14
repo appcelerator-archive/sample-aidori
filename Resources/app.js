@@ -2,16 +2,16 @@ Titanium.include('javascript/application.js');
 var indicatorShowing = false;
 
 var tabGroup = Ti.UI.createTabGroup();
-var reportWin = Ti.UI.createWindow({  
-  url:'javascript/report.js',
+var shelterWin = Ti.UI.createWindow({  
+  url:'javascript/shelter.js',
   barColor:"#333",
   backgroundImage:'images/back.png',
   titleid:L('crisis_title')
 });
-var reportTab = Titanium.UI.createTab({  
+var shelterTab = Titanium.UI.createTab({  
   icon:'images/icon_report.png',
-  title:'Report',
-  window:reportWin
+  title:'Shelters',
+  window:shelterWin
 });
 
 var twitterWin = Titanium.UI.createWindow({  
@@ -52,7 +52,7 @@ var aboutTab = Titanium.UI.createTab({
   window:aboutWin
 });
 
-tabGroup.addTab(reportTab);  
+tabGroup.addTab(shelterTab);  
 tabGroup.addTab(twitterTab);  
 tabGroup.addTab(contributeTab);  
 tabGroup.addTab(aboutTab);  
