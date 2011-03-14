@@ -63,10 +63,11 @@ cc.infoButton.addEventListener('click', function(){
 		var go2Page='';	
 		var go2PageTitle='';	
 		if(e.index==0){
-		
+			go2PageTitle=Ti.Locale.getString('about_quake');
+			go2Page='about_d.js';		
 		}
 		if(e.index==1){
-			go2PageTitle='About CrisisCommons';
+			go2PageTitle=Ti.Locale.getString('about_cc');
 			go2Page='about_cc.js';
 		}
 		if(e.index==2){
@@ -99,12 +100,16 @@ if(isAndroid()){
 			navBarHidden:true,
 			fullscreen:false
 		});
-	    var mAboutCC = menu.add({title: 'About CrisisCommons' });
+	    var mAboutCC = menu.add({title: Ti.Locale.getString('about_cc') });
 	 //   mAboutCC.setIcon('../../Images/Toolbar/calendar.png');
 	    mAboutCC.addEventListener("click", function(e) {
 	    	wPage.url='about_cc.js';
 		  	wPage.open();
 	    });
-
+		var mAboutD = menu.add({title: Ti.Locale.getString('about_quake') });
+	    mAboutD.addEventListener("click", function(e) {
+	    	wPage.url='about_d.js';
+		  	wPage.open();
+	    });
 	};
 }
