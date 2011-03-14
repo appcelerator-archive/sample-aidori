@@ -1,8 +1,11 @@
-Titanium.include('./application.js');
-
+Ti.include('./application.js');
 var cc ={win:Ti.UI.currentWindow};
 
 (function(){
+	cc.win.orientationModes = [
+		Ti.UI.PORTRAIT,
+		Ti.UI.UPSIDE_PORTRAIT
+	];
 	cc.html=''; //We'll use this later
 	cc.infoButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.INFO_LIGHT});
 	if(!isAndroid()){
@@ -28,8 +31,8 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.webView = Ti.UI.createWebView({
 	  scalesPageToFit:true,
 	  backgroundColor:'transparent',
-      touchEnabled: false, //Avoid bounce on iPhone
-	  html: "<html><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' /><body style='padding: 10px; font-size:14px;color:#fff;font-family:sans-serif;'>"+ cc.html + '</body></html>'
+	  touchEnabled: false, //Avoid bounce on iPhone
+	  html: "<html><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;' /><body style='padding: 10px; font-size:14px;color:#fff;font-family:sans-serif;'>"+ cc.html + '</body></html>'
 	});
 	
 	cc.win.add(cc.webView);
@@ -53,27 +56,55 @@ cc.infoButton.addEventListener('click', function(){
 
 	dialog.show();
 	dialog.addEventListener('click', function(e){
-				
+		if(e.index==3){
+			return;
+		}
+
+		var go2Page='';	
+		var go2PageTitle='';	
+		if(e.index==0){
+		
+		}
+		if(e.index==1){
+			go2PageTitle='About CrisisCommons';
+			go2Page='about_cc.js';
+		}
+		if(e.index==2){
+			
+		}
+
+		//Just in case
+		if(go2Page.length==0){
+			return;
+		}
+		
+		var wPage = Ti.UI.createWindow({  
+		    barColor:cc.win.barColor,
+		    backgroundImage:'../images/back.png',
+			navBarHidden:false,
+			url:go2Page,
+			title:go2PageTitle
+		});		
+	
+		wPage.open({modal:true});
 	});
 });	
 
 if(isAndroid()){
 	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
-		alert("I'm in the menu");
-	//    var menu = e.menu;
-	//	var wPage = Ti.UI.createWindow({  
-	//	    barColor:myT.ui.win.barColor,
-	//		DbConfig:myT.ui.win.DbConfig,
-	//	    backgroundColor:'#fff',
-	//		navBarHidden:true,
-	//		fullscreen:false
-	//	});
-	  //  var mCalendar = menu.add({title: Ti.Locale.getString('tab_entry') });
-	 //   mCalendar.setIcon('../../Images/Toolbar/calendar.png');
-	 //   mCalendar.addEventListener("click", function(e) {
-	 //     wPage.url='../Calendar/Month/month_ui.js';
-	//	  wPage.open();
-	  //  });
+    var menu = e.menu;
+		var wPage = Ti.UI.createWindow({  
+		    barColor:cc.win.barColor,
+		    backgroundImage:'../images/back.png',
+			navBarHidden:true,
+			fullscreen:false
+		});
+	    var mAboutCC = menu.add({title: 'About CrisisCommons' });
+	 //   mAboutCC.setIcon('../../Images/Toolbar/calendar.png');
+	    mAboutCC.addEventListener("click", function(e) {
+	    	wPage.url='about_cc.js';
+		  	wPage.open();
+	    });
 
 	};
 }

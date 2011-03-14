@@ -46,4 +46,6 @@
 	<string name="about_app">About this Application</string>
 	<string name="about_cancel">Cancel</string>
 	<string name="about_dialog_title">About</string>
+	<string name="about_cc_desc">CrisisCommons, borne from the CrisisCamp movement, is a concept that is being explored to define how a commons-based approach can provide long term sustainability for the CrisisCamp community as well as other volunteer technology communities and support shared knowledge, collaborative tools, open development, project management and data to crisis response organizations in civil incident management and global development as well as leverage capabilities and capacities of academia and private sector.</string>
+	<string name="about_cc_visit">Learn More About CrisisCommons</string>
 </resources>

@@ -4,7 +4,7 @@
 	left:10;
 	right:10;	
 	borderRadius:5;
-	background-color:'#fff'
+	background-color:'#fff';
 }
 
 #charityName {
