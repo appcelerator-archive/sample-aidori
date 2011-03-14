@@ -20,6 +20,12 @@ var twitterWin = Titanium.UI.createWindow({
   barColor:"#333",
   backgroundColor:'#5a5c64'
 });
+
+// Avoid keyboard overlapping the text fields
+if (Ti.Platform.name == 'android') {
+	twitterWin.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
+}
+
 var twitterTab = Titanium.UI.createTab({  
   icon:'images/icon_twitter2.png',
   title:L('tab_twitter'),
