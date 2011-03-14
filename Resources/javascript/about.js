@@ -1,42 +1,81 @@
 Ti.include('./application.js');
 var cc ={win:Ti.UI.currentWindow};
-
 (function(){
+	
 	cc.win.orientationModes = [
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
 	];
-	cc.html=''; //We'll use this later
+
 	cc.infoButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.INFO_LIGHT});
 	if(!isAndroid()){
 		cc.win.rightNavButton=cc.infoButton;
 	}
 	
-	function setUsingDefaultFile(){
-		f = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, '/htmlfiles/en/about.html');
-		cc.html = f.read();		
-	};
+	cc.mainContainer = Ti.UI.createView({top:5 ,layout:'vertical'});
+	cc.win.add(cc.mainContainer);
 	
-	if(Ti.Locale.currentLanguage=='en'){
-		setUsingDefaultFile();
-	}else{
-		f = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, '/htmlfiles/'+cc.getCountry()+'/about.html');
-		if(!f.exists()){
-			setUsingDefaultFile();
-		}else{
-			cc.html = f.read();	
-		}		
-	}
-	
-	cc.webView = Ti.UI.createWebView({
-	  scalesPageToFit:true,
-	  backgroundColor:'transparent',
-	  touchEnabled: false, //Avoid bounce on iPhone
-	  html: "<html><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;' /><body style='padding: 10px; font-size:14px;color:#fff;font-family:sans-serif;'>"+ cc.html + '</body></html>'
+	if(isAndroid()){
+		cc.nameBox = Ti.UI.createView({id:'nameBoxD'});
+		cc.mainContainer.add(cc.nameBox);		
+		cc.aboutCC = Ti.UI.createLabel({
+			text:'About Sendai Earthquake & Tsunami',
+			id:'aboutD'
+		});	
+		cc.nameBox.add(cc.aboutCC);
+	}	
+	cc.logoBox = Ti.UI.createView({
+		top:isAndroid()? 5: 0,
+		id:'logoBoxD'
 	});
+	cc.mainContainer.add(cc.logoBox);
+		
+	cc.ccLogoD = Ti.UI.createImageView({
+		    image:'../images/wikipedia_logo.png',
+			height:100,
+			width:82
+	  });
+
+	cc.logoBox.add(cc.ccLogoD);
 	
-	cc.win.add(cc.webView);
+	cc.descBox = Ti.UI.createView({
+		top:10,
+		id:'descBoxD'
+	});
+	cc.mainContainer.add(cc.descBox);
+
+	cc.descCC = Ti.UI.createLabel({id:'descD'});	
+	cc.descBox.add(cc.descCC);
+	
+	cc.webButton = Ti.UI.createView({id:'webButtonD',
+		bottom:isAndroid()? 5 : 10
+	});
+
+	if(!isAndroid()){
+		cc.webButton.backgroundGradient={
+			type:'linear',
+			colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}]
+		};
+	}
+	cc.win.add(cc.webButton);
+
+	cc.webImg = Ti.UI.createView({id:'webImgD'});
+	cc.webButton.add(cc.webImg);
+
+	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabelD'});
+	cc.webButton.add(cc.webButtonLabel);		
 })();
+
+//--------------------------------------
+//		Events
+//--------------------------------------
+cc.webButton.addEventListener('click', function(){
+	if (!Ti.Network.online){
+	 	  noNetworkAlert();
+	} else {
+	   Ti.Platform.openURL("http://en.wikipedia.org/wiki/2011_Sendai_earthquake_and_tsunami");
+	}
+});
 
 //-----------------------------------
 //		Events
@@ -45,8 +84,7 @@ var cc ={win:Ti.UI.currentWindow};
 cc.infoButton.addEventListener('click', function(){
 	// create dialog
 	var dialog = Ti.UI.createOptionDialog({
-			options:[Ti.Locale.getString('about_quake'),
-					 Ti.Locale.getString('about_cc'),
+			options:[Ti.Locale.getString('about_cc'),
 					 Ti.Locale.getString('about_app'),
 					Ti.Locale.getString('about_cancel')
 					],
@@ -56,21 +94,18 @@ cc.infoButton.addEventListener('click', function(){
 
 	dialog.show();
 	dialog.addEventListener('click', function(e){
-		if(e.index==3){
+		if(e.index==2){
 			return;
 		}
 
 		var go2Page='';	
 		var go2PageTitle='';	
+
 		if(e.index==0){
-			go2PageTitle=Ti.Locale.getString('about_quake');
-			go2Page='about_d.js';		
-		}
-		if(e.index==1){
 			go2PageTitle=Ti.Locale.getString('about_cc');
 			go2Page='about_cc.js';
 		}
-		if(e.index==2){
+		if(e.index==1){
 			go2PageTitle=Ti.Locale.getString('about_app');
 			go2Page='about_app.js';
 		}
@@ -96,17 +131,6 @@ if(isAndroid()){
 	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
     var menu = e.menu;
 
-		var mAboutD = menu.add({title: Ti.Locale.getString('about_quake') });
-	    mAboutD.addEventListener("click", function(e) {
-			var wAboutD = Ti.UI.createWindow({  
-			    barColor:cc.win.barColor,
-			    backgroundImage:'../images/back.png',
-				navBarHidden:true,
-				fullscreen:false,
-				url:'about_d.js'
-			});
-			wAboutD.open();
-	    });
 	    var mAboutCC = menu.add({title: Ti.Locale.getString('about_cc') });
 	 //   mAboutCC.setIcon('../../Images/Toolbar/calendar.png');
 	    mAboutCC.addEventListener("click", function(e) {
