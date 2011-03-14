@@ -14,6 +14,10 @@
 	<string name="title_map">Map</string>
 	<string name="show_current_position_button_title">Current position</string>
 	<string name="synchronize_shelter_place">Sync</string>
+	<string name="can_not_get_geolocation">Can't get geolocation</string>
+	<string name="can_not_use_network">Can't use network</string>
+	<string name="no_local_shelter_info">Press Sync button and get shelter place information.</string>
+	<string name="search_result_nothing">No result.</string>
 	<string name="tab_about">About</string>
 	<string name="tab_contribute">Contribute</string>
 	<string name="title_about">About Sendai Quake</string>
