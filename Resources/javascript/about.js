@@ -71,7 +71,7 @@ cc.infoButton.addEventListener('click', function(){
 			go2Page='about_cc.js';
 		}
 		if(e.index==2){
-			go2PageTitle=Ti.Locale.getString('about_app')
+			go2PageTitle=Ti.Locale.getString('about_app');
 			go2Page='about_app.js';
 		}
 

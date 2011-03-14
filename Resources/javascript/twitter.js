@@ -59,10 +59,26 @@ Ti.App.fireEvent('show_indicator');
 
 	cc.retrieveTwitterFeed=function() {
 		// get saved hashtags:
+		if(!Ti.App.Properties.hasProperty('hashtag1')){
+			Ti.App.Properties.setString("hashtag1", HASHTAG1);
+		}
+		if(!Ti.App.Properties.hasProperty('hashtag2')){
+			Ti.App.Properties.setString("hashtag2", HASHTAG2);
+		}
+		if(!Ti.App.Properties.hasProperty('hashtag3')){
+			Ti.App.Properties.setString("hashtag3", HASHTAG3);
+		}	
 		var ht1 = Ti.App.Properties.getString("hashtag1", HASHTAG1);
 		var ht2 = Ti.App.Properties.getString("hashtag2", HASHTAG3);
 		var ht3 = Ti.App.Properties.getString("hashtag3", HASHTAG3);
 		var ht4 = Ti.App.Properties.getString("hashtag4", '');
+		
+		//Make sure we've got at least one hashtag
+		if((ht1.length==0)&&(ht2.length==0)&&(ht3.length==0)&&(ht4.length==0)){
+			Ti.App.Properties.setString("hashtag1", HASHTAG1);
+			ht1=HASHTAG1;
+		}
+	
 		var hashTags = encodeURIComponent('#'+ht1);
 		if (ht2 != '') {
 			hashTags += ('&' + encodeURIComponent('#' + ht2));
@@ -121,80 +137,44 @@ Ti.App.fireEvent('show_indicator');
 		visible:false
 	});
 	// twConfigView holds the fields and labels
-	 var twConfigView = Ti.UI.createView({
-		top:65,
-		backgroundColor:'#ffffff',
-		width:260,
-		height:250,
-		borderRadius:10
-	 });
-	 var twConfigHeader = Ti.UI.createView({
-	 	width:250,
-		height:35,
-		top:5,
-		borderRadius:10,
-		backgroundImage:'../images/75percentblack.png'
-	 });
-	 var lbl_tw_header = Ti.UI.createLabel({
-	 	text:L("hashtags"),
-		color:'#ffffff',
-		fontWeight:'bold',
-		top:7,
-		left:7,
-		height:20,
-		width:'auto'
-	 });
+	 var twConfigView = Ti.UI.createView({id:'twConfigView'});
+	 var twConfigHeader = Ti.UI.createView({id:'twConfigHeader'});
+	 var lbl_tw_header = Ti.UI.createLabel({id:'lbltwheader'});
 	 twConfigHeader.add(lbl_tw_header);
-	 var btn_twC_OK = Ti.UI.createButton({
-	 	image:'../images/dark_check.png',
-		top:9,
-		right:9
-	 });
+	 var btn_twC_OK = Ti.UI.createButton({id:'btntwCOK'});
 	 twConfigHeader.add(btn_twC_OK);
 	 twConfigView.add(twConfigHeader);
 	 var txt_hashtag1 = Ti.UI.createTextField({
 	 	value:HASHTAG1,
-		top:45,
-		height:38,
-		width:240,
-		left:10,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
+	    returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		id:'txthashtag1'
 	 });
 	 twConfigView.add(txt_hashtag1);
 	 var txt_hashtag2 = Ti.UI.createTextField({
 	 	value:HASHTAG2,
-		top:85,
-		height:38,
-		width:240,
-		left:10,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
+		returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		id:'txthashtag2'
 	 });
 	 twConfigView.add(txt_hashtag2);
 	 var txt_hashtag3 = Ti.UI.createTextField({
 	 	value:HASHTAG3,
-		top:125,
-		height:38,
-		width:240,
-		left:10,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
+		returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		id:'txthashtag3'
 	 });
 	 twConfigView.add(txt_hashtag3);
 	 var txt_hashtag4 = Ti.UI.createTextField({
-		top:165,
-		height:38,
-		width:240,
-		left:10,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
+		returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		id:'txthashtag4'
 	 });
 	 twConfigView.add(txt_hashtag4);
 	 // set current values if they exist
-	txt_hashtag1.value = Ti.App.Properties.getString("hashtag1", '');
-	txt_hashtag2.value = Ti.App.Properties.getString("hashtag2", '');
-	txt_hashtag3.value = Ti.App.Properties.getString("hashtag3", '');
+	txt_hashtag1.value = Ti.App.Properties.getString("hashtag1", HASHTAG1);
+	txt_hashtag2.value = Ti.App.Properties.getString("hashtag2", HASHTAG2);
+	txt_hashtag3.value = Ti.App.Properties.getString("hashtag3", HASHTAG3);
 	txt_hashtag4.value = Ti.App.Properties.getString("hashtag4", '');
 	
 	 btn_twC_OK.addEventListener('click', function() {
@@ -202,7 +182,7 @@ Ti.App.fireEvent('show_indicator');
 	 	Ti.App.Properties.setString("hashtag2", txt_hashtag2.value);
 	 	Ti.App.Properties.setString("hashtag3", txt_hashtag3.value);
 	 	Ti.App.Properties.setString("hashtag4", txt_hashtag4.value);
-	 	twConfigWrapper.hide();
+		twConfigWrapper.hide();
 		Ti.App.fireEvent('show_indicator',{});
 		cc.retrieveTwitterFeed();
 	 });
@@ -253,8 +233,6 @@ if(isAndroid()){
 
 	};
 }
-
-
 
 })();
 
