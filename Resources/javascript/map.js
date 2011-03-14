@@ -3,8 +3,103 @@ var win = Ti.UI.currentWindow;
 /** initialize **/
 var currentLat = 38.267154;
 var currentLng = 140.870705;
+var defaultLatDelta = 0.1;
+var defaultLngDelta = 0.1;
 var url = 'http://www.mountposition.co.jp/place_data.dat';
 var dbName = 'map';
+
+function getFitLocation(max_lat, max_lng, min_lat, min_lng){
+	var average_lat = (max_lat + min_lat) / 2.0;
+	var average_lng = (max_lng + min_lng) / 2.0;
+	var calcLatitudeDelta = max_lat - min_lat;
+	var calcLongitudeDelta = max_lng - min_lng;
+	
+	if(calcLatitudeDelta < defaultLatDelta){
+		calcLatitudeDelta = defaultLatDelta;
+	}
+	
+	if(calcLongitudeDelta < defaultLatDelta){
+		calcLongitudeDelta = defaultLngDelta;
+	}
+	
+	Ti.API.info({latitude:average_lat, longitude:average_lng, latitudeDelta:calcLatitudeDelta, longitudeDelta:calcLongitudeDelta});
+	return {latitude:average_lat, longitude:average_lng, latitudeDelta:calcLatitudeDelta, longitudeDelta:calcLongitudeDelta};
+}
+
+function textSearch(search_str){
+	
+	var db = Ti.Database.open(dbName);
+	var condition = '%' + search_str + '%';
+	var db_rows = db.execute('select * from places where name like ? or detail like ?', condition, condition);
+	var count = db_rows.getRowCount();
+	
+	var max_lat = 0;
+	var min_lat = 0;
+	var max_lng = 0;
+	var min_lng = 0;
+	var i = 0;
+	var annotations = [];
+	
+	while(db_rows.isValidRow()){
+		if(i == 0){
+			max_lat = db_rows.fieldByName('lat');
+			max_lng = db_rows.fieldByName('lng');
+			min_lat = max_lat;
+			min_lng = max_lng;
+		}else{
+			max_lat = (max_lat > db_rows.fieldByName('lat')) ? max_lat : db_rows.fieldByName('lat');
+			max_lng = (max_lng > db_rows.fieldByName('lng')) ? max_lng : db_rows.fieldByName('lng');
+			min_lat = (min_lat < db_rows.fieldByName('lat')) ? min_lat : db_rows.fieldByName('lat');
+			min_lng = (min_lng < db_rows.fieldByName('lng')) ? min_lng : db_rows.fieldByName('lng');
+		}
+		
+		var annotation = Ti.Map.createAnnotation({
+			title:db_rows.fieldByName('name'),
+			latitude:db_rows.fieldByName('lat'),
+			longitude:db_rows.fieldByName('lng'),
+			pincolor:Ti.Map.ANNOTATION_GREEN
+		});
+		
+		annotations.push(annotation);
+		db_rows.next();
+		i++;
+	}
+	
+	db_rows.close();
+	db.close();
+	
+	if(count == 0){
+		alert('nothing');
+	}else {
+		this.mapView.removeAllAnnotations();
+		this.mapView.addAnnotations(annotations);
+		if(count == 1){
+			this.mapView.setLocation({latitude: max_lat,longitude: max_lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
+		}else{
+			this.mapView.setLocation(getFitLocation(max_lat, max_lng, min_lat, min_lng));
+		}
+	}
+}
+
+var searchBar = Ti.UI.createSearchBar({
+	barColor:'#000000',
+	showCancel:true,
+	height:40,
+	top:0
+});
+
+searchBar.addEventListener('return', function(e)
+{
+	searchBar.blur();
+	if(e.value.length == 0){
+		this.createAnnotations();
+	}else{
+		textSearch(e.value);
+	}
+});
+
+searchBar.addEventListener('cancel', function(e){searchBar.blur();});
+win.add(searchBar);
 
 
 var mapView = Ti.Map.createView({
@@ -15,10 +110,10 @@ var mapView = Ti.Map.createView({
 	region: {
 		latitude: currentLat,
 		longitude: currentLng,
-		latitudeDelta: 0.2,
-		longitudeDelta: 0.2
+		latitudeDelta: defaultLatDelta,
+		longitudeDelta: defaultLngDelta
 	},
-	top: 0,
+	top: 40,
 	left: 0
 });
 
@@ -33,7 +128,7 @@ mapView.add(actInd);
 var XHR = {
 	getDataFromURL: function(url, callback, error_callback){
 		if(Ti.Network.online	 ==	 false){ 
-			error_callback({message:'オフラインのため、データを取得できません'});
+			error_callback({message:L('can_not_use_network')});
 			return;
 		}
 
@@ -105,10 +200,7 @@ function createAnnotations(){
 	var db_rows = db.execute('select * from places');
 	var annotations = [];
 	
-	Ti.API.info(db_rows.getRowCount());
-	
 	while(db_rows.isValidRow()){
-		Ti.API.info(db_rows.fieldByName('id'));
 		annotations.push({latitude:db_rows.fieldByName('lat'), 
 						  longitude:db_rows.fieldByName('lng'), 
 						  title:db_rows.fieldByName('name')});
@@ -118,21 +210,24 @@ function createAnnotations(){
 	db.close();
 	mapView.removeAllAnnotations();
 	mapView.userLocation = true;
-	mapView.addAnnotations(annotations);
+	if(annotations.length == 0){
+		alert(L('no_local_shelter_info'));
+	}else{
+		mapView.addAnnotations(annotations);
+	}
 }
 
 /** sync remoto to local **/
 function setData(data){
 	var db = Ti.Database.open(dbName);
-	db.execute('delete from places');
 	db.execute('create table if not exists places (id integer, name text, lat real, lng real, detail text)');
 
 	for(var i = 0; i < data.length; i++){
 		var db_row = db.execute('select * from places where id = ?', data[i].id);
-		Ti.API.info('id fetch:' + db_row.getRowCount());
+
 		if(db_row.isValidRow()){
 			//update
-			db.execute('update places set(name = ?, lat = ?, lng = ?, detail = ?) where id = ?', 
+			db.execute("update places set name = ?, lat = ?, lng = ?, detail = ? where id = ?", 
 						data[i].name, data[i].lat, data[i].lng, data[i].description, data[i].id);
 		}else{
 			//insert
@@ -148,7 +243,7 @@ function setData(data){
 
 /** sync error callback **/
 function getXHRError(error){
-	alert('通信エラーが発生しました。オフラインモードで実行します');
+	alert(L('can_not_use_network'));
 	Ti.API.info(error);
 	actInd.hide();
 }
@@ -175,9 +270,8 @@ if (Ti.Geolocation.locationServicesEnabled) {
 	});
   
 } else {
-  alert('現在地が取得できませんでした');
+  alert(L('can_not_get_geolocation'));
 }
-
 
 /** execute **/
 createAnnotations();
@@ -238,6 +332,7 @@ function setNearByAnnotation(){
 	}
 	db_rows.close();
 	db.close();
+	createAnnotations();
 	mapView.setLocation({latitude:lat, longitude:lng});
 }
 
@@ -253,6 +348,7 @@ function setNearByAnnotation(){
 	});
 	
 	currentPositionButton.addEventListener('click', function(){
+		createAnnotations();
 		mapView.setLocation({latitude: currentLat,longitude: currentLng});
 	});
 	
