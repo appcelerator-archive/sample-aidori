@@ -95,28 +95,40 @@ cc.infoButton.addEventListener('click', function(){
 if(isAndroid()){
 	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
     var menu = e.menu;
-		var wPage = Ti.UI.createWindow({  
-		    barColor:cc.win.barColor,
-		    backgroundImage:'../images/back.png',
-			navBarHidden:true,
-			fullscreen:false
-		});
 
 		var mAboutD = menu.add({title: Ti.Locale.getString('about_quake') });
 	    mAboutD.addEventListener("click", function(e) {
-	    	wPage.url='about_d.js';
-		  	wPage.open();
+			var wAboutD = Ti.UI.createWindow({  
+			    barColor:cc.win.barColor,
+			    backgroundImage:'../images/back.png',
+				navBarHidden:true,
+				fullscreen:false,
+				url:'about_d.js'
+			});
+			wAboutD.open();
 	    });
 	    var mAboutCC = menu.add({title: Ti.Locale.getString('about_cc') });
 	 //   mAboutCC.setIcon('../../Images/Toolbar/calendar.png');
 	    mAboutCC.addEventListener("click", function(e) {
-	    	wPage.url='about_cc.js';
-		  	wPage.open();
+			var wAboutCC = Ti.UI.createWindow({  
+			    barColor:cc.win.barColor,
+			    backgroundImage:'../images/back.png',
+				navBarHidden:true,
+				fullscreen:false,
+	    		url:'about_cc.js'
+			});
+		  	wAboutCC.open();
 	    });
-		var mAboutD = menu.add({title: Ti.Locale.getString('about_app') });
-	    mAboutD.addEventListener("click", function(e) {
-	    	wPage.url='about_app.js';
-		  	wPage.open();
+		var mAboutAp = menu.add({title: Ti.Locale.getString('about_app') });
+	    mAboutAp.addEventListener("click", function(e) {
+			var wAboutAp = Ti.UI.createWindow({  
+			    barColor:cc.win.barColor,
+			    backgroundImage:'../images/back.png',
+				navBarHidden:true,
+				fullscreen:false,
+	    		url:'about_app.js'
+			});
+		  	wAboutAp.open();
 	    });
 	};
 }

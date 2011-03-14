@@ -1,4 +1,4 @@
-#webButton {
+#webButtonAp {
 	layout:'horizontal';
 	height:50;
 	right:10;
@@ -11,7 +11,7 @@
 	background-color:'#fff';
 }
 
-#webImg {
+#webImgAp {
 	backgroundImage:'../images/dark_globe.png';
 	width:25;
 	height:25;
@@ -19,7 +19,7 @@
 	left:10;
 }
 
-#webButtonLabel {
+#webButtonLabelAp {
 	textid:'about_app_more';
 	height:25;
 	text-align:'center';
@@ -31,14 +31,7 @@
 	top:10;
 }
 
-#nameBox {
-	top:10;
-	height:'auto';
-	left:10;
-	right:10;
-	borderRadius:5;
-	background-color:'#fff';
-}
+
 #aboutAp {
 	height:'auto';
 	left:3;
@@ -51,13 +44,6 @@
 	font-weight:'Bold';
 }
 
-#logoBox {
-	height:'auto';
-	left:10;
-	right:10;
-	borderRadius:5;
-	background-color:'#fff';
-}
 
 #descBox {
 	height:'auto';
@@ -79,7 +65,7 @@
 	font-size:12;
 }
 
-#middleSection {
+#middleSectionAp {
 	layout:'horizontal';
 	height:'auto';
 	background-color:'#fff';
@@ -88,7 +74,6 @@
 }
 
 #teamInfo {
-	textid:'about_app_team';
 	height:'auto';
 	text-align:'left';
 	color:'#000';
@@ -98,10 +83,30 @@
 	top:5;
 }
 
-#moreInfoScroll {
+#moreInfoScrollAp {
 	height:200;
 	background-color:'#fff';
 	borderRadius:5;
 	contentHeight: 'auto';
     contentWidth: 'auto';
+}
+
+#titanInfo {
+	height:'auto';
+	left:5;
+	width:100;
+	color:'#000';
+	text-align:'center';
+	top:5;
+	font-size:12;
+	font-weight:'Bold';
+}
+
+#nameBoxAp {
+	top:10;
+	height:'auto';
+	left:10;
+	right:10;
+	borderRadius:5;
+	background-color:'#fff';
 }

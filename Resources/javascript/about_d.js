@@ -14,7 +14,7 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.win.add(cc.mainContainer);
 	
 	if(isAndroid()){
-		cc.nameBox = Ti.UI.createView({id:'nameBox'});
+		cc.nameBox = Ti.UI.createView({id:'nameBoxD'});
 		cc.mainContainer.add(cc.nameBox);		
 		cc.aboutCC = Ti.UI.createLabel({
 			text:'About Sendai Earthquake & Tsunami',
@@ -24,28 +24,28 @@ var cc ={win:Ti.UI.currentWindow};
 	}	
 	cc.logoBox = Ti.UI.createView({
 		top:isAndroid()?10:20,
-		id:'logoBox'
+		id:'logoBoxD'
 	});
 	cc.mainContainer.add(cc.logoBox);
 		
-	cc.ccLogo = Ti.UI.createImageView({
+	cc.ccLogoD = Ti.UI.createImageView({
 		    image:'../images/wikipedia_logo.png',
 			height:100,
 			width:82
 	  });
 
-	cc.logoBox.add(cc.ccLogo);
+	cc.logoBox.add(cc.ccLogoD);
 	
 	cc.descBox = Ti.UI.createView({
 		top:isAndroid()?10:20,
-		id:'descBox'
+		id:'descBoxD'
 	});
 	cc.mainContainer.add(cc.descBox);
 
 	cc.descCC = Ti.UI.createLabel({id:'descD'});	
 	cc.descBox.add(cc.descCC);
 	
-	cc.webButton = Ti.UI.createView({id:'webButton'});
+	cc.webButton = Ti.UI.createView({id:'webButtonD'});
 
 	if(!isAndroid()){
 		cc.webButton.backgroundGradient={
@@ -55,10 +55,10 @@ var cc ={win:Ti.UI.currentWindow};
 	}
 	cc.win.add(cc.webButton);
 
-	cc.webImg = Ti.UI.createView({id:'webImg'});
+	cc.webImg = Ti.UI.createView({id:'webImgD'});
 	cc.webButton.add(cc.webImg);
 
-	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
+	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabelD'});
 	cc.webButton.add(cc.webButtonLabel);		
 })();
 

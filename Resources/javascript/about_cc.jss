@@ -1,4 +1,4 @@
-#webButton {
+#webButtonCC {
 	layout:'horizontal';
 	height:50;
 	right:10;
@@ -11,7 +11,7 @@
 	background-color:'#fff';
 }
 
-#webImg {
+#webImgCC {
 	backgroundImage:'../images/dark_globe.png';
 	width:25;
 	height:25;
@@ -19,7 +19,7 @@
 	left:10;
 }
 
-#webButtonLabel {
+#webButtonLabelCC {
 	textid:'about_cc_visit';
 	height:25;
 	text-align:'center';
@@ -31,7 +31,7 @@
 	top:10;
 }
 
-#nameBox {
+#nameBoxCC {
 	top:10;
 	height:'auto';
 	left:10;
@@ -51,7 +51,7 @@
 	font-weight:'Bold';
 }
 
-#logoBox {
+#logoBoxCC {
 	height:'auto';
 	left:10;
 	right:10;
@@ -59,7 +59,7 @@
 	background-color:'#fff';
 }
 
-#descBox {
+#descBoxCC {
 	height:'auto';
 	left:10;
 	right:10;

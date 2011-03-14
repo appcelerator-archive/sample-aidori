@@ -1,4 +1,4 @@
-#webButton {
+#webButtonD {
 	layout:'horizontal';
 	height:50;
 	right:10;
@@ -11,7 +11,7 @@
 	background-color:'#fff';
 }
 
-#webImg {
+#webImgD {
 	backgroundImage:'../images/dark_globe.png';
 	width:25;
 	height:25;
@@ -19,7 +19,7 @@
 	left:10;
 }
 
-#webButtonLabel {
+#webButtonLabelD {
 	textid:'about_d_visit';
 	height:25;
 	text-align:'center';
@@ -31,7 +31,7 @@
 	top:10;
 }
 
-#nameBox {
+#nameBoxD {
 	top:10;
 	height:'auto';
 	left:10;
@@ -51,7 +51,7 @@
 	font-weight:'Bold';
 }
 
-#logoBox {
+#logoBoxD {
 	height:'auto';
 	left:10;
 	right:10;
@@ -59,7 +59,7 @@
 	background-color:'#fff';
 }
 
-#descBox {
+#descBoxD {
 	height:'auto';
 	left:10;
 	right:10;

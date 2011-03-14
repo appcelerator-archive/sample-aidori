@@ -14,38 +14,38 @@ var cc ={win:Ti.UI.currentWindow};
 	}
 	
 	if(isAndroid()){
-		cc.nameBox = Ti.UI.createView({id:'nameBox'});
+		cc.nameBox = Ti.UI.createView({id:'nameBoxCC'});
 		cc.mainContainer.add(cc.nameBox);		
 		cc.aboutCC = Ti.UI.createLabel({
 			text:'About CrisisCommons',
-			id:'aboutAp'
+			id:'aboutCC'
 		});	
 		cc.nameBox.add(cc.aboutCC);
 	}	
 	cc.logoBox = Ti.UI.createView({
 		top:isAndroid()?10:20,
-		id:'logoBox'
+		id:'logoBoxCC'
 	});
 	cc.mainContainer.add(cc.logoBox);
 		
-	cc.ccLogo = Ti.UI.createImageView({
+	cc.ccLogoCC = Ti.UI.createImageView({
 		    image:'../images/charity_logos/crisis_commons.png',
 			height:97,
 			width:250
 	  });
 
-	cc.logoBox.add(cc.ccLogo);
+	cc.logoBox.add(cc.ccLogoCC);
 	
 	cc.descBox = Ti.UI.createView({
 		top:isAndroid()?10:20,
-		id:'descBox'
+		id:'descBoxCC'
 	});
 	cc.mainContainer.add(cc.descBox);
 
 	cc.descCC = Ti.UI.createLabel({id:'descCC'});	
 	cc.descBox.add(cc.descCC);
 	
-	cc.webButton = Ti.UI.createView({id:'webButton'});
+	cc.webButton = Ti.UI.createView({id:'webButtonCC'});
 
 	if(!isAndroid()){
 		cc.webButton.backgroundGradient={
@@ -55,10 +55,10 @@ var cc ={win:Ti.UI.currentWindow};
 	}
 	cc.win.add(cc.webButton);
 
-	cc.webImg = Ti.UI.createView({id:'webImg'});
+	cc.webImg = Ti.UI.createView({id:'webImgCC'});
 	cc.webButton.add(cc.webImg);
 
-	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
+	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabelCC'});
 	cc.webButton.add(cc.webButtonLabel);		
 })();
 

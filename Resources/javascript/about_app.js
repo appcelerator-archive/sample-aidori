@@ -14,7 +14,7 @@ var cc ={win:Ti.UI.currentWindow};
 	}
 	
 	if(isAndroid()){
-		cc.nameBox = Ti.UI.createView({id:'nameBox'});
+		cc.nameBox = Ti.UI.createView({id:'nameBoxAp'});
 		cc.mainContainer.add(cc.nameBox);		
 		cc.aboutCC = Ti.UI.createLabel({
 			text:'About This Application',
@@ -25,51 +25,39 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.middleSection = Ti.UI.createView({
 		width:(Ti.Platform.displayCaps.platformWidth-20),
 		top:isAndroid() ? 10 : 5 ,
-		id:'middleSection'
+		id:'middleSectionAp'
 	});
 	cc.mainContainer.add(cc.middleSection);
 		
-	cc.ccLogo = Ti.UI.createImageView({
+	cc.ccLogoAp = Ti.UI.createImageView({
 		    image:'../images/appcelerator.png',
 			height:100,
 			width:100
 	  });
 
-	cc.middleSection.add(cc.ccLogo);
+	cc.middleSection.add(cc.ccLogoAp);
 
 	cc.titanInfo = Ti.UI.createLabel({
 		textid:'Some meaningful message',
-		height:'auto',
-		left:5,
-		width:100,
-		color:'#000',
-		textAlign:'center',
-		top:5,
-		font:{fontSize:12,fontWeight:'Bold'}
+		id:'titanInfo'
 		});
 	cc.middleSection.add(cc.titanInfo);
 		
 	cc.teamInfo = Ti.UI.createLabel({
 		text:Ti.Locale.getString('about_app_team'),
-		height:'auto',
-		textAlign:'left',
-		color:'#000',
-		font:{fontSize:12},
-		left:5,
-		right:5,
-		top:5
+		id:'teamInfo'
 	});
 
 	cc.moreInfoScroll = Ti.UI.createScrollView({
 			width:(Ti.Platform.displayCaps.platformWidth-20),
 			top:isAndroid() ? 10 : 5 ,
-			id:'moreInfoScroll'
+			id:'moreInfoScrollAp'
 		});
 
 	cc.moreInfoScroll.add(cc.teamInfo);
 	cc.mainContainer.add(cc.moreInfoScroll);
 	
-	cc.webButton = Ti.UI.createView({id:'webButton'});
+	cc.webButton = Ti.UI.createView({id:'webButtonAp'});
 
 	if(!isAndroid()){
 		cc.webButton.backgroundGradient={
@@ -79,10 +67,10 @@ var cc ={win:Ti.UI.currentWindow};
 	}
 	cc.win.add(cc.webButton);
 
-	cc.webImg = Ti.UI.createView({id:'webImg'});
+	cc.webImg = Ti.UI.createView({id:'webImgAp'});
 	cc.webButton.add(cc.webImg);
 
-	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
+	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabelAp'});
 	cc.webButton.add(cc.webButtonLabel);		
 })();
 
