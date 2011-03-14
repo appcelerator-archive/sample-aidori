@@ -1,6 +1,12 @@
 Ti.include('./application.js');
 var cc ={win:Ti.UI.currentWindow};
 (function(){
+
+	cc.doneButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.DONE});
+	if(!isAndroid()){
+		cc.win.rightNavButton=cc.doneButton;
+	}
+	
 	cc.mainContainer = Ti.UI.createView({top:isAndroid() ? 20 : 5 ,layout:'vertical'});
 	cc.win.add(cc.mainContainer);
 	
@@ -56,6 +62,9 @@ var cc ={win:Ti.UI.currentWindow};
 //--------------------------------------
 //		Events
 //--------------------------------------
+cc.doneButton.addEventListener('click', function(){
+	cc.win.close();
+});
 cc.webButton.addEventListener('click', function(){
 	if (!Ti.Network.online){
 	 	  noNetworkAlert();
