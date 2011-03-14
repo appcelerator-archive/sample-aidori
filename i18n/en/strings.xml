@@ -12,6 +12,10 @@
 	<string name="title_twitter">Twitter: Sendai Quake</string>
 	<string name="title_instagram">Instagram: prayforjapan</string>
 	<string name="title_contribute">Contribute</string>
+	<string name="tab_map">Map</string>
+	<string name="title_map">Map</string>
+	<string name="show_current_position_button_title">Current position</string>
+	<string name="synchronize_shelter_place">Sync</string>
 	<string name="tab_about">About</string>
 	<string name="tab_contribute">Contribute</string>
 	<string name="title_about">About Sendai Quake</string>

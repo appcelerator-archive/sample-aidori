@@ -64,10 +64,23 @@ var aboutTab = Titanium.UI.createTab({
   window:aboutWin
 });
 
+var mapWin = Titanium.UI.createWindow({
+	url:'javascript/map.js',
+	backgroundColor:'#000',
+	title:L('title_map')
+});
+
+var mapTab = Titanium.UI.createTab({
+	icon:'images/light_pin@2x.png',
+	title:L('tab_map'),
+	window:mapWin
+});
+
 tabGroup.addTab(shelterTab);  
 tabGroup.addTab(twitterTab);
 tabGroup.addTab(instagramTab);
 tabGroup.addTab(contributeTab);  
+tabGroup.addTab(mapTab);
 tabGroup.addTab(aboutTab);  
 
 var disclaimerTabGroup = Titanium.UI.createTabGroup();
