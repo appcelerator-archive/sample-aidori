@@ -44,3 +44,67 @@
   	height:'auto';
   	text-align:'left';
 }
+
+#twConfigView {
+	top:65;
+	background-color:'#ffffff';
+	width:260;
+	height:250;
+	borderRadius:10;
+}
+
+#twConfigHeader {
+ 	width:250;
+	height:35;
+	top:5;
+	borderRadius:10;
+	backgroundImage:'../images/75percentblack.png';
+}
+
+#lbltwheader {
+ 	textid:'hashtags';
+	color:'#ffffff';
+	font-weight:'bold';
+	top:7;
+	left:7;
+	height:20;
+	width:'auto';
+}
+
+#btntwCOK {
+ 	image:'../images/dark_check.png';
+	top:9;
+	right:9;
+}
+
+#txthashtag1 {
+	top:45;
+	height:38;
+	width:240;
+	left:10;
+	autocorrect:false;
+}
+
+#txthashtag2 {
+	top:85;
+	height:38;
+	width:240;
+	left:10;
+	autocorrect:false;
+}
+
+#txthashtag3 {
+	top:125;
+	height:38;
+	width:240;
+	left:10;
+	autocorrect:false;
+}
+
+#txthashtag4 {
+	top:165;
+	height:38;
+	width:240;
+	left:10;
+	autocorrect:false;
+}

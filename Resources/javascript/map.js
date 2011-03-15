@@ -373,6 +373,7 @@ function setNearByAnnotation(){
 	
 	var toolbar = Ti.UI.createToolbar({
 		items:[currentPositionButton, flexSpace, nearbyButton, flexSpace, getPlacesButton],
+		barColor:"#000",
 		bottom:0
 	});
 	
