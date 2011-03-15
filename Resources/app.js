@@ -66,7 +66,7 @@ var mapWin = Titanium.UI.createWindow({
 });
 
 var mapTab = Titanium.UI.createTab({
-	icon:'images/light_pin@2x.png',
+	icon:'images/light_pin.png',
 	title:L('tab_map'),
 	window:mapWin
 });
