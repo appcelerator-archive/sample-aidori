@@ -178,10 +178,10 @@ Ti.App.fireEvent('show_indicator');
 	txt_hashtag4.value = Ti.App.Properties.getString("hashtag4", '');
 	
 	 btn_twC_OK.addEventListener('click', function() {
-	 	Ti.App.Properties.setString("hashtag1", txt_hashtag1.value);
-	 	Ti.App.Properties.setString("hashtag2", txt_hashtag2.value);
-	 	Ti.App.Properties.setString("hashtag3", txt_hashtag3.value);
-	 	Ti.App.Properties.setString("hashtag4", txt_hashtag4.value);
+	 	Ti.App.Properties.setString("hashtag1", txt_hashtag1.value.replace(/\#/g,''));
+	 	Ti.App.Properties.setString("hashtag2", txt_hashtag2.value.replace(/\#/g,''));
+	 	Ti.App.Properties.setString("hashtag3", txt_hashtag3.value.replace(/\#/g,''));
+	 	Ti.App.Properties.setString("hashtag4", txt_hashtag4.value.replace(/\#/g,''));
 		twConfigWrapper.hide();
 		Ti.App.fireEvent('show_indicator',{});
 		cc.retrieveTwitterFeed();

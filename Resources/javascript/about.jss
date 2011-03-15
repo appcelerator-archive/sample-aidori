@@ -1,33 +1,10 @@
-#webButtonD {
-	layout:'horizontal';
-	height:50;
+#resourcesBoxD {
+	top:10;
+	height:'auto';
+	left:10;
 	right:10;
-	left:10;
-	text-align:'center';
 	borderRadius:5;
-	borderWidth:1;
-	borderColor:'#000';
 	background-color:'#fff';
-}
-
-#webImgD {
-	backgroundImage:'../images/dark_globe.png';
-	width:25;
-	height:25;
-	top:10;
-	left:10;
-}
-
-#webButtonLabelD {
-	textid:'about_d_visit';
-	height:25;
-	text-align:'center';
-	width:250;
-	font-size:14;
-	color:'#000';
-	font-weight:'Bold';
-	left:5;
-	top:10;
 }
 
 #nameBoxD {
@@ -38,7 +15,21 @@
 	borderRadius:5;
 	background-color:'#fff';
 }
+
+#resourcesD {
+	height:'auto';
+	left:3;
+	right:3;
+	color:'#000';
+	text-align:'center';
+	top:5;
+	bottom:5;
+	font-size:22;
+	font-weight:'Bold';
+}
+
 #aboutD {
+	textid:'about_page_top';
 	height:'auto';
 	left:3;
 	right:3;
@@ -76,4 +67,23 @@
 	top:5;
 	bottom:5;
 	font-size:12;
+}
+
+#crisisInfo {
+	textid:'about_main_text';
+	height:'auto';
+	text-align:'left';
+	color:'#000';
+	font-size:14;
+	left:5;
+	right:5;
+	top:5;
+}
+#moreInfoScroll {
+	top:20;
+	height:225;
+	background-color:'#fff';
+	borderRadius:5;
+	contentHeight:'auto';
+	contentWidth:'auto';
 }
