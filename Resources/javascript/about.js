@@ -8,131 +8,166 @@ var cc ={win:Ti.UI.currentWindow};
 	];
 
 	cc.infoButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.INFO_LIGHT});
+	cc.navBarPhone = Ti.UI.createButton({
+	    image:'../images/light_phone.png'
+	});
 	if(!isAndroid()){
-		cc.win.rightNavButton=cc.infoButton;
+		cc.win.leftNavButton=cc.infoButton;
+		cc.win.rightNavButton=cc.navBarPhone;
 	}
 	
 	cc.mainContainer = Ti.UI.createView({top:5 ,layout:'vertical'});
 	cc.win.add(cc.mainContainer);
 	
-	if(isAndroid()){
-		cc.nameBox = Ti.UI.createView({id:'nameBoxD'});
-		cc.mainContainer.add(cc.nameBox);		
-		cc.aboutCC = Ti.UI.createLabel({
-			text:'About Sendai Earthquake & Tsunami',
-			id:'aboutD'
-		});	
-		cc.nameBox.add(cc.aboutCC);
-	}	
-	cc.logoBox = Ti.UI.createView({
-		top:isAndroid()? 5: 0,
-		id:'logoBoxD'
-	});
-	cc.mainContainer.add(cc.logoBox);
-		
-	cc.ccLogoD = Ti.UI.createImageView({
-		    image:'../images/wikipedia_logo.png',
-			height:100,
-			width:82
-	  });
-
-	cc.logoBox.add(cc.ccLogoD);
+	cc.nameBox = Ti.UI.createView({id:'nameBoxD'});
+	cc.mainContainer.add(cc.nameBox);		
+	cc.aboutCC = Ti.UI.createLabel({
+		id:'aboutD'
+	});	
+	cc.nameBox.add(cc.aboutCC);
 	
-	cc.descBox = Ti.UI.createView({
-		top:10,
-		id:'descBoxD'
-	});
-	cc.mainContainer.add(cc.descBox);
+	cc.crisisInfo = Ti.UI.createLabel({id:'crisisInfo'});
 
-	cc.descCC = Ti.UI.createLabel({id:'descD'});	
-	cc.descBox.add(cc.descCC);
+	cc.moreInfoScroll = Ti.UI.createScrollView({
+			width:(Ti.Platform.displayCaps.platformWidth-20),
+			id:'moreInfoScroll'
+		});
+
+	cc.moreInfoScroll.add(cc.crisisInfo);
+	cc.mainContainer.add(cc.moreInfoScroll);	
 	
-	cc.webButton = Ti.UI.createView({id:'webButtonD',
-		bottom:isAndroid()? 5 : 10
+	cc.resourcesBox = Ti.UI.createView({id:'resourcesBoxD'});
+	cc.mainContainer.add(cc.resourcesBox);		
+	cc.aboutRE = Ti.UI.createLabel({
+		text:Ti.Locale.getString('about_resource_link_title'),
+		id:'resourcesD'
+	});	
+	cc.resourcesBox.add(cc.aboutRE);	
+	cc.resourcesArrow = Ti.UI.createImageView({
+		height:25,
+		width:25,
+		right:5,
+		image:'../images/dark_more.png'
 	});
-
-	if(!isAndroid()){
-		cc.webButton.backgroundGradient={
-			type:'linear',
-			colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}]
-		};
-	}
-	cc.win.add(cc.webButton);
-
-	cc.webImg = Ti.UI.createView({id:'webImgD'});
-	cc.webButton.add(cc.webImg);
-
-	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabelD'});
-	cc.webButton.add(cc.webButtonLabel);		
+	
+	cc.resourcesBox.add(cc.resourcesArrow);
 })();
 
-//--------------------------------------
-//		Events
-//--------------------------------------
-cc.webButton.addEventListener('click', function(){
-	if (!Ti.Network.online){
-	 	  noNetworkAlert();
-	} else {
-	   Ti.Platform.openURL("http://en.wikipedia.org/wiki/2011_Sendai_earthquake_and_tsunami");
-	}
-});
 
 //-----------------------------------
 //		Events
 //-----------------------------------	
-
+cc.resourcesBox.addEventListener('click', function(){
+	var wAboutRE = Ti.UI.createWindow({  
+	    barColor:cc.win.barColor,
+	    backgroundImage:'../images/back.png',
+		title:Ti.Locale.getString('about_resources_page_title'),
+		backButtonTitleImage:'../images/icon_arrow_left.png',
+		url:'about_resources.js'
+	});
+	Ti.UI.currentTab.open(wAboutRE,{animated:true});
+});
 cc.infoButton.addEventListener('click', function(){
+		// create dialog
+		var dialog = Ti.UI.createOptionDialog({
+				options:[Ti.Locale.getString('about_cc'),
+						 Ti.Locale.getString('about_app'),
+						Ti.Locale.getString('about_cancel')
+						],
+				cancel:3,
+				title:Ti.Locale.getString('about_dialog_title')
+		});
+		dialog.show();
+		dialog.addEventListener('click', function(e){
+			if(e.index==2){
+				return;
+			}
+
+			var go2Page='';	
+			var go2PageTitle='';	
+
+			if(e.index==0){
+				go2PageTitle=Ti.Locale.getString('about_cc');
+				go2Page='about_cc.js';
+			}
+			if(e.index==1){
+				go2PageTitle=Ti.Locale.getString('about_app');
+				go2Page='about_app.js';
+			}
+
+			//Just in case
+			if(go2Page.length==0){
+				return;
+			}
+
+			var wPage = Ti.UI.createWindow({  
+			    barColor:cc.win.barColor,
+				navBarHidden:false,
+				url:go2Page,
+				title:go2PageTitle
+			});		
+
+			wPage.open({modal:true});
+		});
+});
+
+cc.phoneNumberList=function(){
+	var cancelIdex=4;
+	var optionsValues=["Iwate: 0120-801-471",
+			 "Miyagi: 022-221-2000",
+			 "Fukushima: 0120-510-186",
+			 "Fukushima: 090-8424-4207",
+			 "Fukushima: 090-8424-4208"
+	];
+	
+	if(!isAndroid()){
+		optionsValues.push(Ti.Locale.getString('about_cancel'));
+		cancelIdex=5;
+	}
 	// create dialog
 	var dialog = Ti.UI.createOptionDialog({
-			options:[Ti.Locale.getString('about_cc'),
-					 Ti.Locale.getString('about_app'),
-					Ti.Locale.getString('about_cancel')
-					],
-			cancel:3,
-			title:Ti.Locale.getString('about_dialog_title')
+			options:optionsValues,
+			cancel:cancelIdex,
+			title:Ti.Locale.getString('about_phone_title')
 	});
-
 	dialog.show();
 	dialog.addEventListener('click', function(e){
-		if(e.index==2){
-			return;
-		}
-
-		var go2Page='';	
-		var go2PageTitle='';	
-
+		var phoneNumber='';
 		if(e.index==0){
-			go2PageTitle=Ti.Locale.getString('about_cc');
-			go2Page='about_cc.js';
+			phoneNumber='tel:0120801471';
 		}
 		if(e.index==1){
-			go2PageTitle=Ti.Locale.getString('about_app');
-			go2Page='about_app.js';
+			phoneNumber='tel:0222212000';
 		}
-
-		//Just in case
-		if(go2Page.length==0){
-			return;
+		if(e.index==2){
+			phoneNumber='tel:0120510186';
+		}
+		if(e.index==3){
+			phoneNumber='tel:09084244207';
+		}	
+		if(e.index==4){
+			phoneNumber='tel:09084244208';
+		}							
+		if(phoneNumber.length>0){
+			Ti.Platform.openURL(phoneNumber);	
 		}
 		
-		var wPage = Ti.UI.createWindow({  
-		    barColor:cc.win.barColor,
-			navBarHidden:false,
-			url:go2Page,
-			title:go2PageTitle
-		});		
-	
-		wPage.open({modal:true});
-	});
+	});	
+};
+cc.navBarPhone.addEventListener('click', function(){
+	cc.phoneNumberList();
 });	
 
 if(isAndroid()){
 	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
     var menu = e.menu;
 
+	    var mAboutPN = menu.add({title: Ti.Locale.getString('about_phone_title') });
+		mAboutPN.addEventListener("click", function(e) {
+				cc.phoneNumberList();
+		});
 	    var mAboutCC = menu.add({title: Ti.Locale.getString('about_cc') });
-	 //   mAboutCC.setIcon('../../Images/Toolbar/calendar.png');
-	    mAboutCC.addEventListener("click", function(e) {
+		 mAboutCC.addEventListener("click", function(e) {
 			var wAboutCC = Ti.UI.createWindow({  
 			    barColor:cc.win.barColor,
 			    backgroundImage:'../images/back.png',
