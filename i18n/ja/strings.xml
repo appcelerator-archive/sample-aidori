@@ -20,6 +20,8 @@
 	<string name="can_not_use_network">ネットワークに接続できませんでした</string>
 	<string name="no_local_shelter_info">「避難所情報を同期」ボタンを押して、情報を取得してからご利用ください。</string>
 	<string name="search_result_nothing">検索結果はありませんでした。</string>
+	<string name="facility_name">施設名:</string>
+	<string name="map_address">住所:</string>
 	<string name="title_about">About Sendai Quake</string>
 	<string name="about_body">Sendai Quake was built by ...</string>
 	<string name="volunteer_info">For more information on how to volunteer, please call (555) 555-1212</string>
