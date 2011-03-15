@@ -13,8 +13,8 @@ var data = [
 ];
 
 var template = {
-    selectedBackgroundColor:'#fff',
-    backgroundColor:'#ffffff',
+    selectedBackgroundColor:'#000',
+    backgroundColor:'#000',
     rowHeight:100,
     layout:[
         {type:'image', left:10, top:5, width:50, height:50, name:'photo'},

@@ -67,11 +67,14 @@ Ti.App.fireEvent('show_indicator');
 		}
 		if(!Ti.App.Properties.hasProperty('hashtag3')){
 			Ti.App.Properties.setString("hashtag3", HASHTAG3);
-		}	
+		}
+		if(!Ti.App.Properties.hasProperty('hashtag4')){
+			Ti.App.Properties.setString("hashtag4", HASHTAG4);
+		}			
 		var ht1 = Ti.App.Properties.getString("hashtag1", HASHTAG1);
 		var ht2 = Ti.App.Properties.getString("hashtag2", HASHTAG3);
 		var ht3 = Ti.App.Properties.getString("hashtag3", HASHTAG3);
-		var ht4 = Ti.App.Properties.getString("hashtag4", '');
+		var ht4 = Ti.App.Properties.getString("hashtag4", HASHTAG4);
 		
 		//Make sure we've got at least one hashtag
 		if((ht1.length==0)&&(ht2.length==0)&&(ht3.length==0)&&(ht4.length==0)){
@@ -175,7 +178,7 @@ Ti.App.fireEvent('show_indicator');
 	txt_hashtag1.value = Ti.App.Properties.getString("hashtag1", HASHTAG1);
 	txt_hashtag2.value = Ti.App.Properties.getString("hashtag2", HASHTAG2);
 	txt_hashtag3.value = Ti.App.Properties.getString("hashtag3", HASHTAG3);
-	txt_hashtag4.value = Ti.App.Properties.getString("hashtag4", '');
+	txt_hashtag4.value = Ti.App.Properties.getString("hashtag4", HASHTAG4);
 	
 	 btn_twC_OK.addEventListener('click', function() {
 	 	Ti.App.Properties.setString("hashtag1", txt_hashtag1.value);
