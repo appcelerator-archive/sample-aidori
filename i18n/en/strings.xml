@@ -63,4 +63,9 @@
 	<string name="hashtags_droidmenu">Hashtags</string>
 	<string name="about_app_more">Learn More About The Project</string>
 	<string name="about_app_team">Tony to put something here</string>
+	<string name="about_phone_title">Consult about missing persons</string>
+	<string name="about_resource_link_title">Helpful Resources</string>
+	<string name="about_resources_page_title">Helpful Resources</string>
+	<string name="about_main_text">A massive 8.9/9.0 magnitude earthquake hit the Pacific Ocean nearby Northeastern Japan at around 2:46pm on March 11 (JST) causing damage with blackouts, fire and tsunami. On this page we are providing the information regarding the disaster and damage with realtime updates.\n\nThe large earthquake triggered a tsunami warning for countries all around the Pacific ocean.</string>
+	<string name="about_page_top">2011 Japanese Earthquake\nand Tsunami</string>	
 </resources>
