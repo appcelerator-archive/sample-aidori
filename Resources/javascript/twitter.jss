@@ -46,7 +46,7 @@
 }
 
 #twConfigView {
-	top:65;
+	top:10;
 	background-color:'#ffffff';
 	width:260;
 	height:250;
