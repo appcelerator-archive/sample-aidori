@@ -416,6 +416,7 @@ function setNearByAnnotation(){
 		XHR.getDataFromURL(url, setData, getXHRError);
 	});
 	
+
 	if(isAndroid){
 		var toolView = Ti.UI.createView({
 			bottom:0,

@@ -10,8 +10,9 @@
 	<string name="tab_twitter">Twitter</string>
 	<string name="title_twitter">Twitter: Sendai Quake</string>
 	<string name="title_contribute">Contribute</string>
-	<string name="tab_map">Map</string>
-	<string name="title_map">Map</string>
+	<string name="tab_news">News</string>
+	<string name="tab_map">Shelter Map</string>
+	<string name="title_map">Shelter Map</string>
 	<string name="show_current_position_button_title">Current position</string>
 	<string name="synchronize_shelter_place">Sync</string>
 	<string name="can_not_get_geolocation">Can't get geolocation</string>
@@ -62,4 +63,9 @@
 	<string name="hashtags_droidmenu">Hashtags</string>
 	<string name="about_app_more">Learn More About The Project</string>
 	<string name="about_app_team">Tony to put something here</string>
+	<string name="about_phone_title">Consult about missing persons</string>
+	<string name="about_resource_link_title">Helpful Resources</string>
+	<string name="about_resources_page_title">Helpful Resources</string>
+	<string name="about_main_text">A massive 8.9/9.0 magnitude earthquake hit the Pacific Ocean nearby Northeastern Japan at around 2:46pm on March 11 (JST) causing damage with blackouts, fire and tsunami. On this page we are providing the information regarding the disaster and damage with realtime updates.\n\nThe large earthquake triggered a tsunami warning for countries all around the Pacific ocean.</string>
+	<string name="about_page_top">2011 Japanese Earthquake\nand Tsunami</string>	
 </resources>

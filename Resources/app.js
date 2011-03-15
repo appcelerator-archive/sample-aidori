@@ -2,16 +2,16 @@ Titanium.include('javascript/application.js');
 var indicatorShowing = false;
 
 var tabGroup = Ti.UI.createTabGroup();
-var shelterWin = Ti.UI.createWindow({  
-  url:'javascript/shelter.js',
+var newsWin = Ti.UI.createWindow({  
+  url:'javascript/news.js',
   barColor:"#333",
   backgroundImage:'images/back.png',
   titleid:L('crisis_title')
 });
-var shelterTab = Titanium.UI.createTab({  
+var newsTab = Titanium.UI.createTab({  
   icon:'images/icon_report.png',
-  title:'Shelters',
-  window:shelterWin
+  title:L('tab_news'),
+  window:newsWin
 });
 
 var twitterWin = Titanium.UI.createWindow({  
@@ -20,6 +20,12 @@ var twitterWin = Titanium.UI.createWindow({
   barColor:"#333",
   backgroundColor:'#5a5c64'
 });
+
+// Avoid keyboard overlapping the text fields
+if (Ti.Platform.name == 'android') {
+	twitterWin.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
+}
+
 var twitterTab = Titanium.UI.createTab({  
   icon:'images/icon_twitter2.png',
   title:L('tab_twitter'),
@@ -55,6 +61,7 @@ var aboutTab = Titanium.UI.createTab({
 var mapWin = Titanium.UI.createWindow({
 	url:'javascript/map.js',
 	backgroundColor:'#000',
+	barColor:"#333",
 	title:L('title_map')
 });
 
@@ -64,7 +71,7 @@ var mapTab = Titanium.UI.createTab({
 	window:mapWin
 });
 
-tabGroup.addTab(shelterTab);  
+tabGroup.addTab(newsTab);  
 tabGroup.addTab(twitterTab);  
 tabGroup.addTab(contributeTab);  
 tabGroup.addTab(mapTab);
