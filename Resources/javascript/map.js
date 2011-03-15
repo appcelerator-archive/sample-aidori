@@ -6,8 +6,9 @@ var currentLat = 38.267154;
 var currentLng = 140.870705;
 var defaultLatDelta = 0.1;
 var defaultLngDelta = 0.1;
-var url = 'http://www.mountposition.co.jp/place_data.php';
+var url = 'http://s3-ap-northeast-1.amazonaws.com/yehara.tokyo/JapanQuake2011/test.db';
 var dbName = 'map';
+var dbFileName = 'map.db';
 
 
 var mapView = Ti.Map.createView({
@@ -24,6 +25,84 @@ var mapView = Ti.Map.createView({
 	top: 40,
 	bottom:40,
 	left: 0
+});
+
+mapView.addEventListener('click', function(evt){
+	var annotation = evt.annotation;
+	var subWindow = Ti.UI.createWindow({
+		backgroundColor:'#666666',
+		backgroundImage:'../images/back.png'
+	});
+	var titleFont = {fontSize:16, fontWeight:'bold'};
+	var contentFont = {fontSize:16};
+	
+	var nameRow = Ti.UI.createTableViewRow({height:50});
+	var nameTitle = Ti.UI.createLabel({
+		text:L('facility_name'),
+		font:titleFont,
+		color:'#000000',
+		textAlign:'right',
+		width:70,
+		left:0
+	});
+	nameRow.add(nameTitle);
+	var nameContent = Ti.UI.createLabel({
+		text:annotation.title,
+		left:80,
+		right:10,
+		font:contentFont,
+		color:'#000000'
+	});
+	nameRow.add(nameContent);
+	
+	var addressRow = Ti.UI.createTableViewRow({height:80});
+	var addressTitle = Ti.UI.createLabel({
+		text:L('map_address'),
+		font:titleFont,
+		color:'#000000',
+		textAlign:'right',
+		width:70,
+		left:0
+	});
+	addressRow.add(addressTitle);
+	var addressContent = Ti.UI.createLabel({
+		text:annotation.detail,
+		left:80,
+		right:10,
+		font:contentFont,
+		color:'#000000'
+	});
+	addressRow.add(addressContent);
+	
+	var tableView = Ti.UI.createTableView({
+		data:[nameRow, addressRow],
+		borderRadius:10,
+		borderColor:'#666666',
+		backgroundColor:'#ffffff',
+		height:130,
+		left:10,
+		right:10,
+		top:10
+	});
+	
+	
+	if(!isAndroid){
+		//tableView.style = Ti.UI.iPhone.TableViewStyle.GROUPED;
+		var closeButton = Ti.UI.createButton({
+			title:'Done',
+			style: Ti.UI.iPhone.SystemButtonStyle.DONE
+		});
+		closeButton.addEventListener('click', function(){
+			subWindow.close();
+		});
+		subWindow.setRightNavButton(closeButton);
+	}else{
+		tableView.borderRadius = 10;
+		subWindow.navBarHidden = true;
+	}
+	subWindow.add(tableView);
+	
+	isAndroid ? subWindow.open({fullscreen:true}) : subWindow.open({modal:true});
 });
 
 var actInd = Ti.UI.createActivityIndicator({
@@ -46,6 +125,7 @@ function createAnnotations(){
 							title:db_rows.fieldByName('name'),
 							latitude:db_rows.fieldByName('lat'),
 							longitude:db_rows.fieldByName('lng'),
+							detail:db_rows.fieldByName('detail'),
 							animate:true
 		});
 		
@@ -131,6 +211,7 @@ function textSearch(search_str){
 			title:db_rows.fieldByName('name'),
 			latitude:lat,
 			longitude:lng,
+			detail:db_rows.fieldByName('detail'),
 			animate:true
 		});
 		
@@ -215,12 +296,13 @@ var XHR = {
 
 		//After processing
 		xhr.onload = function(){
-			var result = '';
+			var result = null;
 			var error = null;
 			try{
 				//Ti.API.info(this.responseData);
 				//Ti.API.info(this.responseText);
-				result = JSON.parse(this.responseText);
+				//result = JSON.parse(this.responseText);
+				result = this.responseData;
 			}catch(ex){
 				Ti.API.info(ex);
 				Ti.API.info(this.responseText);
@@ -256,12 +338,28 @@ var XHR = {
 	}
 };
 
-
+function saveDBFile(blobData, callback){
+	var dir = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "data");
+	if(!dir.exists()){
+		dir.createDirectory();
+	}
+	var file = Ti.Filesystem.getFile(dir.nativePath, (dbName + '.db'));
+	if(file.exists()){
+		file.deleteFile();
+	}
+	file.write(blobData);
+	Ti.API.info("saved file path: " + file.nativePath);
+	
+	var temp_db = Ti.Database.open(dbName);
+	temp_db.remove();
+	Ti.API.info('remove db:' + temp_db);
+	callback(file.nativePath);
+}
 
 /** sync remoto to local **/
+/*
 function setData(data){
 	var db = Ti.Database.open(dbName);
-	db.execute('delete from places');
 	db.execute('create table if not exists places (id integer, name text, lat real, lng real, detail text)');
 	
 	for(var i = 0; i < data.length; i++){
@@ -279,6 +377,20 @@ function setData(data){
 		db_row.close();
 	}
 	db.close();
+	createAnnotations();
+	actInd.hide();
+}
+*/
+function dbInstall(filePath){
+	var db = Ti.Database.install(filePath, dbName);
+	Ti.API.info('new_db:' + db);
+	db.close();
+	return filePath;
+}
+
+function dbFileInitialize(blobData){
+	var filePath = saveDBFile(blobData, dbInstall);
+	//db初期化処理後のメソッドコール
 	createAnnotations();
 	actInd.hide();
 }
@@ -413,7 +525,7 @@ function setNearByAnnotation(){
 	
 	getPlacesButton.addEventListener('click', function(){
 		actInd.show();
-		XHR.getDataFromURL(url, setData, getXHRError);
+		XHR.getDataFromURL(url, dbFileInitialize, getXHRError);
 	});
 	
 
