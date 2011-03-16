@@ -2,24 +2,6 @@ cc.charityData ={
 	rowCount:22,
 	orgInfo:[
 		{
-			name:"ユニセフ　東日本大震災緊急募金",
-			logo:'../images/charity_logos/unicef.png',
-			phone:'インターネット募金のお問い合わせ：0120-88-1052',
-			phone_num:'0120881052',
-			web:'http://www.unicef.or.jp/',
-			address:"〒108-8607 東京都港区高輪4-6-12 ユニセフハウス",
-			info_text:"ユニセフのアンソニー・レーク事務局長は、日本時間13日深夜、東日本大震災で被災した子どもたちを支援するため、特に、子どもの保護や心理社会的支援のような専門的な知識を要する分野への支援や、教育や保健をはじめとする広範な分野での緊急支援を、日本ユニセフ協会と協力して提供する用意があることを、日本政府に対し正式に表明しました。"
-		},
-		{
-			name:"日本赤十字社　東北関東大震災義援金を受け付けます",
-			logo:'../images/charity_logos/jpsekijujisha.png',
-			phone:'東北関東大震災義援金 担当窓口',
-			phone_num:'0334377081',
-			web:'http://www.jrc.or.jp/',
-			address:"〒105-8521　港区芝大門1-1-3",
-			info_text:"日本赤十字社では、今回の震災の被害が甚大かつ広範囲に及んでいることから、被災県組織に代わり、皆さまからの義援金を受け付けております。"
-		},
-		{
 			name:"Adventist Development and Relief Agency International's Response to Japan Tsunami",
 			logo:'../images/charity_logos/adra.png',
 			phone:'Donation Phone #: 800-424-ADRA (2372)',
