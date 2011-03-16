@@ -101,7 +101,7 @@ cc.tabThisApp.addEventListener('click', function(){
 	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
 	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer.png';
 	cc.detailInfo.text=Ti.Locale.getString('about_app_team');
-	cc.crisisCommonsLabel.color='#fff';
+	cc.thisAppLabel.color='#fff';
 	cc.thisAppLabel.font={
 		fontSize:'13',fontWeight:'Bold'
 	};
