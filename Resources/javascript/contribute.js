@@ -6,7 +6,7 @@ var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirect
 if(!file.exists()) {
    file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/contribute.json");
 }
-cc.charityData = JSON.parse(file.read());
+cc.charityData = JSON.parse(''+file.read());
 
 (function(){
 	cc.win.orientationModes = [

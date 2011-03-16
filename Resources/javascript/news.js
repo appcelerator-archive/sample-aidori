@@ -10,7 +10,7 @@ var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirect
 if(!file.exists()) {
    file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/news.json");
 }
-var data = JSON.parse(file.read());
+var data = JSON.parse(''+file.read());
 
 var template = {
     selectedBackgroundColor: '#000',
@@ -47,6 +47,6 @@ Ti.App.fireEvent('hide_indicator');
 
 Ti.App.addEventListener('update_news', function() {
     var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "news.json");
-    var data = JSON.parse(file.read());
+    var data = JSON.parse(''+file.read());
     tableView.setData(data);
 });
