@@ -21,6 +21,8 @@
 	<string name="can_not_use_network">Can't use network</string>
 	<string name="no_local_shelter_info">Press Sync button and get shelter place information.</string>
 	<string name="search_result_nothing">No result.</string>
+	<string name="facility_name">Facility name:</string>
+	<string name="map_address">Address:</string>
 	<string name="tab_about">À propos</string>
 	<string name="tab_contribute">Contribuer</string>
 	<string name="title_about">À propos de Sendai Quake</string>

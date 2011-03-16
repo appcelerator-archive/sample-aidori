@@ -13,9 +13,9 @@ Ti.App.fireEvent('show_indicator');
 		Ti.UI.currentWindow.setRightNavButton(cc.configButton);
 	};
 	cc.tableView = Ti.UI.createTableView({
-		backgroundColor:'#5a5c64',
+		backgroundColor:'#adadae',
 		separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE,
-		separatorColor:'#444'
+		separatorColor:'#6e6e6e'
 	});
 	cc.win.add(cc.tableView);
 	cc.buildData=function(tweet) {
@@ -67,11 +67,14 @@ Ti.App.fireEvent('show_indicator');
 		}
 		if(!Ti.App.Properties.hasProperty('hashtag3')){
 			Ti.App.Properties.setString("hashtag3", HASHTAG3);
-		}	
+		}
+		if(!Ti.App.Properties.hasProperty('hashtag4')){
+			Ti.App.Properties.setString("hashtag4", HASHTAG4);
+		}			
 		var ht1 = Ti.App.Properties.getString("hashtag1", HASHTAG1);
 		var ht2 = Ti.App.Properties.getString("hashtag2", HASHTAG3);
 		var ht3 = Ti.App.Properties.getString("hashtag3", HASHTAG3);
-		var ht4 = Ti.App.Properties.getString("hashtag4", '');
+		var ht4 = Ti.App.Properties.getString("hashtag4", HASHTAG4);
 		
 		//Make sure we've got at least one hashtag
 		if((ht1.length==0)&&(ht2.length==0)&&(ht3.length==0)&&(ht4.length==0)){
@@ -134,9 +137,12 @@ Ti.App.fireEvent('show_indicator');
 		height:Ti.Platform.displayCaps.platformHeight,
 		width:Ti.Platform.displayCaps.platformWidth,
 		backgroundImage:'../images/75percentblack.png',
-		visible:false
+		visible:false,
+		id:'twConfigWrapper'
 	});
 	// twConfigView holds the fields and labels
+	
+	 var twInfoScroll = Ti.UI.createScrollView({id:'twInfoScroll'	});
 	 var twConfigView = Ti.UI.createView({id:'twConfigView'});
 	 var twConfigHeader = Ti.UI.createView({id:'twConfigHeader'});
 	 var lbl_tw_header = Ti.UI.createLabel({id:'lbltwheader'});
@@ -146,27 +152,27 @@ Ti.App.fireEvent('show_indicator');
 	 twConfigView.add(twConfigHeader);
 	 var txt_hashtag1 = Ti.UI.createTextField({
 	 	value:HASHTAG1,
-	    returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+	    returnKeyType:Ti.UI.RETURNKEY_DONE,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		id:'txthashtag1'
 	 });
 	 twConfigView.add(txt_hashtag1);
 	 var txt_hashtag2 = Ti.UI.createTextField({
 	 	value:HASHTAG2,
-		returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		returnKeyType:Ti.UI.RETURNKEY_DONE,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		id:'txthashtag2'
 	 });
 	 twConfigView.add(txt_hashtag2);
 	 var txt_hashtag3 = Ti.UI.createTextField({
 	 	value:HASHTAG3,
-		returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		returnKeyType:Ti.UI.RETURNKEY_DONE,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		id:'txthashtag3'
 	 });
 	 twConfigView.add(txt_hashtag3);
 	 var txt_hashtag4 = Ti.UI.createTextField({
-		returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		returnKeyType:Ti.UI.RETURNKEY_DONE,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		id:'txthashtag4'
 	 });
@@ -175,7 +181,7 @@ Ti.App.fireEvent('show_indicator');
 	txt_hashtag1.value = Ti.App.Properties.getString("hashtag1", HASHTAG1);
 	txt_hashtag2.value = Ti.App.Properties.getString("hashtag2", HASHTAG2);
 	txt_hashtag3.value = Ti.App.Properties.getString("hashtag3", HASHTAG3);
-	txt_hashtag4.value = Ti.App.Properties.getString("hashtag4", '');
+	txt_hashtag4.value = Ti.App.Properties.getString("hashtag4", HASHTAG4);
 	
 	 btn_twC_OK.addEventListener('click', function() {
 	 	Ti.App.Properties.setString("hashtag1", txt_hashtag1.value.replace(/\#/g,''));
@@ -187,7 +193,8 @@ Ti.App.fireEvent('show_indicator');
 		cc.retrieveTwitterFeed();
 	 });
 	 twConfigView.add(btn_twC_OK);
-	 twConfigWrapper.add(twConfigView);
+	 twInfoScroll.add(twConfigView);
+	 twConfigWrapper.add(twInfoScroll);
 	 cc.win.add(twConfigWrapper);
 	 
 

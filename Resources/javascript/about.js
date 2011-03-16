@@ -8,59 +8,64 @@ var cc ={win:Ti.UI.currentWindow};
 	];
 
 	cc.infoButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.INFO_LIGHT});
-	cc.navBarPhone = Ti.UI.createButton({
-	    image:'../images/light_phone.png'
-	});
+
 	if(!isAndroid()){
-		cc.win.leftNavButton=cc.infoButton;
-		cc.win.rightNavButton=cc.navBarPhone;
+		cc.win.rightNavButton=cc.infoButton;
 	}
 	
-	cc.mainContainer = Ti.UI.createView({top:5 ,layout:'vertical'});
+	cc.mainContainer = Ti.UI.createView({
+		height:isAndroid() ? 370 : 340,
+		borderRadius:isAndroid() ? 10 : 5,
+		id:'mainContainer'
+		});
 	cc.win.add(cc.mainContainer);
 	
-	cc.nameBox = Ti.UI.createView({id:'nameBoxD'});
-	cc.mainContainer.add(cc.nameBox);		
-	cc.aboutCC = Ti.UI.createLabel({
-		id:'aboutD'
-	});	
-	cc.nameBox.add(cc.aboutCC);
+	cc.crisisName = Ti.UI.createLabel({id:'crisisName'});	
+	cc.mainContainer.add(cc.crisisName);
+
+	cc.Line1 = Ti.UI.createView({id:'vwLine'});
+	cc.mainContainer.add(cc.Line1);
 	
 	cc.crisisInfo = Ti.UI.createLabel({id:'crisisInfo'});
 
 	cc.moreInfoScroll = Ti.UI.createScrollView({
-			width:(Ti.Platform.displayCaps.platformWidth-20),
-			id:'moreInfoScroll'
+		height:240,
+		contentHeight:'auto',
+		contentWidth:'auto'
+			//id:'moreInfoScroll'
 		});
 
 	cc.moreInfoScroll.add(cc.crisisInfo);
-	cc.mainContainer.add(cc.moreInfoScroll);	
-	
-	cc.resourcesBox = Ti.UI.createView({id:'resourcesBoxD'});
-	cc.mainContainer.add(cc.resourcesBox);		
-	cc.aboutRE = Ti.UI.createLabel({
-		text:Ti.Locale.getString('about_resource_link_title'),
-		id:'resourcesD'
-	});	
-	cc.resourcesBox.add(cc.aboutRE);	
-	cc.resourcesArrow = Ti.UI.createImageView({
-		height:25,
-		width:25,
-		right:5,
-		image:'../images/dark_more.png'
-	});
-	
-	cc.resourcesBox.add(cc.resourcesArrow);
-})();
+	cc.mainContainer.add(cc.moreInfoScroll);
 
+	cc.bottomContainer = Ti.UI.createView({id:'bottomContainer'});
+	cc.mainContainer.add(cc.bottomContainer);
+	
+	cc.phoneButton = Ti.UI.createView({id:'phoneButton'});	
+	cc.bottomContainer.add(cc.phoneButton);
+
+	cc.phoneImg = Ti.UI.createView({id:'phoneImg'});
+	cc.phoneButton.add(cc.phoneImg);
+	
+	cc.phoneButtonLabel = Ti.UI.createLabel({id:'phoneButtonLabel'});	
+	cc.phoneButton.add(cc.phoneButtonLabel);
+	
+	cc.webButton = Ti.UI.createView({id:'webButton'});	
+	cc.bottomContainer.add(cc.webButton);
+				
+	cc.webImg = Ti.UI.createView({id:'webImg'});
+	cc.webButton.add(cc.webImg);
+	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
+	cc.webButton.add(cc.webButtonLabel);
+})();
 
 //-----------------------------------
 //		Events
 //-----------------------------------	
-cc.resourcesBox.addEventListener('click', function(){
+cc.webButton.addEventListener('click', function(){
 	var wAboutRE = Ti.UI.createWindow({  
 	    barColor:cc.win.barColor,
-	    backgroundImage:'../images/back.png',
+	    backgroundImage:'../images/background/BG_gray.png',
 		title:Ti.Locale.getString('about_resources_page_title'),
 		backButtonTitleImage:'../images/icon_arrow_left.png',
 		url:'about_resources.js'
@@ -154,7 +159,7 @@ cc.phoneNumberList=function(){
 		
 	});	
 };
-cc.navBarPhone.addEventListener('click', function(){
+cc.phoneButton.addEventListener('click', function(){
 	cc.phoneNumberList();
 });	
 

@@ -1,6 +1,7 @@
 #nameLabel {
-	   color:'#fff';
-	   font-size:13;
+	   color:'#000';
+	   shadowColor:'#8d8d8d';
+	   font-size:15;
 	   font-weight:'bold';
 	   top:8;
 	   left:68;
@@ -10,12 +11,13 @@
 }
 
 #dateLabel {
-   color:'#eee';
-   font-size:10;
+   color:'#434343';
+   shadowColor:'#8d8d8d';
+   font-size:11;
    font-weight:'normal';
    top:8;
-   left:198;
-   width:110;
+   left:178;
+   width:130;
    height:16;
    text-align:'right';
 }
@@ -35,7 +37,8 @@
 }
 
 #tweetLabel {
-  	color:'#fff';
+  	color:'#000';
+	shadowColor:'#8d8d8d';
   	font-size:14;
 	font-weight:'normal';
   	top:30;
@@ -45,35 +48,45 @@
   	text-align:'left';
 }
 
-#twConfigView {
-	top:10;
-	background-color:'#ffffff';
-	width:260;
-	height:250;
+#twInfoScroll {
+	background-color:'#cecece';
+	width:310;
+	height:350;
+	contentHeight:'auto';
+    contentWidth:'auto';
 	borderRadius:10;
+	top:65;
+}
+
+#twConfigView {
+	background-color:'#cecece';
+	width:310;
+	height:250;
+	top:0;
 }
 
 #twConfigHeader {
- 	width:250;
-	height:35;
-	top:5;
+ 	width:310;
+	height:40;
+	top:0;
 	borderRadius:10;
-	backgroundImage:'../images/75percentblack.png';
+	backgroundColor:'#fff';
 }
 
 #lbltwheader {
- 	textid:'hashtags';
-	color:'#ffffff';
+	textid:'hashtags';
+	color:'#000';
+	font-size:18;
 	font-weight:'bold';
-	top:7;
+	top:10;
 	left:7;
-	height:20;
+	height:24;
 	width:'auto';
 }
 
 #btntwCOK {
  	image:'../images/dark_check.png';
-	top:9;
+	top:10;
 	right:9;
 }
 

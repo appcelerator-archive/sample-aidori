@@ -5,11 +5,11 @@ var tabGroup = Ti.UI.createTabGroup();
 var newsWin = Ti.UI.createWindow({  
   url:'javascript/news.js',
   barColor:"#333",
-  backgroundImage:'images/back.png',
+  backgroundImage:'images/backgrounds/BG_gray.png',
   titleid:L('crisis_title')
 });
 var newsTab = Titanium.UI.createTab({  
-  icon:'images/icon_report.png',
+  icon:'images/tabs/TAB_news.png',
   title:L('tab_news'),
   window:newsWin
 });
@@ -18,7 +18,7 @@ var twitterWin = Titanium.UI.createWindow({
   url:'javascript/twitter.js',
   titleid:L('title_twitter'),
   barColor:"#333",
-  backgroundColor:'#5a5c64'
+  backgroundImage:'images/backgrounds/BG_gray.png'
 });
 
 // Avoid keyboard overlapping the text fields
@@ -27,7 +27,7 @@ if (Ti.Platform.name == 'android') {
 }
 
 var twitterTab = Titanium.UI.createTab({  
-  icon:'images/icon_twitter2.png',
+  icon:'images/tabs/TAB_twitter.png',
   title:L('tab_twitter'),
   window:twitterWin
 });
@@ -46,39 +46,39 @@ var instagramTab = Titanium.UI.createTab({
 
 var contributeWin = Titanium.UI.createWindow({  
   url:'javascript/contribute.js',
-  backgroundImage:'images/back.png',
+  backgroundImage:'images/backgrounds/BG_gray.png',
   title:L('contribute_page_title'),
   barColor:"#333",
   backTitle:'Back'
 });
 var contributeTab = Titanium.UI.createTab({  
-  icon:'images/icon_volunteer.png',
+  icon:'images/tabs/TAB_contribute.png',
   title:L('tab_contribute'),
   window:contributeWin
 });
 
 var aboutWin = Titanium.UI.createWindow({  
   url:'javascript/about.js',
-  backgroundColor:'#000',
-  title:L('title_about'),
+  backgroundImage:'images/backgrounds/BG_map_gray.png',
+  title:L('about_page_title'),
   barColor:"#333",
   backTitle:'Back'
 });
 var aboutTab = Titanium.UI.createTab({  
-  icon:'images/icon_about.png',
+  icon:'images/tabs/TAB_about.png',
   title:L('tab_about'),
   window:aboutWin
 });
 
 var mapWin = Titanium.UI.createWindow({
 	url:'javascript/map.js',
-	backgroundColor:'#000',
+    backgroundImage:'images/backgrounds/BG_gray.png',
 	barColor:"#333",
 	title:L('title_map')
 });
 
 var mapTab = Titanium.UI.createTab({
-	icon:'images/light_pin@2x.png',
+	icon:'images/tabs/TAB_shelter.png',
 	title:L('tab_map'),
 	window:mapWin
 });

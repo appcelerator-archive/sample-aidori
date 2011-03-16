@@ -21,6 +21,8 @@
 	<string name="can_not_use_network">Can't use network</string>
 	<string name="no_local_shelter_info">Press Sync button and get shelter place information.</string>
 	<string name="search_result_nothing">No result.</string>
+	<string name="facility_name">Facility name:</string>
+	<string name="map_address">Address:</string>
 	<string name="tab_about">About</string>
 	<string name="tab_contribute">Contribute</string>
 	<string name="title_about">About Sendai Quake</string>
@@ -70,4 +72,13 @@
 	<string name="about_resources_page_title">Helpful Resources</string>
 	<string name="about_main_text">A massive 8.9/9.0 magnitude earthquake hit the Pacific Ocean nearby Northeastern Japan at around 2:46pm on March 11 (JST) causing damage with blackouts, fire and tsunami. On this page we are providing the information regarding the disaster and damage with realtime updates.\n\nThe large earthquake triggered a tsunami warning for countries all around the Pacific ocean.</string>
 	<string name="about_page_top">2011 Japanese Earthquake\nand Tsunami</string>	
+	<string name="about_page_title">Overview</string>
+	<string name="about_phone_numbers">Report Missing</string>
+	<string name="about_web_resources">More Resources</string>
+	<string name="about_app_this_app_title">Project Volunteers</string>
+	<string name="about_app_crisis_common_title">CrisisCommons</string>
+	<string name="about_app_appcelerator_title">Appcelerator</string>
+	<string name="about_appcelerator_desc">Tony to add Appcelerator description</string>
+	<string name="about_learn_more">Learn More</string>
+	<string name="about_main_title">App Overview</string>
 </resources>
