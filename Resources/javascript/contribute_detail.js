@@ -9,6 +9,7 @@ Ti.include('./application.js');
 	
 	cc.mainContainer = Ti.UI.createView({
 		height:isAndroid() ? 370 : 340,
+		borderRadius:isAndroid() ? 10 : 5, 
 		id:'mainContainer'
 		});
 	cc.win.add(cc.mainContainer);

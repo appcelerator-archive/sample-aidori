@@ -49,7 +49,6 @@
 #mainContainer {
 	top:10;
 	layout:'vertical';
-	borderRadius:5;
 	left:10;
 	right:10;
 	background-color:'#fff';
