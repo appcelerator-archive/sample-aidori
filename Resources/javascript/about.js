@@ -73,47 +73,17 @@ cc.webButton.addEventListener('click', function(){
 	Ti.UI.currentTab.open(wAboutRE,{animated:true});
 });
 cc.infoButton.addEventListener('click', function(){
-		// create dialog
-		var dialog = Ti.UI.createOptionDialog({
-				options:[Ti.Locale.getString('about_cc'),
-						 Ti.Locale.getString('about_app'),
-						Ti.Locale.getString('about_cancel')
-						],
-				cancel:3,
-				title:Ti.Locale.getString('about_dialog_title')
-		});
-		dialog.show();
-		dialog.addEventListener('click', function(e){
-			if(e.index==2){
-				return;
-			}
 
-			var go2Page='';	
-			var go2PageTitle='';	
+	var wPage = Ti.UI.createWindow({  
+	    barColor:cc.win.barColor,
+		navBarHidden:false,
+		title:Ti.Locale.getString('about_main_title'),
+		url:'about_app.js',
+		backgroundImage:'../images/backgrounds/BG_map_gray.png',
+	    backButtonTitleImage:'../images/icon_arrow_left.png'
+	});		
 
-			if(e.index==0){
-				go2PageTitle=Ti.Locale.getString('about_cc');
-				go2Page='about_cc.js';
-			}
-			if(e.index==1){
-				go2PageTitle=Ti.Locale.getString('about_app');
-				go2Page='about_app.js';
-			}
-
-			//Just in case
-			if(go2Page.length==0){
-				return;
-			}
-
-			var wPage = Ti.UI.createWindow({  
-			    barColor:cc.win.barColor,
-				navBarHidden:false,
-				url:go2Page,
-				title:go2PageTitle
-			});		
-
-			wPage.open({modal:true});
-		});
+	Ti.UI.currentTab.open(wPage,{animated:true});
 });
 
 cc.phoneNumberList=function(){
@@ -167,31 +137,18 @@ if(isAndroid()){
 	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
     var menu = e.menu;
 
-	    var mAboutPN = menu.add({title: Ti.Locale.getString('about_phone_title') });
-		mAboutPN.addEventListener("click", function(e) {
-				cc.phoneNumberList();
-		});
-	    var mAboutCC = menu.add({title: Ti.Locale.getString('about_cc') });
-		 mAboutCC.addEventListener("click", function(e) {
-			var wAboutCC = Ti.UI.createWindow({  
-			    barColor:cc.win.barColor,
-			    backgroundImage:'../images/back.png',
-				navBarHidden:true,
-				fullscreen:false,
-	    		url:'about_cc.js'
-			});
-		  	wAboutCC.open();
-	    });
 		var mAboutAp = menu.add({title: Ti.Locale.getString('about_app') });
 	    mAboutAp.addEventListener("click", function(e) {
-			var wAboutAp = Ti.UI.createWindow({  
+			var wPage = Ti.UI.createWindow({  
 			    barColor:cc.win.barColor,
-			    backgroundImage:'../images/back.png',
-				navBarHidden:true,
-				fullscreen:false,
-	    		url:'about_app.js'
-			});
-		  	wAboutAp.open();
+				navBarHidden:false,
+				title:Ti.Locale.getString('about_main_title'),
+				url:'about_app.js',
+				backgroundImage:'../images/backgrounds/BG_map_gray.png',
+			    backButtonTitleImage:'../images/icon_arrow_left.png'
+			});		
+
+			Ti.UI.currentTab.open(wPage,{animated:true});
 	    });
 	};
 }

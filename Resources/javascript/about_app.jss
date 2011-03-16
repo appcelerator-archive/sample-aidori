@@ -1,112 +1,124 @@
-#webButtonAp {
-	layout:'horizontal';
-	height:50;
-	right:10;
+#mainContainer {
+	top:10;
+	layout:'vertical';
 	left:10;
-	bottom:10;
-	text-align:'center';
-	borderRadius:5;
-	borderWidth:1;
-	borderColor:'#000';
+	right:10;
 	background-color:'#fff';
 }
 
-#webImgAp {
-	backgroundImage:'../images/dark_globe.png';
+#tabContainer {
+	top:0;
+	height:55;
+	layout:'horizontal';
+	background-color:'#000';
+}
+
+#topContainer {
+	top:0;
+	height:55;
+	layout:'horizontal';
+}
+
+#vwLine {
+	top:5;
+	height:1;
+	right:5;
+	left:5;
+	border-color:'#000';
+}
+
+#moreInfoScroll {
+	contentHeight:'auto';
+	contentWidth:'auto';
+	showVerticalScrollIndicator:true;
+}
+
+#webImg {
+	backgroundImage:'../images/buttons/ICON_www.png';
 	width:25;
 	height:25;
 	top:10;
-	left:10;
+	left:50;
 }
 
-#webButtonLabelAp {
-	textid:'about_app_more';
+#webButtonLabel {
+	textid:'about_learn_more';
 	height:25;
-	text-align:'center';
-	width:250;
-	font-size:14;
-	color:'#000';
+	text-align:'left';
+	width:200;
+	font-size:20;
+	color:'#fff';
 	font-weight:'Bold';
-	left:5;
+	left:25;
 	top:10;
 }
 
-
-#aboutAp {
-	height:'auto';
-	left:3;
-	right:3;
-	color:'#000';
-	text-align:'center';
-	top:5;
-	bottom:5;
-	font-size:16;
-	font-weight:'Bold';
-}
-
-
-#descBox {
-	height:'auto';
-	left:10;
-	right:10;
-	borderRadius:5;
-	background-color:'#fff';
-}
-
-#descAp {
-	textid:'about_cc_desc';
-	height:'auto';
-	left:3;
-	right:3;
-	color:'#000';
-	text-align:'left';
-	top:5;
-	bottom:5;
-	font-size:12;
-}
-
-#middleSectionAp {
-	layout:'horizontal';
-	height:'auto';
-	background-color:'#fff';
-	borderRadius:5;
-	top:20;
-}
-
-#teamInfo {
-	height:'auto';
-	text-align:'left';
-	color:'#000';
-	font-size:12;
-	left:5;
-	right:5;
-	top:5;
-}
-
-#moreInfoScrollAp {
-	height:200;
-	background-color:'#fff';
-	borderRadius:5;
-	contentHeight: 'auto';
-    contentWidth: 'auto';
-}
-
-#titanInfo {
-	height:'auto';
-	left:5;
+#tabThisApp {
+	height:50;
 	width:100;
-	color:'#000';
+	backgroundImage:'../images/buttons/button_spacer_selected.png';
+}
+
+#thisAppLabel {
+	textid:'about_tab_app_info';
+	width:100;
 	text-align:'center';
-	top:5;
-	font-size:12;
+	color:'#fff';
+	font-size:'13';
 	font-weight:'Bold';
 }
 
-#nameBoxAp {
-	top:10;
+#tabCrisisCommons {
+	height:50;
+	width:99;
+	left:1;
+	backgroundImage:'../images/buttons/button_spacer.png';
+}
+
+#crisisCommonsLabel{
+	textid:'about_tab_crisiscommons';
+	width:99;
+	text-align:'center';
+	color:'#999';
+	font-size:'13';
+}
+
+#tabAppcelerator {
+	height:50;
+	width:99;
+	left:1;
+	backgroundImage:'../images/buttons/button_spacer.png';
+}
+
+#appceleratorLabel {
+	width:99;
+	text-align:'center';
+	color:'#999';
+	font-size:'13';
+}
+
+#infoName {
+	textid:'about_app_this_app_title';
+	width:225;
+	height:50;
+	left:5;
+	color:'#000';
+	font-size:24;
+	font-weight:'Bold';
+}
+
+#detailInfo {
+	textid:'about_app_team';
+	left:3;
+	right:3;
 	height:'auto';
-	left:10;
-	right:10;
-	borderRadius:5;
-	background-color:'#fff';
+	color:'#000';
+	font-size:12;
+}
+
+#bottomContainer {
+	top:0;
+	height:50;
+	layout:'horizontal';
+	backgroundImage:'../images/buttons/dub_button.png';
 }
