@@ -85,6 +85,14 @@ var actInd = Ti.UI.createActivityIndicator({
     width: 32,
     height: 32
 });
+var actIndView = Ti.UI.createView({
+	top:0,
+	left:0,
+	bottom:0,
+	right:0,
+	backgroundColor:'#000000',
+	opacity:0.2
+});
 mapView.add(actInd);
 
 /** create annotation from local db **/
@@ -163,6 +171,8 @@ function textSearch(search_str){
 	var count = db_rows.getRowCount();
 	if(count >= 100){
 		searchState = false;
+		actInd.hide();
+		actIndView.hide();
 		alert(L('search_result_overflow'));
 		return;
 	}
@@ -173,7 +183,7 @@ function textSearch(search_str){
 	var min_lng = 0.0;
 	var i = 0;
 	var annotations = [];
-	Ti.API.info(db_rows);
+
 	while(db_rows.isValidRow()){
 		var lat = db_rows.fieldByName('lat');
 		var lng = db_rows.fieldByName('lng');
@@ -228,6 +238,8 @@ function textSearch(search_str){
 			mapView.setLocation(getFitLocation(max_lat, max_lng, min_lat, min_lng));
 		}
 	}
+	actInd.hide();
+	actIndView.hide();
 }
 
 /** XHR **/
@@ -359,6 +371,7 @@ function dbFileInitialize(blobData){
 	//db初期化処理後のメソッドコール
 	//createAnnotations();
 	actInd.hide();
+	actIndView.hide();
 }
 
 /** sync error callback **/
@@ -366,6 +379,7 @@ function getXHRError(error){
 	alert(L('can_not_use_network'));
 	Ti.API.info(error);
 	actInd.hide();
+	actIndView.hide();
 }
 
 
@@ -428,6 +442,7 @@ function showAnnotation(annotations){
 	for(var i = 0; i < annotations.length; i++){
 		mapView.addAnnotation(annotations[i]);
 	}
+	regionState = true;
 }
 
 /** Search bar **/
@@ -446,6 +461,8 @@ searchBar.addEventListener('return', function(e)
 		var annotations = createAnnotationByGeohash(currentMapLat, currentMapLng, currentLatDelta, currentLngDelta);
 		showAnnotation(annotations);
 	}else{
+		actInd.show();
+		actIndView.show();
 		textSearch(e.value);
 	}
 });
@@ -485,6 +502,7 @@ if (Ti.Geolocation.locationServicesEnabled) {
 			currentMapLng = evt.longitude;
 			Ti.API.info(evt);
 			if(regionState && !searchState){
+				regionState = false;
 				var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
 				showAnnotation(annotations);
 			}
@@ -583,6 +601,7 @@ function setNearByAnnotation(){
 	//createAnnotations();
 	mapView.setLocation({latitude:lat, longitude:lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
 	actInd.hide();
+	actIndView.hide();
 }
 
 
@@ -615,6 +634,7 @@ function setNearByAnnotation(){
 	
 	nearbyButton.addEventListener('click', function(){
 		actInd.show();
+		actIndView.show();
 		setNearByAnnotation();
 	});
 	
@@ -625,6 +645,7 @@ function setNearByAnnotation(){
 	
 	getPlacesButton.addEventListener('click', function(){
 		actInd.show();
+		actIndView.show();
 		XHR.getDataFromURL(url, dbFileInitialize, getXHRError);
 	});
 	
@@ -671,7 +692,8 @@ function setNearByAnnotation(){
 	}
 })();
 
-
+win.add(actIndView);
+actIndView.hide();
 /** win close **/
 win.addEventListener('close', function(){
 	Ti.Geolocation.removeEventListener('location');
