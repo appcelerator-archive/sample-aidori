@@ -1,110 +1,23 @@
-#nameBox {
-	top:10;
-	height:'auto';
-	left:10;
-	right:10;	
-	borderRadius:5;
-	background-color:'#fff';
-}
-
-#charityName {
-	height:'auto';
-	left:3;
-	right:3;
-	color:'#000';
-	text-align:'center';
+#vwLine {
 	top:5;
-	bottom:5;
-	font-size:14;
-	font-weight:'Bold';
-}
-
-#middleSection {
-	layout:'horizontal';
-	height:'auto';
-	background-color:'#fff';
-	borderRadius:5;
-	top:20;
-}
-
-#chartiyLogo {
-	width:100;
-	height:100;
-	top:20;
-}
-
-#middleSectionRight {
-	layout:'vertical';
-	width:200;
-	height:'auto';
-	top:10;
-}
-
-#charityPhone {
-	height:'auto';
-	left:3;
-	right:3;
-	color:'#000';
-	text-align:'left';
-	top:5;
-	font-size:14;
-	font-weight:'Bold';
-}
-
-#charityAddr {
-	height:'auto';
-	left:3;
-	right:3;
-	text-align:'left';
-	top:5;
-	color:'#000';
-	font-size:12;
-	font-weight:'Bold';
-}
-
-#charityInfo {
-	height:'auto';
-	text-align:'left';
-	color:'#000';
-	font-size:12;
-	left:5;
+	height:1;
 	right:5;
-	top:5;
-}
-
-#moreInfoScroll {
-	height:125;
-	top:20;
-	background-color:'#fff';
-	borderRadius:5;
-	contentHeight: 'auto';
-    contentWidth: 'auto';
-}
-
-#phoneButton {
-	layout:'horizontal';
-	width:100;
-	height:50;
-	left:10;
-	bottom:10;
-	borderRadius:5;
-	borderWidth:1;
-	borderColor:'#000';
-	background-color:'#fff';
+	left:5;
+	border-color:'#000';
 }
 
 #phoneImg {
-	backgroundImage:'../images/dark_phone.png';
+	backgroundImage:'../images/buttons/ICON_phone.png';
 	width:25;
 	height:25;
 	top:10;
-	left:5;
+	left:25;
 }
 
 #phoneButtonLabel {
 	textid:'contribute_detail_phone_button';
 	height:25;
-	color:'#000';
+	color:'#fff';
 	text-align:'center';
 	width:50;
 	font-size:16;
@@ -113,24 +26,12 @@
 	top:10;
 }
 
-#webButton {
-	layout:'horizontal';
-	width:100;
-	height:50;
-	right:10;
-	bottom:10;
-	borderRadius:5;
-	borderWidth:1;
-	borderColor:'#000';
-	background-color:'#fff';
-}
-
 #webImg {
-	backgroundImage:'../images/dark_globe.png';
+	backgroundImage:'../images/buttons/ICON_www.png';
 	width:25;
 	height:25;
 	top:10;
-	left:5;
+	left:25;
 }
 
 #webButtonLabel {
@@ -139,8 +40,78 @@
 	text-align:'center';
 	width:65;
 	font-size:16;
-	color:'#000';
+	color:'#fff';
 	font-weight:'Bold';
 	left:0;
 	top:10;
+}
+
+#mainContainer {
+	top:10;
+	layout:'vertical';
+	borderRadius:5;
+	left:10;
+	right:10;
+	background-color:'#fff';
+}
+
+#topContainer {
+	top:0;
+	height:75;
+	layout:'horizontal';
+	borderRadius:5;
+}
+
+#charityName {
+	width:200;
+	height:75;
+	left:5;
+	color:'#000';
+	font-size:14;
+	font-weight:'Bold';
+}
+
+#charityAdr {
+	left:5;
+	right:5;
+	height:50;
+	color:'#000';
+	font-size:12;
+	font-weight:'Bold';
+}
+
+#charityInfo {
+	left:3;
+	right:3;
+	color:'#000';
+	font-size:12;
+}
+
+#moreInfoScroll {
+	height:160;
+	contentHeight:'auto';
+	contentWidth:'auto';
+}
+
+#bottomContainer {
+	top:0;
+	height:75;
+	layout:'horizontal';
+	backgrounImage:'..images/backgrounds/BG_gray.png';
+}
+
+#phoneButton {
+	height:50;
+	width:150;
+	bottom:0;
+	layout:'horizontal';
+	backgroundImage:'../images/buttons/contr_details_left.png';
+}
+
+#webButton {
+	height:50;
+	width:150;
+	bottom:0;
+	layout:'horizontal';
+	backgroundImage:'../images/buttons/contr_details_right.png';
 }

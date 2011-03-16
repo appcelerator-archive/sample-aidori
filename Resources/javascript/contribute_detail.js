@@ -6,105 +6,75 @@ Ti.include('./application.js');
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
 	];
-	cc.doneButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.DONE});
-	if(!isAndroid()){
-		cc.win.rightNavButton=cc.doneButton;
-	}
 	
-	cc.mainContainer = Ti.UI.createView({top:isAndroid() ? 20 : 5 ,layout:'vertical'});
+	cc.mainContainer = Ti.UI.createView({
+		height:isAndroid() ? 370 : 340,
+		id:'mainContainer'
+		});
 	cc.win.add(cc.mainContainer);
 		
-	cc.nameBox = Ti.UI.createView({id:'nameBox'});
-	cc.mainContainer.add(cc.nameBox);
-		
-	cc.charityName = Ti.UI.createLabel({
-		text:cc.win.charity_name,
-		id:'charityName'
-	});	
-	cc.nameBox.add(cc.charityName);
-
-	cc.middleSection = Ti.UI.createView({
-		width:(Ti.Platform.displayCaps.platformWidth-20),
-		id:'middleSection'
-	});
-	cc.mainContainer.add(cc.middleSection);	
+	cc.topContainer = Ti.UI.createView({id:'topContainer'});
+	cc.mainContainer.add(cc.topContainer);
 
 	cc.chartiyLogo = Ti.UI.createImageView({
 		    image:cc.win.charity_logo,
-			id:'chartiyLogo'
-	  });
-
-	cc.middleSection.add(cc.chartiyLogo);
-
-	cc.middleSectionRight = Ti.UI.createView({id:'middleSectionRight'});
-	cc.middleSection.add(cc.middleSectionRight);
-
-	cc.charityPhone = Ti.UI.createLabel({
-		text:Ti.Locale.getString('contribute_detail_phone_donate') + ' ' + cc.win.phone_text,
-		id:'charityPhone'
+			height:75, width:75
 	});
+	cc.topContainer.add(cc.chartiyLogo);
 
-	cc.middleSectionRight.add(cc.charityPhone);
+	cc.charityName = Ti.UI.createLabel({
+			text:cc.win.charity_name,
+			id:'charityName'
+		});	
+	cc.topContainer.add(cc.charityName);
 
-	cc.charityAddr = Ti.UI.createLabel({
-		text:Ti.Locale.getString('contribute_detail_address_donate') + ' ' + cc.win.charity_address,
-		id:'charityAddr'
-	});
+	cc.Line1 = Ti.UI.createView({id:'vwLine'});
+	cc.mainContainer.add(cc.Line1);
 
-	cc.middleSectionRight.add(cc.charityAddr);
+	cc.charityAdr = Ti.UI.createLabel({
+			text:cc.win.charity_address,
+			id:'charityAdr'
+		});
+	cc.mainContainer.add(cc.charityAdr);
+	cc.Line2 = Ti.UI.createView({id:'vwLine'});
+	cc.mainContainer.add(cc.Line2);								
+
 
 	cc.charityInfo = Ti.UI.createLabel({
 		text:cc.win.info_text,
 		id:'charityInfo'
 	});
 
-	cc.moreInfoScroll = Ti.UI.createScrollView({
-			width:(Ti.Platform.displayCaps.platformWidth-20),
-			id:'moreInfoScroll'
-		});
+	cc.moreInfoScroll = Ti.UI.createScrollView({id:'moreInfoScroll'});
 
 	cc.moreInfoScroll.add(cc.charityInfo);
 	cc.mainContainer.add(cc.moreInfoScroll);
-
-	cc.phoneButton = Ti.UI.createView({id:'phoneButton'});
-
-	if(!isAndroid()){
-		cc.phoneButton.backgroundGradient={
-			type:'linear',
-			colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}]
-		};
-	}
-	cc.win.add(cc.phoneButton);
+	
+	cc.bottomContainer = Ti.UI.createView({id:'bottomContainer'});
+	cc.mainContainer.add(cc.bottomContainer);
+	
+	cc.phoneButton = Ti.UI.createView({id:'phoneButton'});	
+	cc.bottomContainer.add(cc.phoneButton);
 
 	cc.phoneImg = Ti.UI.createView({id:'phoneImg'});
 	cc.phoneButton.add(cc.phoneImg);
-
+	
 	cc.phoneButtonLabel = Ti.UI.createLabel({id:'phoneButtonLabel'});	
 	cc.phoneButton.add(cc.phoneButtonLabel);
-
-	cc.webButton = Ti.UI.createView({id:'webButton'});
-
-	if(!isAndroid()){
-		cc.webButton.backgroundGradient={
-			type:'linear',
-			colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}]
-		};
-	}
-	cc.win.add(cc.webButton);
-
+	
+	cc.webButton = Ti.UI.createView({id:'webButton'});	
+	cc.bottomContainer.add(cc.webButton);
+				
 	cc.webImg = Ti.UI.createView({id:'webImg'});
 	cc.webButton.add(cc.webImg);
-
 	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
-	cc.webButton.add(cc.webButtonLabel);		
+	cc.webButton.add(cc.webButtonLabel);
+
 })();
 
 //------------------------------
 //	Events
 //------------------------------
-cc.doneButton.addEventListener('click', function(){
-	cc.win.close();
-});
 
 cc.phoneButton.addEventListener('click', function(){
 	if(cc.win.phone_num.length>0){

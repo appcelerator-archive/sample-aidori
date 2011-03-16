@@ -72,8 +72,9 @@ cc.tableView.addEventListener('click', function(e){
 	    barColor:cc.win.barColor,
 		navBarHidden:false,
 		title:Ti.Locale.getString('contribute_detail_title'),
-		backgroundImage:'../images/back.png',
+		backgroundImage:'../images/backgrounds/BG_map_gray.png',
 		url:'contribute_detail.js',
+		backButtonTitleImage:'../images/icon_arrow_left.png',
 		charity_name:e.rowData.charity_name,
 		web_link:e.rowData.web_link,
 		phone_num:e.rowData.phone_num,
@@ -83,5 +84,5 @@ cc.tableView.addEventListener('click', function(e){
 		charity_logo:e.rowData.charity_logo
 	});
 	
-	wPage.open({modal:true});
+	Ti.UI.currentTab.open(wPage,{animated:true});	
 });
