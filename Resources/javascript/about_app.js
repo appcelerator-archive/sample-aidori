@@ -101,12 +101,15 @@ cc.tabThisApp.addEventListener('click', function(){
 	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
 	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer.png';
 	cc.detailInfo.text=Ti.Locale.getString('about_app_team');
+	cc.crisisCommonsLabel.color='#fff';
 	cc.thisAppLabel.font={
 		fontSize:'13',fontWeight:'Bold'
 	};
+	cc.crisisCommonsLabel.color='#999';
 	cc.crisisCommonsLabel.font={
 		fontSize:'13',fontWeight:'Normal'
 	};
+	cc.appceleratorLabel.color='#999';
 	cc.appceleratorLabel.font={
 		fontSize:'13',fontWeight:'Normal'
 	};
@@ -121,12 +124,15 @@ cc.tabCrisisCommons.addEventListener('click', function(){
 	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer.png';
 	cc.detailInfo.text=Ti.Locale.getString('about_cc_desc');
 		
+	cc.thisAppLabel.color='#999';
 	cc.thisAppLabel.font={
 		fontSize:'13',fontWeight:'Normal'
 	};
+	cc.crisisCommonsLabel.color='#fff';
 	cc.crisisCommonsLabel.font={
 		fontSize:'12',fontWeight:'Bold'
 	};
+	cc.appceleratorLabel.color='#999';
 	cc.appceleratorLabel.font={
 		fontSize:'13',fontWeight:'Normal'
 	};
@@ -140,12 +146,15 @@ cc.tabAppcelerator.addEventListener('click', function(){
 	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
 	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer_selected.png';
 	cc.detailInfo.text=Ti.Locale.getString('about_appcelerator_desc');		
+	cc.thisAppLabel.color='#999';
 	cc.thisAppLabel.font={
 		fontSize:'13',fontWeight:'Normal'
 	};
+	cc.crisisCommonsLabel.color='#999';
 	cc.crisisCommonsLabel.font={
 		fontSize:'12',fontWeight:'Normal'
 	};
+	cc.appceleratorLabel.color='#fff';
 	cc.appceleratorLabel.font={
 		fontSize:'13',fontWeight:'Bold'
 	};
