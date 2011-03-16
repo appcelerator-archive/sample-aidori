@@ -73,4 +73,10 @@
 	<string name="about_page_title">Overview</string>
 	<string name="about_phone_numbers">Report Missing</string>
 	<string name="about_web_resources">More Resources</string>
+	<string name="about_app_this_app_title">Project Volunteers</string>
+	<string name="about_app_crisis_common_title">CrisisCommons</string>
+	<string name="about_app_appcelerator_title">Appcelerator</string>
+	<string name="about_appcelerator_desc">Tony to add Appcelerator description</string>
+	<string name="about_learn_more">Learn More</string>
+	<string name="about_main_title">App Overview</string>
 </resources>
