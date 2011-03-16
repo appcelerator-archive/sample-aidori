@@ -48,7 +48,7 @@ var contributeTab = Titanium.UI.createTab({
 var aboutWin = Titanium.UI.createWindow({  
   url:'javascript/about.js',
   backgroundImage:'images/backgrounds/BG_map_gray.png',
-  title:L('title_about'),
+  title:L('about_page_title'),
   barColor:"#333",
   backTitle:'Back'
 });
