@@ -18,7 +18,7 @@ var twitterWin = Titanium.UI.createWindow({
   url:'javascript/twitter.js',
   titleid:L('title_twitter'),
   barColor:"#333",
-  backgroundImage:'images/backgrounds/BG_gray.png',
+  backgroundImage:'images/backgrounds/BG_gray.png'
 });
 
 // Avoid keyboard overlapping the text fields
