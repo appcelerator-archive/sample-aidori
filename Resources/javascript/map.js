@@ -18,6 +18,21 @@ var dbName = 'map';
 var dbFileName = 'map.db';
 var regionState = false;
 var searchState = false;
+var dataState = false;
+
+(function(){
+	var db = Ti.Database.open(dbName);
+	db.execute('create table if not exists geohash (geohash text primary key, lat real, lng real, length integer, center_count integer, neighbor_count integer)');
+	db_rows = db.execute('select count(*) as count from geohash');
+	if(db_rows.isValidRow()){
+		if(db_rows.fieldByName('count') > 0){
+			dataState = true;
+		}
+	}
+	db_rows.close();
+	db.close();
+	alert(L('no_local_shelter_info'));
+})();
 
 function calcHashLevel(delta){
 	if(delta < 0.03){
@@ -370,6 +385,7 @@ function dbFileInitialize(blobData){
 	var filePath = saveDBFile(blobData, dbInstall);
 	//db初期化処理後のメソッドコール
 	//createAnnotations();
+	dataState = true;
 	actInd.hide();
 	actIndView.hide();
 }
@@ -383,17 +399,21 @@ function getXHRError(error){
 }
 
 
-
+var preSearchKey = '';
 function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
+	var annotations = [];
 	var geohash = encodeGeoHash(lat, lng);
 	Ti.API.info('lat:' + latDelta + ',lng:' + lngDelta);
 	var delta = (parseFloat(latDelta) + parseFloat(lngDelta)) / 2.0;
 	var hashLevel = calcHashLevel(delta);
 	Ti.API.info('geohash:'+ geohash + ',hashLevel:' + hashLevel + ',delta:' + delta);
 	
-	var db = Ti.Database.open(dbName);
+	if(geohash.substring(0, hashLevel) == preSearchKey){
+		return annotations;
+	}
+	preSearchKey = geohash.substring(0, hashLevel);
 	
-	var annotations = [];
+	var db = Ti.Database.open(dbName);
 	if(hashLevel == 6 || hashLevel == 5){
 		var db_rows = db.execute('select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where geohash = ? and length = ?) group by places_id)', geohash.substring(0, hashLevel), hashLevel);
 		Ti.API.info('count:' + db_rows.getRowCount());
@@ -438,6 +458,10 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 
 
 function showAnnotation(annotations){
+	if(annotations.length == 0){
+		regionState = true;
+		return;
+	}
 	mapView.removeAllAnnotations();
 	for(var i = 0; i < annotations.length; i++){
 		mapView.addAnnotation(annotations[i]);
@@ -455,6 +479,10 @@ var searchBar = Ti.UI.createSearchBar({
 
 searchBar.addEventListener('return', function(e)
 {
+	if(!dataState){
+		alert(L('no_local_shelter_info'));
+		return;
+	}
 	searchBar.blur();
 	if(e.value.length == 0){
 		searchState = false;
@@ -471,6 +499,7 @@ searchBar.addEventListener('cancel', function(){
 	searchBar.blur();
 	searchBar.value = '';
 	searchState = false;
+	if(!dataState){return;}
 	var annotations = createAnnotationByGeohash(currentMapLat, currentMapLng, currentLatDelta, currentLngDelta);
 	showAnnotation(annotations);
 });
@@ -501,7 +530,7 @@ if (Ti.Geolocation.locationServicesEnabled) {
 			currentMapLat = evt.latitude;
 			currentMapLng = evt.longitude;
 			Ti.API.info(evt);
-			if(regionState && !searchState){
+			if(regionState && !searchState && dataState){
 				regionState = false;
 				var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
 				showAnnotation(annotations);
@@ -553,6 +582,12 @@ function geoDistance(lat1, lng1, lat2, lng2, precision) {
 
 
 function setNearByAnnotation(){
+	if(!dataState){
+		alert(L('no_local_shelter_info'));
+		actInd.hide();
+		actIndView.hide();
+		return;
+	}
 	var geohash = encodeGeoHash(currentLat, currentLng);
 	var sql = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where geohash = ? and length = ?) group by places_id)';
 	//var hashLevel = 6;
@@ -604,7 +639,6 @@ function setNearByAnnotation(){
 	actIndView.hide();
 }
 
-
 /** toolbar **/
 (function(){
 	
@@ -622,9 +656,9 @@ function setNearByAnnotation(){
 			}else{
 				currentLat = e.coords.latitude;
 				currentLng = e.coords.longitude;
-				mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
 			}
 		});
+		mapView.setLocation({latitude:currentLat, longitude:currentLng});
 	});
 	
 	var nearbyButton = Ti.UI.createButton({
@@ -649,7 +683,6 @@ function setNearByAnnotation(){
 		XHR.getDataFromURL(url, dbFileInitialize, getXHRError);
 	});
 	
-
 	if(isAndroid){
 		var toolView = Ti.UI.createView({
 			bottom:0,
