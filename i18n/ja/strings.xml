@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<string name="crisis_title">Sendai Quake</string>
+	<string name="crisis_title">最新ニュース</string>
 	<string name="btn_clear">クリア</string>
 	<string name="btn_save">保存</string>
 	<string name="btn_send">送信</string>
 	<string name="add_photo">Add a Photo</string>
 	<string name="share">Share with us what you\'re seeing</string>
-	<string name="tab_report">ニュース</string>
+	<string name="tab_report">レポート</string>
+	<string name="tab_news">ニュース</string>
 	<string name="tab_twitter">ツイッター</string>
 	<string name="title_twitter">Twitter: Sendai Quake</string>
 	<string name="title_contribute">協力</string>
 	<string name="tab_about">アイドリ</string>
-	<string name="tab_contribute">Contribute</string>
+	<string name="tab_contribute">協力</string>
 	<string name="tab_map">避難場所</string>
 	<string name="title_map">避難場所</string>
 	<string name="show_current_position_button_title">現在地を表示</string>
@@ -22,14 +23,14 @@
 	<string name="search_result_nothing">検索結果はありませんでした。</string>
 	<string name="facility_name">施設名:</string>
 	<string name="map_address">住所:</string>
-	<string name="title_about">About Sendai Quake</string>
+	<string name="title_about">アイドリについて</string>
 	<string name="about_body">Sendai Quake was built by ...</string>
 	<string name="volunteer_info">For more information on how to volunteer, please call (555) 555-1212</string>
 	<string name="twitter_loading">Loading...</string>
 	<string name="title_organization">Organization</string>
-	<string name="twitter_no_network_title">Connection Required</string>
+	<string name="twitter_no_network_title">ネットワーク接続が必要です。</string>
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
-	<string name="disclaimer_button_title">I Accept</string>
+	<string name="disclaimer_button_title">同意する</string>
 	<string name="disclaimer_text">CrisisCommons, along with our friends in the greater volunteer technology community, stands ready to provide opportunities to volunteers of all skills levels to contribute to support requests made by crisis response agencies such as UN OCHA, Red Cross or local emergency management in support of their response and recovery efforts to response to 2011 Sendai earthquake and the subsequent tsunami that has affected countries across the Pacific region.Personal privacy. Your personal information will not be collected on this application. We encourage thoughtful reporting. Data retrieved on this application will be monitored. As a reminder, your location and the data you submit will be made public.\n\nIf you at any time wish to contact CrisisCommons, please email us at NEED_EMAIL_ADDRESS@crisiscommons.org\n\nPrivacy Statement (crisiscommons.org/privacy)\n\nTerms of Service (crisiscommons.org/tos)</string>
 	<string name="twitter_time_lessminute">数秒前</string>
 	<string name="twitter_minuteago">1 分前</string>
