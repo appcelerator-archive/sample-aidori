@@ -210,3 +210,5 @@ Ti.App.addEventListener('change_title', function(e) {
 Ti.App.addEventListener('hide_indicator', function(e) {
 	hideIndicator();
 });
+
+Titanium.include("javascript/check_contents.js");

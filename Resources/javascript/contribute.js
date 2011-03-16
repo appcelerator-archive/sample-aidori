@@ -1,5 +1,13 @@
 var cc ={win:Ti.UI.currentWindow};
-Ti.include('./application.js','./charity_data.js');
+Ti.include('./application.js');
+
+// load charity data
+var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "contribute.json");
+if(!file.exists()) {
+   file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/contribute.json");
+}
+cc.charityData = JSON.parse(file.read());
+
 (function(){
 	cc.win.orientationModes = [
 		Ti.UI.PORTRAIT,
@@ -60,8 +68,14 @@ Ti.include('./application.js','./charity_data.js');
 		data:cc.getTableData()
 	});
 	cc.win.add(cc.tableView);	
+
+    Ti.App.addEventListener('update_contribute', function() {
+        var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "contribute.json");
+        cc.charityData = JSON.parse(file.read());
+        cc.tableView.setData(cc.getTableData());
+    });
 })();
-		
+
 
 //-------------------------------
 //	Events
@@ -86,3 +100,4 @@ cc.tableView.addEventListener('click', function(e){
 	
 	Ti.UI.currentTab.open(wPage,{animated:true});	
 });
+
