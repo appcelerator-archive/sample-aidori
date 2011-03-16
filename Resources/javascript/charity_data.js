@@ -1,5 +1,5 @@
 cc.charityData ={
-	rowCount:22,
+	rowCount:20,
 	orgInfo:[
 		{
 			name:"Adventist Development and Relief Agency International's Response to Japan Tsunami",
