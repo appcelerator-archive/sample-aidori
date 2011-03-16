@@ -13,9 +13,9 @@ Ti.App.fireEvent('show_indicator');
 		Ti.UI.currentWindow.setRightNavButton(cc.configButton);
 	};
 	cc.tableView = Ti.UI.createTableView({
-		backgroundColor:'#5a5c64',
+		backgroundColor:'#adadae',
 		separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE,
-		separatorColor:'#444'
+		separatorColor:'#6e6e6e'
 	});
 	cc.win.add(cc.tableView);
 	cc.buildData=function(tweet) {
@@ -137,7 +137,8 @@ Ti.App.fireEvent('show_indicator');
 		height:Ti.Platform.displayCaps.platformHeight,
 		width:Ti.Platform.displayCaps.platformWidth,
 		backgroundImage:'../images/75percentblack.png',
-		visible:false
+		visible:false,
+		id:'twConfigWrapper'
 	});
 	// twConfigView holds the fields and labels
 	

@@ -3,10 +3,10 @@
 	   shadowColor:'#8d8d8d';
 	   font-size:15;
 	   font-weight:'bold';
-	   top:8;
+	   top:4;
 	   left:68;
-	   width:120;
-	   height:16;
+	   width:125;
+	   height:21;
 	   text-align:'left';
 }
 
@@ -15,7 +15,7 @@
    shadowColor:'#8d8d8d';
    font-size:11;
    font-weight:'normal';
-   top:8;
+   top:10;
    left:178;
    width:130;
    height:16;
@@ -48,21 +48,23 @@
   	text-align:'left';
 }
 
+#twConfigWrapper {
+	top:0;
+}
 #twInfoScroll {
 	background-color:'#cecece';
 	width:310;
-	height:350;
+	height:410;
 	contentHeight:'auto';
     contentWidth:'auto';
 	borderRadius:10;
-	top:65;
+	top:5;
 }
 
 #twConfigView {
 	background-color:'#cecece';
 	width:310;
 	height:250;
-	top:0;
 }
 
 #twConfigHeader {
@@ -74,7 +76,7 @@
 }
 
 #lbltwheader {
-	textid:'hashtags';
+ 	textid:'hashtags';
 	color:'#000';
 	font-size:18;
 	font-weight:'bold';
