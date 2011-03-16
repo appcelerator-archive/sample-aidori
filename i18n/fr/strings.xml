@@ -20,6 +20,9 @@
 	<string name="search_result_nothing">No result.</string>
 	<string name="facility_name">Facility name:</string>
 	<string name="map_address">Address:</string>
+	<string name="map_detail_title">Shelter detail</string>
+	<string name="search_result_overflow">There are more than 100 result. Narrow down please.</string>
+	<string name="map_processing">Processing..</string>
 	<string name="tab_about">À propos</string>
 	<string name="tab_contribute">Contribuer</string>
 	<string name="title_about">À propos de Sendai Quake</string>

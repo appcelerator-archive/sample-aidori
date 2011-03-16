@@ -64,7 +64,6 @@ var mapWin = Titanium.UI.createWindow({
 	barColor:"#333",
 	title:L('title_map')
 });
-
 var mapTab = Titanium.UI.createTab({
 	icon:'images/light_pin.png',
 	title:L('tab_map'),

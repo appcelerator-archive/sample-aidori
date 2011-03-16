@@ -1,15 +1,37 @@
+Ti.include('geohash.js');
 var win = Ti.UI.currentWindow;
 
 /** initialize **/
 var isAndroid = Ti.Platform.osname == 'android';
 var currentLat = 38.267154;
 var currentLng = 140.870705;
+var currentMapLat = 0;
+var currentMapLng = 0;
 var defaultLatDelta = 0.1;
 var defaultLngDelta = 0.1;
-var url = 'http://s3-ap-northeast-1.amazonaws.com/yehara.tokyo/JapanQuake2011/test.db';
+var currentLatDelta = defaultLatDelta;
+var currentLngDelta = defaultLngDelta;
+
+var url = 'http://s3-ap-northeast-1.amazonaws.com/yehara.tokyo/JapanQuake2011/shelter.db';
+
 var dbName = 'map';
 var dbFileName = 'map.db';
+var regionState = false;
+var searchState = false;
 
+function calcHashLevel(delta){
+	if(delta < 0.03){
+		return 6;
+	}else if(0.03 <= delta && delta < 0.2){
+		return 5;
+	}else if(0.2 <= delta && delta < 0.4){
+		return 4;
+	}else if(0.4 <= delta && delta < 5.0){
+		return 3;
+	}else{
+		return 2;
+	}
+}
 
 var mapView = Ti.Map.createView({
 	mapType: Ti.Map.STANDARD_TYPE,
@@ -29,90 +51,44 @@ var mapView = Ti.Map.createView({
 
 mapView.addEventListener('click', function(evt){
 	var annotation = evt.annotation;
-	var subWindow = Ti.UI.createWindow({
-		backgroundColor:'#666666',
-		backgroundImage:'../images/back.png'
-	});
-	var titleFont = {fontSize:16, fontWeight:'bold'};
-	var contentFont = {fontSize:16};
-	
-	var nameRow = Ti.UI.createTableViewRow({height:50});
-	var nameTitle = Ti.UI.createLabel({
-		text:L('facility_name'),
-		font:titleFont,
-		color:'#000000',
-		textAlign:'right',
-		width:70,
-		left:0
-	});
-	nameRow.add(nameTitle);
-	var nameContent = Ti.UI.createLabel({
-		text:annotation.title,
-		left:80,
-		right:10,
-		font:contentFont,
-		color:'#000000'
-	});
-	nameRow.add(nameContent);
-	
-	var addressRow = Ti.UI.createTableViewRow({height:80});
-	var addressTitle = Ti.UI.createLabel({
-		text:L('map_address'),
-		font:titleFont,
-		color:'#000000',
-		textAlign:'right',
-		width:70,
-		left:0
-	});
-	addressRow.add(addressTitle);
-	var addressContent = Ti.UI.createLabel({
-		text:annotation.detail,
-		left:80,
-		right:10,
-		font:contentFont,
-		color:'#000000'
-	});
-	addressRow.add(addressContent);
-	
-	var tableView = Ti.UI.createTableView({
-		data:[nameRow, addressRow],
-		borderRadius:10,
-		borderColor:'#666666',
-		backgroundColor:'#ffffff',
-		height:130,
-		left:10,
-		right:10,
-		top:10
-	});
-	
-	
-	if(!isAndroid){
-		//tableView.style = Ti.UI.iPhone.TableViewStyle.GROUPED;
-		var closeButton = Ti.UI.createButton({
-			title:'Done',
-			style: Ti.UI.iPhone.SystemButtonStyle.DONE
+	if(!annotation.isSummary){
+		var subWindow = Ti.UI.createWindow({
+			backgroundColor:'#666666',
+			backgroundImage:'../images/back.png',
+			url:'map_detail.js',
+			title:L('map_detail_title')
 		});
-		closeButton.addEventListener('click', function(){
-			subWindow.close();
-		});
-		subWindow.setRightNavButton(closeButton);
+	
+		subWindow.prop = {title:annotation.title, detail:annotation.detail};
+	
+		if(!isAndroid){
+			var closeButton = Ti.UI.createButton({
+				title:'Done',
+				style: Ti.UI.iPhone.SystemButtonStyle.DONE
+			});
+			closeButton.addEventListener('click', function(){subWindow.close();});
+			subWindow.setRightNavButton(closeButton);
+		}else{
+			subWindow.navBarHidden = true;
+		}
+	
+		isAndroid ? subWindow.open({fullscreen:true}) : subWindow.open({modal:true});
 	}else{
-		tableView.borderRadius = 10;
-		subWindow.navBarHidden = true;
+		Ti.API.info({latitude:annotation.latitude, lonigude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
+		mapView.setLocation({latitude:annotation.latitude, lonigude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
 	}
-	subWindow.add(tableView);
-	
-	isAndroid ? subWindow.open({fullscreen:true}) : subWindow.open({modal:true});
 });
 
 var actInd = Ti.UI.createActivityIndicator({
     style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK,
+	message:L('map_processing'),
     width: 32,
     height: 32
 });
 mapView.add(actInd);
 
 /** create annotation from local db **/
+/*
 function createAnnotations(){
 	var db = Ti.Database.open(dbName);
 	db.execute('create table if not exists places (id integer, name text, lat real, lng real, detail text)');
@@ -150,8 +126,10 @@ function createAnnotations(){
 		}
 	}
 }
+*/
 
 function getFitLocation(max_lat, max_lng, min_lat, min_lng){
+	
 	var average_lat = (parseFloat(max_lat) + parseFloat(min_lat)) / 2.0;
 	var average_lng = (parseFloat(max_lng) + parseFloat(min_lng)) / 2.0;
 	var calcLatitudeDelta = max_lat - min_lat;
@@ -178,11 +156,16 @@ function getFitLocation(max_lat, max_lng, min_lat, min_lng){
 }
 
 function textSearch(search_str){
-	
+	searchState = true;
 	var db = Ti.Database.open(dbName);
 	var condition = '%' + search_str + '%';
 	var db_rows = db.execute('select * from places where name like ? or detail like ?', condition, condition);
 	var count = db_rows.getRowCount();
+	if(count >= 100){
+		searchState = false;
+		alert(L('search_result_overflow'));
+		return;
+	}
 	
 	var max_lat = 0.0;
 	var min_lat = 0.0;
@@ -212,7 +195,8 @@ function textSearch(search_str){
 			latitude:lat,
 			longitude:lng,
 			detail:db_rows.fieldByName('detail'),
-			animate:true
+			animate:true,
+			isSummary:false
 		});
 		
 		if(isAndroid){
@@ -245,26 +229,6 @@ function textSearch(search_str){
 		}
 	}
 }
-
-var searchBar = Ti.UI.createSearchBar({
-	barColor:'#000000',
-	showCancel:true,
-	height:40,
-	top:0
-});
-
-searchBar.addEventListener('return', function(e)
-{
-	searchBar.blur();
-	if(e.value.length == 0){
-		createAnnotations();
-	}else{
-		textSearch(e.value);
-	}
-});
-
-searchBar.addEventListener('cancel', function(e){searchBar.blur();});
-win.add(searchBar);
 
 /** XHR **/
 var XHR = {
@@ -353,6 +317,7 @@ function saveDBFile(blobData, callback){
 	var temp_db = Ti.Database.open(dbName);
 	temp_db.remove();
 	Ti.API.info('remove db:' + temp_db);
+	temp_db.close();
 	callback(file.nativePath);
 }
 
@@ -382,6 +347,7 @@ function setData(data){
 }
 */
 function dbInstall(filePath){
+	Ti.API.info('file:' + filePath);
 	var db = Ti.Database.install(filePath, dbName);
 	Ti.API.info('new_db:' + db);
 	db.close();
@@ -391,7 +357,7 @@ function dbInstall(filePath){
 function dbFileInitialize(blobData){
 	var filePath = saveDBFile(blobData, dbInstall);
 	//db初期化処理後のメソッドコール
-	createAnnotations();
+	//createAnnotations();
 	actInd.hide();
 }
 
@@ -402,6 +368,98 @@ function getXHRError(error){
 	actInd.hide();
 }
 
+
+
+function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
+	var geohash = encodeGeoHash(lat, lng);
+	Ti.API.info('lat:' + latDelta + ',lng:' + lngDelta);
+	var delta = (parseFloat(latDelta) + parseFloat(lngDelta)) / 2.0;
+	var hashLevel = calcHashLevel(delta);
+	Ti.API.info('geohash:'+ geohash + ',hashLevel:' + hashLevel + ',delta:' + delta);
+	
+	var db = Ti.Database.open(dbName);
+	
+	var annotations = [];
+	if(hashLevel == 6 || hashLevel == 5){
+		var db_rows = db.execute('select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where geohash = ? and length = ?) group by places_id)', geohash.substring(0, hashLevel), hashLevel);
+		Ti.API.info('count:' + db_rows.getRowCount());
+		while(db_rows.isValidRow()){
+			var annotation = Ti.Map.createAnnotation({
+				title:db_rows.fieldByName('name'),
+				latitude:db_rows.fieldByName('lat'),
+				longitude:db_rows.fieldByName('lng'),
+				hashLevel:hashLevel,
+				detail:db_rows.fieldByName('detail'),
+				geoHash:geohash,
+				isSummary:false
+			});
+			if(isAndroid){
+				annotation.pinImage = "../images/map-pin.png";
+			}
+			annotations.push(annotation);
+			db_rows.next();
+		}
+		db_rows.close();
+	}else{
+		var db_rows = db.execute('select * from geohash where geohash like ? and length = ?', (geohash.substring(0, hashLevel) + '%'), 4);
+		Ti.API.info('count:' + db_rows.getRowCount());
+		while(db_rows.isValidRow()){
+			var annotation = Ti.Map.createAnnotation({
+				title:'Click to Zoom',
+				latitude:db_rows.fieldByName('lat'),
+				longitude:db_rows.fieldByName('lng'),
+				hashLevel:hashLevel,
+				isSummary:true,
+				geoHash:geohash,
+				pincolor:Titanium.Map.ANNOTATION_PURPLE
+			});
+			annotations.push(annotation);
+			db_rows.next();
+		}
+		db_rows.close();
+	}
+	db.close();
+	return annotations;
+}
+
+
+function showAnnotation(annotations){
+	mapView.removeAllAnnotations();
+	for(var i = 0; i < annotations.length; i++){
+		mapView.addAnnotation(annotations[i]);
+	}
+}
+
+/** Search bar **/
+var searchBar = Ti.UI.createSearchBar({
+	barColor:'#000000',
+	showCancel:true,
+	height:40,
+	top:0
+});
+
+searchBar.addEventListener('return', function(e)
+{
+	searchBar.blur();
+	if(e.value.length == 0){
+		searchState = false;
+		var annotations = createAnnotationByGeohash(currentMapLat, currentMapLng, currentLatDelta, currentLngDelta);
+		showAnnotation(annotations);
+	}else{
+		textSearch(e.value);
+	}
+});
+
+searchBar.addEventListener('cancel', function(){
+	searchBar.blur();
+	searchBar.value = '';
+	searchState = false;
+	var annotations = createAnnotationByGeohash(currentMapLat, currentMapLng, currentLatDelta, currentLngDelta);
+	showAnnotation(annotations);
+});
+
+searchBar.addEventListener('cancel', function(e){searchBar.blur();});
+win.add(searchBar);
 
 /** Get geolocation **/
 if (Ti.Geolocation.locationServicesEnabled) {
@@ -415,17 +473,28 @@ if (Ti.Geolocation.locationServicesEnabled) {
 		if (!e.success || e.error)
 		{
 			alert(L('can_not_get_geolocation'));
-			return;
+		}else{
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+			mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
 		}
-		currentLat = e.coords.latitude;
-		currentLng = e.coords.longitude;
-		mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
+		mapView.addEventListener('regionChanged', function(evt){
+			currentLatDelta = evt.latitudeDelta;
+			currentLngDelta = evt.longitudeDelta;
+			currentMapLat = evt.latitude;
+			currentMapLng = evt.longitude;
+			Ti.API.info(evt);
+			if(regionState && !searchState){
+				var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
+				showAnnotation(annotations);
+			}
+		});
+		regionState = true;
 	});
   
 	Ti.Geolocation.addEventListener("location", function(e) {
 		currentLat = e.coords.latitude;
 		currentLng = e.coords.longitude;
-		mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
 	});
   
 } else {
@@ -433,7 +502,6 @@ if (Ti.Geolocation.locationServicesEnabled) {
 }
 
 /** execute **/
-createAnnotations();
 win.add(mapView);
 searchBar.blur();
 
@@ -465,9 +533,29 @@ function geoDistance(lat1, lng1, lat2, lng2, precision) {
   return distance;
 }
 
+
 function setNearByAnnotation(){
+	var geohash = encodeGeoHash(currentLat, currentLng);
+	var sql = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where geohash = ? and length = ?) group by places_id)';
+	//var hashLevel = 6;
+	
 	var db = Ti.Database.open(dbName);
-	db_rows = db.execute('select * from places');
+	db_rows = null;
+	
+	for(var hashLevel = 6; hashLevel > 0; hashLevel--){
+		db_rows = db.execute(sql, geohash.substring(0, hashLevel), hashLevel);
+		if(db_rows.getRowCount() != 0){
+			break;
+		}else{
+			db_rows.close();
+			db_rows = null;
+		}
+	}
+	
+	if(db_rows == null){
+		alert('Not Found');
+		return;
+	}
 	
 	var lat = 0;
 	var lng = 0;
@@ -492,9 +580,11 @@ function setNearByAnnotation(){
 	}
 	db_rows.close();
 	db.close();
-	createAnnotations();
-	mapView.setLocation({latitude:lat, longitude:lng});
+	//createAnnotations();
+	mapView.setLocation({latitude:lat, longitude:lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
+	actInd.hide();
 }
+
 
 /** toolbar **/
 (function(){
@@ -505,8 +595,17 @@ function setNearByAnnotation(){
 	});
 	
 	currentPositionButton.addEventListener('click', function(){
-		createAnnotations();
-		mapView.setLocation({latitude: currentLat,longitude: currentLng});
+		Ti.Geolocation.getCurrentPosition(function(e) {
+			if (!e.success || e.error)
+			{
+				alert(L('can_not_get_geolocation'));
+				return;
+			}else{
+				currentLat = e.coords.latitude;
+				currentLng = e.coords.longitude;
+				mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
+			}
+		});
 	});
 	
 	var nearbyButton = Ti.UI.createButton({
@@ -515,6 +614,7 @@ function setNearByAnnotation(){
 	});
 	
 	nearbyButton.addEventListener('click', function(){
+		actInd.show();
 		setNearByAnnotation();
 	});
 	
