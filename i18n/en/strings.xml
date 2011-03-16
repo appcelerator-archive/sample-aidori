@@ -81,4 +81,6 @@
 	<string name="about_appcelerator_desc">Tony to add Appcelerator description</string>
 	<string name="about_learn_more">Learn More</string>
 	<string name="about_main_title">App Overview</string>
+	<string name="about_tab_app_info">App Info</string>
+	<string name="about_tab_crisiscommons">CrisisCommons</string>	
 </resources>

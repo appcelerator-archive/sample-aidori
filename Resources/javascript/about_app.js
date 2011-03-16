@@ -5,85 +5,158 @@ var cc ={win:Ti.UI.currentWindow};
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
 	];
-	cc.mainContainer = Ti.UI.createView({top:isAndroid() ? 20 : 5 ,layout:'vertical'});
+	cc.selectedTabIndex=0;
+	cc.mainContainer = Ti.UI.createView({
+		height:isAndroid() ? 380 : 340,
+		borderRadius:isAndroid() ? 10 : 5, 
+		id:'mainContainer'
+		});
 	cc.win.add(cc.mainContainer);
 	
-	cc.doneButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.DONE});
-	if(!isAndroid()){
-		cc.win.rightNavButton=cc.doneButton;
-	}
+	cc.tabContainer = Ti.UI.createView({id:'tabContainer'});
+	cc.mainContainer.add(cc.tabContainer);
 	
-	if(isAndroid()){
-		cc.nameBox = Ti.UI.createView({id:'nameBoxAp'});
-		cc.mainContainer.add(cc.nameBox);		
-		cc.aboutCC = Ti.UI.createLabel({
-			text:'About This Application',
-			id:'aboutAp'
+	cc.tabThisApp = Ti.UI.createView({id:'tabThisApp'});
+	cc.tabContainer.add(cc.tabThisApp);
+	
+	cc.thisAppLabel = Ti.UI.createLabel({id:'thisAppLabel'});	
+	cc.tabThisApp.add(cc.thisAppLabel);
+	
+	cc.tabCrisisCommons = Ti.UI.createView({id:'tabCrisisCommons'});
+	cc.tabContainer.add(cc.tabCrisisCommons);
+
+	cc.crisisCommonsLabel = Ti.UI.createLabel({id:'crisisCommonsLabel'});	
+	cc.tabCrisisCommons.add(cc.crisisCommonsLabel);
+		
+	cc.tabAppcelerator = Ti.UI.createView({id:'tabAppcelerator'});
+	cc.tabContainer.add(cc.tabAppcelerator);
+	
+	
+	cc.appceleratorLabel = Ti.UI.createLabel({
+		text:'Appcelerator',
+		id:'appceleratorLabel'
 		});	
-		cc.nameBox.add(cc.aboutCC);
-	}	
-	cc.middleSection = Ti.UI.createView({
-		width:(Ti.Platform.displayCaps.platformWidth-20),
-		top:isAndroid() ? 10 : 5 ,
-		id:'middleSectionAp'
-	});
-	cc.mainContainer.add(cc.middleSection);
-		
-	cc.ccLogoAp = Ti.UI.createImageView({
-		    image:'../images/appcelerator.png',
-			height:100,
-			width:100
-	  });
-
-	cc.middleSection.add(cc.ccLogoAp);
-
-	cc.titanInfo = Ti.UI.createLabel({
-		textid:'Some meaningful message',
-		id:'titanInfo'
-		});
-	cc.middleSection.add(cc.titanInfo);
-		
-	cc.teamInfo = Ti.UI.createLabel({
-		text:Ti.Locale.getString('about_app_team'),
-		id:'teamInfo'
-	});
-
-	cc.moreInfoScroll = Ti.UI.createScrollView({
-			width:(Ti.Platform.displayCaps.platformWidth-20),
-			top:isAndroid() ? 10 : 5 ,
-			id:'moreInfoScrollAp'
-		});
-
-	cc.moreInfoScroll.add(cc.teamInfo);
-	cc.mainContainer.add(cc.moreInfoScroll);
+	cc.tabAppcelerator.add(cc.appceleratorLabel);
 	
-	cc.webButton = Ti.UI.createView({id:'webButtonAp'});
+	cc.topContainer = Ti.UI.createView({id:'topContainer'});
+	cc.mainContainer.add(cc.topContainer);
+	
+	
+	cc.infoLogo = Ti.UI.createImageView({
+		    image:'../images/cont_placeholder.png',
+			height:50, width:50
+	});
+	cc.topContainer.add(cc.infoLogo);
 
-	if(!isAndroid()){
-		cc.webButton.backgroundGradient={
-			type:'linear',
-			colors:[{color:'#d4d4d4',position:0.0},{color:'#c4c4c4',position:0.50},{color:'#b4b4b4',position:1.0}]
-		};
-	}
-	cc.win.add(cc.webButton);
+	cc.infoName = Ti.UI.createLabel({id:'infoName'});	
+	cc.topContainer.add(cc.infoName);
 
-	cc.webImg = Ti.UI.createView({id:'webImgAp'});
-	cc.webButton.add(cc.webImg);
+	cc.Line1 = Ti.UI.createView({id:'vwLine'});
+	cc.mainContainer.add(cc.Line1);
 
-	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabelAp'});
-	cc.webButton.add(cc.webButtonLabel);		
+	cc.detailInfo = Ti.UI.createLabel({id:'detailInfo'});
+	cc.moreInfoScroll = Ti.UI.createScrollView({
+		height:isAndroid() ? 220 : 180,
+		id:'moreInfoScroll'
+		});
+
+	cc.moreInfoScroll.add(cc.detailInfo);
+	cc.mainContainer.add(cc.moreInfoScroll);
+
+	cc.bottomContainer = Ti.UI.createView({id:'bottomContainer'});
+	cc.mainContainer.add(cc.bottomContainer);
+	
+	cc.webImg = Ti.UI.createView({id:'webImg'});
+	cc.bottomContainer.add(cc.webImg);
+	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
+	cc.bottomContainer.add(cc.webButtonLabel);
+						
 })();
 
-//--------------------------------------
+//-----------------------------------
 //		Events
-//--------------------------------------
-cc.doneButton.addEventListener('click', function(){
-	cc.win.close();
-});
-cc.webButton.addEventListener('click', function(){
+//-----------------------------------
+cc.bottomContainer.addEventListener('click', function(){
 	if (!Ti.Network.online){
 	 	  noNetworkAlert();
 	} else {
-	   Ti.Platform.openURL("http://wiki.appcelerator.org/display/titans/Japan+2011+Quake+Relief");
+	   var urlText='http://wiki.appcelerator.org/display/titans/Japan+2011+Quake+Relief';
+		if(cc.selectedTabIndex==0){
+		   urlText='http://wiki.appcelerator.org/display/titans/Japan+2011+Quake+Relief';
+		}
+		if(cc.selectedTabIndex==1){
+		   urlText='http://crisiscommons.org/';
+		}
+		if(cc.selectedTabIndex==2){
+		   urlText='http://www.appcelerator.com/';
+		}				
+	   Ti.Platform.openURL(urlText);
 	}
 });
+cc.tabThisApp.addEventListener('click', function(){
+	cc.selectedTabIndex=0;
+	cc.infoName.text=Ti.Locale.getString('about_app_this_app_title');
+	cc.infoLogo.image='../images/cont_placeholder.png';
+	cc.tabThisApp.backgroundImage='../images/buttons/button_spacer_selected.png';
+	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
+	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer.png';
+	cc.detailInfo.text=Ti.Locale.getString('about_app_team');
+	cc.crisisCommonsLabel.color='#fff';
+	cc.thisAppLabel.font={
+		fontSize:'13',fontWeight:'Bold'
+	};
+	cc.crisisCommonsLabel.color='#999';
+	cc.crisisCommonsLabel.font={
+		fontSize:'13',fontWeight:'Normal'
+	};
+	cc.appceleratorLabel.color='#999';
+	cc.appceleratorLabel.font={
+		fontSize:'13',fontWeight:'Normal'
+	};
+});
+
+cc.tabCrisisCommons.addEventListener('click', function(){
+	cc.selectedTabIndex=1;
+	cc.infoName.text=Ti.Locale.getString('about_app_crisis_common_title');
+	cc.infoLogo.image='../images/charity_logos/crisis_commons.png';
+	cc.tabThisApp.backgroundImage='../images/buttons/button_spacer.png';
+	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer_selected.png';
+	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer.png';
+	cc.detailInfo.text=Ti.Locale.getString('about_cc_desc');
+		
+	cc.thisAppLabel.color='#999';
+	cc.thisAppLabel.font={
+		fontSize:'13',fontWeight:'Normal'
+	};
+	cc.crisisCommonsLabel.color='#fff';
+	cc.crisisCommonsLabel.font={
+		fontSize:'12',fontWeight:'Bold'
+	};
+	cc.appceleratorLabel.color='#999';
+	cc.appceleratorLabel.font={
+		fontSize:'13',fontWeight:'Normal'
+	};
+});
+
+cc.tabAppcelerator.addEventListener('click', function(){
+	cc.selectedTabIndex=2;
+	cc.infoName.text=Ti.Locale.getString('about_app_appcelerator_title');
+	cc.infoLogo.image='../images/appcelerator.png';
+	cc.tabThisApp.backgroundImage='../images/buttons/button_spacer.png';
+	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
+	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer_selected.png';
+	cc.detailInfo.text=Ti.Locale.getString('about_appcelerator_desc');		
+	cc.thisAppLabel.color='#999';
+	cc.thisAppLabel.font={
+		fontSize:'13',fontWeight:'Normal'
+	};
+	cc.crisisCommonsLabel.color='#999';
+	cc.crisisCommonsLabel.font={
+		fontSize:'12',fontWeight:'Normal'
+	};
+	cc.appceleratorLabel.color='#fff';
+	cc.appceleratorLabel.font={
+		fontSize:'13',fontWeight:'Bold'
+	};
+});
+
