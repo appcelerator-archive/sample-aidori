@@ -45,12 +45,19 @@
   	text-align:'left';
 }
 
-#twConfigView {
-	top:10;
+#twInfoScroll {
 	background-color:'#ffffff';
 	width:260;
 	height:250;
+	contentHeight:'auto';
+    contentWidth:'auto';
 	borderRadius:10;
+}
+
+#twConfigView {
+	background-color:'#ffffff';
+	width:260;
+	height:250;
 }
 
 #twConfigHeader {
