@@ -43,7 +43,7 @@ var cc ={win:Ti.UI.currentWindow};
 	
 	
 	cc.infoLogo = Ti.UI.createImageView({
-		    image:'../images/cont_placeholder.png',
+		    image:'../images/volunteer.png',
 			height:50, width:50
 	});
 	cc.topContainer.add(cc.infoLogo);
@@ -96,7 +96,7 @@ cc.bottomContainer.addEventListener('click', function(){
 cc.tabThisApp.addEventListener('click', function(){
 	cc.selectedTabIndex=0;
 	cc.infoName.text=Ti.Locale.getString('about_app_this_app_title');
-	cc.infoLogo.image='../images/cont_placeholder.png';
+	cc.infoLogo.image='../images/volunteer.png';
 	cc.tabThisApp.backgroundImage='../images/buttons/button_spacer_selected.png';
 	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
 	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer.png';
@@ -141,7 +141,7 @@ cc.tabCrisisCommons.addEventListener('click', function(){
 cc.tabAppcelerator.addEventListener('click', function(){
 	cc.selectedTabIndex=2;
 	cc.infoName.text=Ti.Locale.getString('about_app_appcelerator_title');
-	cc.infoLogo.image='../images/appcelerator.png';
+	cc.infoLogo.image='../images/appcelerator50.png';
 	cc.tabThisApp.backgroundImage='../images/buttons/button_spacer.png';
 	cc.tabCrisisCommons.backgroundImage='../images/buttons/button_spacer.png';
 	cc.tabAppcelerator.backgroundImage='../images/buttons/button_spacer_selected.png';
