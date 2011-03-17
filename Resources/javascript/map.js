@@ -31,7 +31,9 @@ var dataState = false;
 	}
 	db_rows.close();
 	db.close();
-	alert(L('no_local_shelter_info'));
+	if(!dataState){
+		alert(L('no_local_shelter_info'));
+	}
 })();
 
 function calcHashLevel(delta){
@@ -89,8 +91,8 @@ mapView.addEventListener('click', function(evt){
 	
 		isAndroid ? subWindow.open({fullscreen:true}) : subWindow.open({modal:true});
 	}else{
-		Ti.API.info({latitude:annotation.latitude, lonigude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
-		mapView.setLocation({latitude:annotation.latitude, lonigude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
+		mapView.removeAllAnnotations();
+		mapView.setLocation({latitude:annotation.latitude, longitude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
 	}
 });
 
@@ -110,47 +112,6 @@ var actIndView = Ti.UI.createView({
 });
 mapView.add(actInd);
 
-/** create annotation from local db **/
-/*
-function createAnnotations(){
-	var db = Ti.Database.open(dbName);
-	db.execute('create table if not exists places (id integer, name text, lat real, lng real, detail text)');
-	var db_rows = db.execute('select * from places');
-	var annotations = [];
-	
-	while(db_rows.isValidRow()){
-						
-		var annotation = Ti.Map.createAnnotation({
-							title:db_rows.fieldByName('name'),
-							latitude:db_rows.fieldByName('lat'),
-							longitude:db_rows.fieldByName('lng'),
-							detail:db_rows.fieldByName('detail'),
-							animate:true
-		});
-		
-		if(isAndroid){
-			annotation.pinImage = "../images/map-pin.png";
-		}
-		
-		annotations.push(annotation);
-		db_rows.next();
-	}
-	db_rows.close();
-	db.close();
-	mapView.removeAllAnnotations();
-	mapView.userLocation = true;
-	if(annotations.length == 0){
-		alert(L('no_local_shelter_info'));
-	}else{
-		//mapView.addAnnotation(annotations);
-		//Android not implement Ti.Map.addAnnotations
-		for(var i = 0; i < annotations.length; i++){
-			mapView.addAnnotation(annotations[i]);
-		}
-	}
-}
-*/
-
 function getFitLocation(max_lat, max_lng, min_lat, min_lng){
 	
 	var average_lat = (parseFloat(max_lat) + parseFloat(min_lat)) / 2.0;
@@ -165,16 +126,6 @@ function getFitLocation(max_lat, max_lng, min_lat, min_lng){
 	if(calcLongitudeDelta < defaultLatDelta){
 		calcLongitudeDelta = defaultLngDelta;
 	}
-	/*
-	Ti.API.info('max_lat:' + max_lat);
-	Ti.API.info('max_lng:' + max_lng);
-	Ti.API.info('min_lat:' + min_lat);
-	Ti.API.info('min_lng:' + min_lng);
-	Ti.API.info('average_lat:' + average_lat);
-	Ti.API.info('average_lng:' + average_lng);
-	Ti.API.info('calcLatitudeDelta:' + calcLatitudeDelta);
-	Ti.API.info('calcLongitudeDelta:' + calcLongitudeDelta);
-	*/
 	return {latitude:average_lat, longitude:average_lng, latitudeDelta:calcLatitudeDelta, longitudeDelta:calcLongitudeDelta};
 }
 
@@ -184,6 +135,7 @@ function textSearch(search_str){
 	var condition = '%' + search_str + '%';
 	var db_rows = db.execute('select * from places where name like ? or detail like ?', condition, condition);
 	var count = db_rows.getRowCount();
+	
 	if(count >= 100){
 		searchState = false;
 		actInd.hide();
@@ -329,7 +281,8 @@ var XHR = {
 	}
 };
 
-function saveDBFile(blobData, callback){
+/** sync complete callback **/
+function saveDBFile(blobData){
 	var dir = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "data");
 	if(!dir.exists()){
 		dir.createDirectory();
@@ -343,48 +296,10 @@ function saveDBFile(blobData, callback){
 	
 	var temp_db = Ti.Database.open(dbName);
 	temp_db.remove();
-	Ti.API.info('remove db:' + temp_db);
 	temp_db.close();
-	callback(file.nativePath);
-}
-
-/** sync remoto to local **/
-/*
-function setData(data){
-	var db = Ti.Database.open(dbName);
-	db.execute('create table if not exists places (id integer, name text, lat real, lng real, detail text)');
 	
-	for(var i = 0; i < data.length; i++){
-		var db_row = db.execute('select * from places where id = ?', data[i].id);
-
-		if(db_row.isValidRow()){
-			//update
-			db.execute("update places set name = ?, lat = ?, lng = ?, detail = ? where id = ?", 
-						data[i].name, data[i].lat, data[i].lng, data[i].description, data[i].id);
-		}else{
-			//insert
-			db.execute('insert into places(id, name, lat, lng, detail) values(?, ?, ?, ?, ?)', 
-						data[i].id, data[i].name, data[i].lat, data[i].lng, data[i].description);
-		}
-		db_row.close();
-	}
-	db.close();
-	createAnnotations();
-	actInd.hide();
-}
-*/
-function dbInstall(filePath){
-	Ti.API.info('file:' + filePath);
-	var db = Ti.Database.install(filePath, dbName);
-	Ti.API.info('new_db:' + db);
-	db.close();
-	return filePath;
-}
-
-function dbFileInitialize(blobData){
-	var filePath = saveDBFile(blobData, dbInstall);
-	//db初期化処理後のメソッドコール
-	//createAnnotations();
+	var new_db = Ti.Database.install(file.nativePath, dbName);
+	new_db.close();
 	dataState = true;
 	actInd.hide();
 	actIndView.hide();
@@ -398,14 +313,14 @@ function getXHRError(error){
 	actIndView.hide();
 }
 
-
 var preSearchKey = '';
 function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 	var annotations = [];
 	var geohash = encodeGeoHash(lat, lng);
-	Ti.API.info('lat:' + latDelta + ',lng:' + lngDelta);
 	var delta = (parseFloat(latDelta) + parseFloat(lngDelta)) / 2.0;
 	var hashLevel = calcHashLevel(delta);
+	
+	Ti.API.info('preSearchKey:' + preSearchKey + ',currentSearchKey:' + geohash.substring(0, hashLevel));
 	Ti.API.info('geohash:'+ geohash + ',hashLevel:' + hashLevel + ',delta:' + delta);
 	
 	if(geohash.substring(0, hashLevel) == preSearchKey){
@@ -548,10 +463,7 @@ if (Ti.Geolocation.locationServicesEnabled) {
   alert(L('can_not_get_geolocation'));
 }
 
-/** execute **/
 win.add(mapView);
-searchBar.blur();
-
 
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
   var distance = 0;
@@ -580,7 +492,6 @@ function geoDistance(lat1, lng1, lat2, lng2, precision) {
   return distance;
 }
 
-
 function setNearByAnnotation(){
 	if(!dataState){
 		alert(L('no_local_shelter_info'));
@@ -590,7 +501,6 @@ function setNearByAnnotation(){
 	}
 	var geohash = encodeGeoHash(currentLat, currentLng);
 	var sql = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where geohash = ? and length = ?) group by places_id)';
-	//var hashLevel = 6;
 	
 	var db = Ti.Database.open(dbName);
 	db_rows = null;
@@ -633,7 +543,6 @@ function setNearByAnnotation(){
 	}
 	db_rows.close();
 	db.close();
-	//createAnnotations();
 	mapView.setLocation({latitude:lat, longitude:lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
 	actInd.hide();
 	actIndView.hide();
@@ -680,7 +589,7 @@ function setNearByAnnotation(){
 	getPlacesButton.addEventListener('click', function(){
 		actInd.show();
 		actIndView.show();
-		XHR.getDataFromURL(url, dbFileInitialize, getXHRError);
+		XHR.getDataFromURL(url, saveDBFile, getXHRError);
 	});
 	
 	if(isAndroid){
