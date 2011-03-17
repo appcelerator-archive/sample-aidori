@@ -42,6 +42,7 @@ var cc ={win:Ti.UI.currentWindow};
 	{
 		xhr.onload = function()
 		{
+            var views = [];
 			var data=JSON.parse(this.responseText);
 			/*
 			Ti.API.log(this.responseText);
@@ -67,11 +68,10 @@ var cc ={win:Ti.UI.currentWindow};
 					defaultImage: '../images/default_image.png',
 					image: picture.images.standard_resolution.url
 				});
-				
-				detailView.views[i] = standard_resolution;
-				
-				
+				// detailView.views[i] = standard_resolution;
+                views.push(standard_resolution);
 			}
+            detailView.views = views;
 			Ti.App.fireEvent('hide_indicator',{});
 			
 		};
@@ -80,7 +80,7 @@ var cc ={win:Ti.UI.currentWindow};
 
 		// send the data
 		xhr.send();
-	}
+	};
 	
 	if (!Ti.Network.online){
 	  	Ti.App.fireEvent('hide_indicator',{});
