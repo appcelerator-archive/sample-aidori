@@ -5,7 +5,7 @@ var DEFAULT_BAR_COLOR = "#000";
 
 function noNetworkAlert() {
     Ti.App.fireEvent('hide_indicator',{});
-  	Titanium.UI.createAlertDialog({
+  	Ti.UI.createAlertDialog({
   	  title:Ti.Locale.getString('twitter_no_network_title'),
   	  message:Ti.Locale.getString('twitter_no_network_msg')
   	}).show();	

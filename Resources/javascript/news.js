@@ -1,16 +1,21 @@
-Titanium.include('./keys.js');
-Titanium.include('./application.js');
+var cc ={win:Ti.UI.currentWindow};
+Ti.include('./keys.js','./application.js');
 
-var win = Ti.UI.currentWindow;
+(function(){
+	cc.win.orientationModes = [
+		Ti.UI.PORTRAIT,
+		Ti.UI.UPSIDE_PORTRAIT
+	];
+
 
 Ti.App.fireEvent('show_indicator');
 
-
-var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "news.json");
+var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "news.json");
 if(!file.exists()) {
-   file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/news.json");
+   file = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data/news.json");
 }
-var data = JSON.parse(''+file.read());
+
+var tableData = JSON.parse(''+file.read());
 
 var template = {
     selectedBackgroundColor: '#000',
@@ -23,30 +28,35 @@ var template = {
    ]
 };
 
-var tableView = Titanium.UI.createTableView({
-    data: data,
+cc.tableView = Ti.UI.createTableView({
+    data: tableData,
     template: template
 });
 
+cc.win.add(cc.tableView);
+
+Ti.App.fireEvent('hide_indicator');
+})();
+
 // Create tableView row event listener
-tableView.addEventListener('click', function (e) {
+cc.tableView.addEventListener('click', function (e) {
     if (e.rowData.controller) {
-        Ti.API.info('click fired: ' + e.rowData.title + ' ' + e.rowData.controller);
         var win = Titanium.UI.createWindow({
             url:e.rowData.controller,
-            title:e.rowData.title
+			rss_url:e.rowData.rss,
+            title:e.rowData.title,
+		    barColor:cc.win.barColor,
+		    fullscreen:false,
+			backgroundImage:'../images/backgrounds/BG_map_gray.png',
+			backButtonTitleImage:'../images/icon_arrow_left.png'
         });
-        win.rss = e.rowData.rss;
-        Titanium.UI.currentTab.open(win,{animated:true});
+
+        Ti.UI.currentTab.open(win,{animated:true});
     }
 });
 
-Titanium.UI.currentWindow.add(tableView);
-
-Ti.App.fireEvent('hide_indicator');
-
 Ti.App.addEventListener('update_news', function() {
-    var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "news.json");
+    var file = Ti.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "news.json");
     var data = JSON.parse(''+file.read());
     tableView.setData(data);
 });
