@@ -24,7 +24,7 @@
 	<string name="facility_name">Facility name:</string>
 	<string name="map_address">Address:</string>
 	<string name="map_detail_title">Shelter detail</string>
-	<string name="search_result_overflow">There are more than 100 result. Narrow down please.</string>
+	<string name="search_result_overflow">There are more than 100 results. Narrow down please.</string>
 	<string name="map_processing">Processing..</string>
 	<string name="tab_about">About</string>
 	<string name="tab_contribute">Contribute</string>
@@ -36,7 +36,7 @@
 	<string name="twitter_no_network_title">Connection Required</string>
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
 	<string name="disclaimer_button_title">I Accept</string>
-	<string name="disclaimer_text">CrisisCommons, along with our friends in the greater volunteer technology community, stands ready to provide opportunities to volunteers of all skills levels to contribute to support requests made by crisis response agencies such as UN OCHA, Red Cross or local emergency management in support of their response and recovery efforts to response to 2011 Sendai earthquake and the subsequent tsunami that has affected countries across the Pacific region.Personal privacy. Your personal information will not be collected on this application. We encourage thoughtful reporting. Data retrieved on this application will be monitored. As a reminder, your location and the data you submit will be made public.\n\nIf you at any time wish to contact CrisisCommons, please email us at NEED_EMAIL_ADDRESS@crisiscommons.org\n\nPrivacy Statement (crisiscommons.org/privacy)\n\nTerms of Service (crisiscommons.org/tos)</string>
+	<string name="disclaimer_text"></string>
 	<string name="twitter_time_lessminute">less than a minute ago</string>
 	<string name="twitter_minuteago">a minute ago</string>
 	<string name="twitter_minutesago"> minutes ago</string>
@@ -58,12 +58,9 @@
 	<string name="contribute_detail_phone_button">Phone</string>	
 	<string name="contribute_detail_web_button">Website</string>
 	<string name="about_quake">About Sendai Earthquake</string>
-	<string name="about_cc">About Crisis Commons</string>
 	<string name="about_app">About this Application</string>
 	<string name="about_cancel">Cancel</string>
 	<string name="about_dialog_title">About</string>
-	<string name="about_cc_desc">CrisisCommons, borne from the CrisisCamp movement, is a concept that is being explored to define how a commons-based approach can provide long term sustainability for the CrisisCamp community as well as other volunteer technology communities and support shared knowledge, collaborative tools, open development, project management and data to crisis response organizations in civil incident management and global development as well as leverage capabilities and capacities of academia and private sector.</string>
-	<string name="about_cc_visit">Learn More About CrisisCommons</string>
 	<string name="about_d_visit">Read More At Wikipedia</string>
 	<string name="about_d_desc">On 11 March 2011, the Sendal earthquake and tsunami struck the T-hoku region, it was an 8.9-9.0 megathrust earthquake.  The estimates of the Sendai earthquake's magnitude made it the most powerful earthquake to hit Japan and one of the five most powerful earthquakes in the world since modern recording time.  The earthquake and tsunami impacted at least 20 countries as far away as North and South America.  Japanese Prime Minister Naoto Kan stated In the 65 years after the World War II this is the toughest and most difficult crisis for Japan</string>	
 	<string name="hashtags">Hashtags</string>
@@ -79,11 +76,9 @@
 	<string name="about_phone_numbers">Report Missing</string>
 	<string name="about_web_resources">More Resources</string>
 	<string name="about_app_this_app_title">Project Volunteers</string>
-	<string name="about_app_crisis_common_title">CrisisCommons</string>
 	<string name="about_app_appcelerator_title">Appcelerator</string>
 	<string name="about_appcelerator_desc">Tony to add Appcelerator description</string>
 	<string name="about_learn_more">Learn More</string>
 	<string name="about_main_title">App Overview</string>
 	<string name="about_tab_app_info">App Info</string>
-	<string name="about_tab_crisiscommons">CrisisCommons</string>	
 </resources>
