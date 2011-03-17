@@ -13,7 +13,7 @@ Ti.App.fireEvent('show_indicator');
 		Ti.UI.currentWindow.setRightNavButton(cc.configButton);
 	};
 	cc.tableView = Ti.UI.createTableView({
-		backgroundColor:'#adadae',
+		backgroundColor:'#fff',
 		separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE,
 		separatorColor:'#6e6e6e'
 	});
