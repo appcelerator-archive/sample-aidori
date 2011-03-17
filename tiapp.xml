@@ -4,7 +4,7 @@
         <target device="iphone">true</target>
         <target device="android">true</target>
     </deployment-targets>
-<id>jp.masuidrive.SendaiQuake</id>
+<id>com.appcelerator.sendaiquake</id>
 <name>SendaiQuake</name>
 <version>1.0</version>
 <publisher>Appcelerator</publisher>
