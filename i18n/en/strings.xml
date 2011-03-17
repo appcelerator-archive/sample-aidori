@@ -82,5 +82,5 @@
 	<string name="about_main_title">App Overview</string>
 	<string name="about_tab_app_info">App Info</string>
 	<string name="new_reader_error_title">Sorry</string>
-	<string name="new_reader_error_msg">New Feed is currently unavailable. Please try again later.</string>
+	<string name="new_reader_error_msg">News Feed is currently unavailable. Please try again later.</string>
 </resources>
