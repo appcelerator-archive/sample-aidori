@@ -13,6 +13,13 @@ cc.charityData = JSON.parse(''+file.read());
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
 	];
+	
+	cc.refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
+		
+	if(!isAndroid()){
+		cc.win.rightNavButton=cc.refreshButton;	
+	}
+	
 	cc.getDataRow=function(charityItem,countItem){
 		var row = Ti.UI.createTableViewRow({
 			height:120,
@@ -70,17 +77,21 @@ cc.charityData = JSON.parse(''+file.read());
 	});
 	cc.win.add(cc.tableView);	
 
-    Ti.App.addEventListener('update_contribute', function() {
-        var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "contribute.json");
-        cc.charityData = JSON.parse(file.read());
-        cc.tableView.setData(cc.getTableData());
-    });
+	cc.refeshItemsList=function(){
+		alert("Downloading feed from server");
+	};
 })();
 
 
 //-------------------------------
 //	Events
 //-------------------------------
+Ti.App.addEventListener('update_contribute', function() {
+    var file = Titanium.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "contribute.json");
+    cc.charityData = JSON.parse(file.read());
+    cc.tableView.setData(cc.getTableData());
+});
+
 cc.tableView.addEventListener('click', function(e){
 
 	var wPage = Ti.UI.createWindow({  
@@ -102,3 +113,22 @@ cc.tableView.addEventListener('click', function(e){
 	Ti.UI.currentTab.open(wPage,{animated:true});	
 });
 
+cc.refreshButton.addEventListener('click', function(e){
+	if (!Ti.Network.online){
+	 	  noNetworkAlert();
+	}else{
+		cc.refeshItemsList();
+	}
+});
+
+if(isAndroid()){
+	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
+    var menu = e.menu;
+
+		var mRefresh = menu.add({title: Ti.Locale.getString('refresh_list') });
+		mRefresh.setIcon('../images/color_refresh.png');
+	    mRefresh.addEventListener("click", function(e) {
+			cc.refeshItemsList();
+	    });
+	};
+}
