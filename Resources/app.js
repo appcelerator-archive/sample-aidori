@@ -90,9 +90,9 @@ tabGroup.addTab(aboutTab);
 var disclaimerTabGroup = Titanium.UI.createTabGroup();
 var disclaimerWin = Titanium.UI.createWindow({
   url:'javascript/disclaimer.js',
-  backgroundColor:'#476e8b',
-  title:L('disclaimer'),
-  barColor:"#333",
+  backgroundColor:'#9A0707',
+  title:L('disclaimer_title'),
+  barColor:'#9A0707',
   backTitle:'Close',
   tabBarHidden:true
 });

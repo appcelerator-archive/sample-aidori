@@ -17,7 +17,7 @@
   width:300;
   height:'auto';
   color:'#fff';
-  font-size:13;
+  font-size:16;
   font-weight:'normal';
   textid: 'disclaimer_text'
 }
