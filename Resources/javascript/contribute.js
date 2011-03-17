@@ -42,6 +42,7 @@ cc.charityData = JSON.parse(''+file.read());
 		
 		var logoImg = Ti.UI.createImageView({
 		    image:charityItem.logo,
+			defaultImage:'../images/cont_placeholder.png',
 		  	preventDefaultImage:true,
 			height:75,
 			width:75

@@ -19,6 +19,7 @@ Ti.include('./application.js');
 
 	cc.chartiyLogo = Ti.UI.createImageView({
 		    image:cc.win.charity_logo,
+			defaultImage:'../images/cont_placeholder.png',
 			height:75, width:75
 	});
 	cc.topContainer.add(cc.chartiyLogo);
