@@ -16,6 +16,7 @@ var url = 'http://s3-ap-northeast-1.amazonaws.com/yehara.tokyo/JapanQuake2011/sh
 
 var dbName = 'map';
 var dbFileName = 'map.db';
+var preSearchKey = '';
 var regionState = false;
 var searchState = false;
 var dataState = false;
@@ -89,7 +90,7 @@ mapView.addEventListener('click', function(evt){
 			subWindow.navBarHidden = true;
 		}
 	
-		isAndroid ? subWindow.open({fullscreen:true}) : subWindow.open({modal:true});
+		isAndroid ? subWindow.open({fullscreen:true}) : Ti.UI.currentTab.open(subWindow, {animated: true});
 	}else{
 		mapView.removeAllAnnotations();
 		mapView.setLocation({latitude:annotation.latitude, longitude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
@@ -130,7 +131,9 @@ function getFitLocation(max_lat, max_lng, min_lat, min_lng){
 }
 
 function textSearch(search_str){
+	preSearchKey = search_str;
 	searchState = true;
+	
 	var db = Ti.Database.open(dbName);
 	var condition = '%' + search_str + '%';
 	var db_rows = db.execute('select * from places where name like ? or detail like ?', condition, condition);
@@ -313,7 +316,6 @@ function getXHRError(error){
 	actIndView.hide();
 }
 
-var preSearchKey = '';
 function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 	var annotations = [];
 	var geohash = encodeGeoHash(lat, lng);
