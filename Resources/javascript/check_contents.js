@@ -40,7 +40,7 @@ var check_contents = function() {
     if(!file.exists()) {
         file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/contents_versions.json");
     }
-    var current = JSON.parse(''+ile.read());
+    var current = JSON.parse(''+file.read());
 
     var xhr = Ti.Network.createHTTPClient({
         onload: function(e){
