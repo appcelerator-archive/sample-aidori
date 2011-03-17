@@ -80,7 +80,7 @@ var mapWin = Ti.UI.createWindow({
 	title:L('title_map')
 });
 var mapTab = Ti.UI.createTab({
-	icon:'images/tabs/TAB_shelter.png',
+	icon:'images/tabs/TAB_map.png',
 	title:L('tab_map'),
 	window:mapWin
 });
