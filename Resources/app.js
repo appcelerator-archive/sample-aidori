@@ -48,7 +48,7 @@ var contributeWin = Titanium.UI.createWindow({
   url:'javascript/contribute.js',
   backgroundImage:'/images/backgrounds/BG_gray.png',
   title:L('contribute_page_title'),
-  barColor:"#333",
+  barColor:"#333"
 });
 var contributeTab = Titanium.UI.createTab({  
   icon:'images/tabs/TAB_contribute.png',

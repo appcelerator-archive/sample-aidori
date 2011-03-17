@@ -55,43 +55,28 @@
 
 #tabThisApp {
 	height:50;
-	width:100;
+	width:150;
 	backgroundImage:'../images/buttons/button_spacer_selected.png';
 }
 
 #thisAppLabel {
 	textid:'about_tab_app_info';
-	width:100;
+	width:150;
 	text-align:'center';
 	color:'#fff';
 	font-size:'13';
 	font-weight:'Bold';
 }
 
-#tabCrisisCommons {
-	height:50;
-	width:99;
-	left:1;
-	backgroundImage:'../images/buttons/button_spacer.png';
-}
-
-#crisisCommonsLabel{
-	textid:'about_tab_crisiscommons';
-	width:99;
-	text-align:'center';
-	color:'#999';
-	font-size:'13';
-}
-
 #tabAppcelerator {
 	height:50;
-	width:99;
+	width:149;
 	left:1;
 	backgroundImage:'../images/buttons/button_spacer.png';
 }
 
 #appceleratorLabel {
-	width:99;
+	width:149;
 	text-align:'center';
 	color:'#999';
 	font-size:'13';
