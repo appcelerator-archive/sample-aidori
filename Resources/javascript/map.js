@@ -517,6 +517,8 @@ function setNearByAnnotation(){
 	
 	if(db_rows == null){
 		alert('Not Found');
+		actInd.hide();
+		actIndView.hide();
 		return;
 	}
 	
