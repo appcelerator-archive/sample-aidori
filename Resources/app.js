@@ -1,3 +1,7 @@
+if(Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad') {
+    Titanium.UI.iPhone.showStatusBar({'animated': false});
+}
+
 Titanium.include('javascript/application.js');
 var indicatorShowing = false;
 
