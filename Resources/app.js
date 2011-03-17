@@ -5,20 +5,20 @@ var tabGroup = Ti.UI.createTabGroup();
 var newsWin = Ti.UI.createWindow({  
   url:'javascript/news.js',
   barColor:"#e62600",
-  backgroundImage:'/images/backgrounds/BG_gray.png',
+  backgroundColor:'#f39380',
   titleid:L('crisis_title')
 });
-var newsTab = Titanium.UI.createTab({  
+var newsTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_news.png',
   title:L('tab_news'),
   window:newsWin
 });
 
-var twitterWin = Titanium.UI.createWindow({  
+var twitterWin = Ti.UI.createWindow({  
   url:'javascript/twitter.js',
   titleid:L('title_twitter'),
   barColor:"#e62600",
-  backgroundImage:'/images/backgrounds/BG_gray.png'
+  backgroundColor:'#f39380'
 });
 
 // Avoid keyboard overlapping the text fields
@@ -26,55 +26,56 @@ if (Ti.Platform.name == 'android') {
 	twitterWin.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
 }
 
-var twitterTab = Titanium.UI.createTab({  
+var twitterTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_twitter.png',
   title:L('tab_twitter'),
   window:twitterWin
 });
 
-var instagramWin = Titanium.UI.createWindow({  
+var instagramWin = Ti.UI.createWindow({  
   url:'javascript/instagram.js',
   titleid:L('title_instagram'),
   barColor:"#e62600",
-  backgroundImage:'/images/backgrounds/BG_gray.png'
+  backgroundColor:'#f39380'
 });
-var instagramTab = Titanium.UI.createTab({  
+var instagramTab = Ti.UI.createTab({  
   icon:'images/icon_instagram.png',
   title:L('tab_instagram'),
   window: instagramWin
 });
 
-var contributeWin = Titanium.UI.createWindow({  
+var contributeWin = Ti.UI.createWindow({  
   url:'javascript/contribute.js',
-  backgroundImage:'/images/backgrounds/BG_gray.png',
+  backgroundColor:'#f39380',
   title:L('contribute_page_title'),
   barColor:"#e62600"
 });
-var contributeTab = Titanium.UI.createTab({  
+var contributeTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_contribute.png',
+  backgroundColor:'#f39380',
   title:L('tab_contribute'),
   window:contributeWin
 });
 
-var aboutWin = Titanium.UI.createWindow({  
+var aboutWin = Ti.UI.createWindow({  
   url:'javascript/about.js',
-  backgroundImage:'/images/backgrounds/BG_map_gray.png',
+  backgroundColor:'#f39380',
   title:L('about_page_title'),
   barColor:"#e62600"
 });
-var aboutTab = Titanium.UI.createTab({  
+var aboutTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_about.png',
   title:L('tab_about'),
   window:aboutWin
 });
 
-var mapWin = Titanium.UI.createWindow({
+var mapWin = Ti.UI.createWindow({
 	url:'javascript/map.js',
-    backgroundImage:'/images/backgrounds/BG_gray.png',
+    backgroundColor:'#f39380',
 	barColor:"#e62600",
 	title:L('title_map')
 });
-var mapTab = Titanium.UI.createTab({
+var mapTab = Ti.UI.createTab({
 	icon:'images/tabs/TAB_shelter.png',
 	title:L('tab_map'),
 	window:mapWin
@@ -87,23 +88,23 @@ tabGroup.addTab(contributeTab);
 tabGroup.addTab(mapTab);
 tabGroup.addTab(aboutTab);  
 
-var disclaimerTabGroup = Titanium.UI.createTabGroup();
-var disclaimerWin = Titanium.UI.createWindow({
+var disclaimerTabGroup = Ti.UI.createTabGroup();
+var disclaimerWin = Ti.UI.createWindow({
   url:'javascript/disclaimer.js',
-  backgroundColor:'#9A0707',
+  backgroundColor:'#f39380',
   title:L('disclaimer_title'),
   barColor:'#e62600',
   backTitle:'Close',
   tabBarHidden:true
 });
-var disclaimerTab = Titanium.UI.createTab({  
+var disclaimerTab = Ti.UI.createTab({  
   title:L('disclaimer'),
   window:disclaimerWin
 });
 disclaimerTabGroup.addTab(disclaimerTab);
 
 Ti.App.addEventListener('remove_disclaimer', function() {
-  if (Titanium.Platform.name == 'android') {
+  if (Ti.Platform.name == 'android') {
     disclaimerWin.close();
   } else {
     disclaimerTabGroup.close();
@@ -115,7 +116,7 @@ Ti.App.addEventListener('remove_disclaimer', function() {
 if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
   tabGroup.open();
 } else {
-  if (Titanium.Platform.name == 'android') {
+  if (Ti.Platform.name == 'android') {
     disclaimerWin.open();
   } else {
     disclaimerTabGroup.open();
@@ -157,7 +158,7 @@ function showIndicator(title) {
   	indWin.add(actInd);
 
   	// message
-  	var message = Titanium.UI.createLabel({
+  	var message = Ti.UI.createLabel({
   		text:title,
   		color:'#fff',
   		width:'auto',
