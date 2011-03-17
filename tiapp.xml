@@ -4,7 +4,7 @@
         <target device="iphone">true</target>
         <target device="android">true</target>
     </deployment-targets>
-<id>com.appcelerator.sendaiquake</id>
+<id>jp.masuidrive.SendaiQuake</id>
 <name>SendaiQuake</name>
 <version>1.0</version>
 <publisher>Appcelerator</publisher>
@@ -27,11 +27,10 @@
 		<orientations device="ipad">
 			<orientation>Ti.UI.PORTRAIT</orientation>
 			<orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
-			<orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
-			<orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
 		</orientations>
 	</iphone>
 	<android xmlns:android="http://schemas.android.com/apk/res/android">
+      
 	</android>
 	<modules>
 	</modules>
