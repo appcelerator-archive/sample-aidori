@@ -7,6 +7,9 @@ Ti.include('./application.js','./about_resources_data.js');
 		Ti.UI.UPSIDE_PORTRAIT
 	];
 	
+	Ti.API.info('currentCountry=' +  Ti.Locale.currentCountry);
+	Ti.API.info('currentLanguage=' +  Ti.Locale.currentLanguage);
+	Ti.API.info('currentLocale=' +  Ti.Locale.currentLocale);	
 				
 	cc.getDataRow=function(itemR,itemCount){
 		var row = Ti.UI.createTableViewRow({
@@ -66,7 +69,7 @@ Ti.include('./application.js','./about_resources_data.js');
 cc.tableView.addEventListener('click', function(e){
 
 	//If japan then try to load the japanese link first
-	if(Ti.Locale.currentCountry=='ja'){
+	if(Ti.Locale.currentLanguage=='ja'){
 		if(e.rowData.ja_url.length>0){
 			cc.openLink(e.rowData.ja_url);
 		}else{
