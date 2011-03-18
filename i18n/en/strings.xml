@@ -43,7 +43,7 @@
 	<string name="twitter_no_network_title">Connection Required</string>
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
 	<string name="disclaimer_title">Notice</string>
-	<string name="disclaimer_text">On Friday, March 11 2011, a 9.0-magnitude earthquake occurred near the east coast of Honshu, Japan. The earthquake generated a massive tsunami that caused widespread destruction across the region.\n\n We hope the thousands who have lost their lives rest in peace, and hope anyone who are waiting for rescue are saved as many as possible.\n\n 'Aidori' is developed for all the people who have lost their families and homes and we hope the app will be of help as much as possible.\n\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titan</string>
+	<string name="disclaimer_text">On Friday, March 11 2011, a 9.0-magnitude earthquake occurred near the east coast of Honshu, Japan. The earthquake generated a massive tsunami that caused widespread destruction across the region.\n\n We hope the thousands who have lost their lives rest in peace, and hope anyone who are waiting for rescue are saved as many as possible.\n\n 'Aidori' is developed for all the people who have lost their families and homes and we hope the app will be of help as much as possible.\n\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titans</string>
 	<string name="disclaimer_button_title">OK</string>
 	<string name="twitter_time_lessminute">less than a minute ago</string>
 	<string name="twitter_minuteago">a minute ago</string>
