@@ -78,7 +78,6 @@ tabGroup.addEventListener('focus', function(e){
 	}
 });
 
-var disclaimerTabGroup = Ti.UI.createTabGroup();
 var disclaimerWin = Ti.UI.createWindow({
   url:'javascript/disclaimer.js',
   backgroundColor:'#f39380',
@@ -87,21 +86,7 @@ var disclaimerWin = Ti.UI.createWindow({
   backTitle:'Close',
   tabBarHidden:true
 });
-var disclaimerTab = Ti.UI.createTab({  
-  title:L('disclaimer'),
-  window:disclaimerWin
-});
-disclaimerTabGroup.addTab(disclaimerTab);
 
-Ti.App.addEventListener('remove_disclaimer', function() {
-  if (Ti.Platform.name == 'android') {
-    disclaimerWin.close();
-  } else {
-    disclaimerTabGroup.close();
-  }
-  Ti.App.Properties.setBool('disclaimerViewed', true);
-  tabGroup.open();
-});
 
 // ---------------------------------------------------------------
 // Create custom loading indicator
