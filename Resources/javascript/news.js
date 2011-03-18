@@ -7,7 +7,9 @@ Ti.include('./keys.js','./application.js');
 		Ti.UI.UPSIDE_PORTRAIT
 	];
 	
-	Ti.App.fireEvent('show_indicator');
+	if(!cc.win.welcomeMsgOpen){
+		Ti.App.fireEvent('show_indicator');
+	}
 
 	var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "news.json");
 	if(!file.exists()) {
