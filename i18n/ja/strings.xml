@@ -9,14 +9,16 @@
 	<string name="tab_report">レポート</string>
 	<string name="tab_news">ニュース</string>
 	<string name="tab_twitter">ツイッター</string>
-	<string name="title_twitter">Twitter: Sendai Quake</string>
+	<string name="title_twitter">Twitter</string>
 	<string name="title_contribute">協力</string>
+	<string name="contribute_page_title">協力</string>
 	<string name="tab_about">アイドリ</string>
 	<string name="tab_contribute">協力</string>
 	<string name="tab_map">避難場所</string>
 	<string name="title_map">避難場所</string>
 	<string name="show_current_position_button_title">現在地を表示</string>
 	<string name="synchronize_shelter_place">避難所情報を同期</string>
+	<string name="map_near_by">最寄</string>
 	<string name="can_not_get_geolocation">現在地を取得できませんでした</string>
 	<string name="can_not_use_network">ネットワークに接続できませんでした</string>
 	<string name="no_local_shelter_info">「避難所情報を同期」ボタンを押して、情報を取得してからご利用ください。</string>
@@ -74,4 +76,7 @@
 	<string name="about_learn_more">もっと詳しく</string>
 	<string name="about_main_title">アイドリについて</string>
 	<string name="about_tab_app_info">アイドリとは</string>
+	<string name="social_tab_name">ソーシャル</string>
+	<string name="social_page_title">ソーシャル</string>
+	<string name="title_instagram">Instagram</string>
 </resources>
