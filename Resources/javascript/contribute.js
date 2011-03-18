@@ -14,13 +14,7 @@ cc.charityData = JSON.parse(''+file.read());
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
 	];
-	
-	cc.refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
 		
-	if(!isAndroid()){
-		cc.win.rightNavButton=cc.refreshButton;	
-	}
-	
 	cc.getDataRow=function(charityItem,countItem){
 		var row = Ti.UI.createTableViewRow({
 			height:120,
@@ -78,9 +72,6 @@ cc.charityData = JSON.parse(''+file.read());
 	});
 	cc.win.add(cc.tableView);	
 
-	cc.refeshItemsList=function(){
-		alert("Downloading feed from server");
-	};
 })();
 
 
@@ -113,23 +104,3 @@ cc.tableView.addEventListener('click', function(e){
 	
 	Ti.UI.currentTab.open(wPage,{animated:true});	
 });
-
-cc.refreshButton.addEventListener('click', function(e){
-	if (!Ti.Network.online){
-	 	  noNetworkAlert();
-	}else{
-		cc.refeshItemsList();
-	}
-});
-
-if(isAndroid()){
-	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
-    var menu = e.menu;
-
-		var mRefresh = menu.add({title: Ti.Locale.getString('refresh_list') });
-		mRefresh.setIcon('../images/color_refresh.png');
-	    mRefresh.addEventListener("click", function(e) {
-			cc.refeshItemsList();
-	    });
-	};
-}
