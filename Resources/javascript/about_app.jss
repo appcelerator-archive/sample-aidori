@@ -80,6 +80,8 @@
 	text-align:'center';
 	color:'#999';
 	font-size:'13';
+	right:5;
+	left:5;
 }
 
 #infoName {
