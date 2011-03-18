@@ -349,6 +349,20 @@ function textSearch(search_str){
 	actIndView.hide();
 }
 
+function getNeighbors(geohash){
+	var neighbors = {}
+	neighbors.center = geohash;
+	neighbors.top = calculateAdjacent(neighbors.center, 'top');
+	neighbors.bottom = calculateAdjacent(neighbors.center, 'bottom');
+	neighbors.right = calculateAdjacent(neighbors.center, 'right');
+	neighbors.left = calculateAdjacent(neighbors.center, 'left');
+	neighbors.topleft = calculateAdjacent(neighbors.left, 'top');
+	neighbors.topright = calculateAdjacent(neighbors.right, 'top');
+	neighbors.bottomright = calculateAdjacent(neighbors.right, 'bottom');
+	neighbors.bottomleft = calculateAdjacent(neighbors.left, 'bottom');
+	return neighbors;
+}
+
 function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 	var annotations = [];
 	var geohash = encodeGeoHash(lat, lng);
@@ -385,19 +399,7 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 		}
 		db_rows.close();
 	}else{
-		var neighbors = {}
-		neighbors.center = geohash.substring(0, hashLevel);
-		neighbors.top = calculateAdjacent(neighbors.center, 'top');
-		neighbors.bottom = calculateAdjacent(neighbors.center, 'bottom');
-		neighbors.right = calculateAdjacent(neighbors.center, 'right');
-		neighbors.left = calculateAdjacent(neighbors.center, 'left');
-		neighbors.topleft = calculateAdjacent(neighbors.left, 'top');
-		neighbors.topright = calculateAdjacent(neighbors.right, 'top');
-		neighbors.bottomright = calculateAdjacent(neighbors.right, 'bottom');
-		neighbors.bottomleft = calculateAdjacent(neighbors.left, 'bottom');
-		//Ti.API.info(neighbors);
-		//alert(neighbors);
-		
+		var neighbors = getNeighbors(geohash.substring(0, hashLevel));
 		var db_rows = db.execute('select * from geohash where (geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ?) and length = 4 and center_count > 0', 
 								(neighbors.center + '%'), (neighbors.top + '%'), (neighbors.bottom + '%'), (neighbors.right + '%'), (neighbors.left + '%'), (neighbors.topleft + '%'), (neighbors.topright + '%'), (neighbors.bottomleft + '%'), (neighbors.bottomright + '%'));
 		Ti.API.info('count:' + db_rows.getRowCount());
@@ -510,13 +512,21 @@ function setNearByAnnotation(){
 		return;
 	}
 	var geohash = encodeGeoHash(currentLat, currentLng);
-	var sql = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where geohash = ? and length = ?) group by places_id)';
 	
+	var sql1 = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where (geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ?) and length = ?) group by places_id)';
+	var sql2 = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where (geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ?) and length = 4) group by places_id)';
 	var db = Ti.Database.open(dbName);
 	db_rows = null;
 	
-	for(var hashLevel = 6; hashLevel > 0; hashLevel--){
-		db_rows = db.execute(sql, geohash.substring(0, hashLevel), hashLevel);
+	for(var hashLevel = 6; hashLevel > 2; hashLevel--){
+		
+		var neighbors = getNeighbors(geohash.substring(0, hashLevel));
+		
+		if(hashLevel > 3){
+			db_rows = db.execute(sql1, neighbors.center, neighbors.top, neighbors.bottom, neighbors.right, neighbors.left, neighbors.topleft, neighbors.topright, neighbors.bottomleft, neighbors.bottomright, hashLevel);
+		}else{
+			db_rows = db.execute(sql2, (neighbors.center + '%'), (neighbors.top + '%'), (neighbors.bottom + '%'), (neighbors.right + '%'), (neighbors.left + '%'), (neighbors.topleft + '%'), (neighbors.topright + '%'), (neighbors.bottomleft + '%'), (neighbors.bottomright + '%'))
+		}
 		if(db_rows.getRowCount() != 0){
 			break;
 		}else{
@@ -526,7 +536,7 @@ function setNearByAnnotation(){
 	}
 	
 	if(db_rows == null){
-		alert('Not Found');
+		alert(L('near_by_not_found'));
 		actInd.hide();
 		actIndView.hide();
 		return;
