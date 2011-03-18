@@ -41,8 +41,8 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.twitterLogoMore = Ti.UI.createImageView({
 		    image:'../images/dark_more.png',
 		  	preventDefaultImage:true,
-			height:25,
-			width:25,
+			height:27,
+			width:26,
 			right:10
 	  });
 	
@@ -83,8 +83,8 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.instagramLogoMore = Ti.UI.createImageView({
 		    image:'../images/dark_more.png',
 		  	preventDefaultImage:true,
-			height:25,
-			width:25,
+			height:27,
+			width:26,
 			right:10
 	  });
 	
