@@ -204,6 +204,7 @@ function saveDBFile(blobData){
 	Ti.App.Properties.setBool('hasShelterUpdate', false);
 	actInd.hide();
 	actIndView.hide();
+	alert(L('shelter_info_notice'));
 }
 
 /** sync error callback **/
