@@ -7,12 +7,6 @@ Ti.include('./keys.js','./application.js');
 		Ti.UI.UPSIDE_PORTRAIT
 	];
 	
-	cc.refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
-		
-	if(!isAndroid()){
-		cc.win.rightNavButton=cc.refreshButton;	
-	}
-
 	Ti.App.fireEvent('show_indicator');
 
 	var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "news.json");
@@ -45,10 +39,6 @@ Ti.include('./keys.js','./application.js');
 
 	cc.win.add(cc.tableView);
 	
-	cc.refeshItemsList=function(){
-		alert("Downloading feed from server");
-	};
-	
 	Ti.App.fireEvent('hide_indicator');
 })();
 
@@ -74,23 +64,3 @@ Ti.App.addEventListener('update_news', function() {
     var data = JSON.parse(''+file.read());
     tableView.setData(data);
 });
-
-cc.refreshButton.addEventListener('click', function(e){
-	if (!Ti.Network.online){
-	 	  noNetworkAlert();
-	}else{
-		cc.refeshItemsList();
-	}
-});
-
-if(isAndroid()){
-	Ti.Android.currentActivity.onCreateOptionsMenu = function(e) {
-    var menu = e.menu;
-
-		var mRefresh = menu.add({title: Ti.Locale.getString('refresh_list') });
-		mRefresh.setIcon('../images/color_refresh.png');
-	    mRefresh.addEventListener("click", function(e) {
-			cc.refeshItemsList();
-	    });
-	};
-}
