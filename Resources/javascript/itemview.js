@@ -1,4 +1,4 @@
-var win = Titanium.UI.currentWindow
+var win = Titanium.UI.currentWindow;
 Ti.API.info("Loaded itemview.js");
 
 Ti.include('./strip_tags.js');
