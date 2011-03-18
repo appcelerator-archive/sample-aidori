@@ -88,11 +88,11 @@ cc.infoButton.addEventListener('click', function(){
 
 cc.phoneNumberList=function(){
 	var cancelIdex=4;
-	var optionsValues=["Iwate: 0120-801-471",
-			 "Miyagi: 022-221-2000",
-			 "Fukushima: 0120-510-186",
-			 "Fukushima: 090-8424-4207",
-			 "Fukushima: 090-8424-4208"
+	var optionsValues=[Ti.Locale.getString('about_phone_iwate'),
+			 Ti.Locale.getString('about_phone_miyagi'),
+			 Ti.Locale.getString('about_phone_fukushima1'),
+			 Ti.Locale.getString('about_phone_fukushima2'),
+			 Ti.Locale.getString('about_phone_fukushima3'),
 	];
 	
 	if(!isAndroid()){
