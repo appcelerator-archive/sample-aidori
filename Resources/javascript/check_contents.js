@@ -2,6 +2,10 @@ var baseurl = "http://masuidrive.jp/tmp/";
 Ti.App.Properties.setBool('hasShelterUpdate', false);
 
 var download = function(path, callback) {
+	//Double check we have network
+	if(!Ti.Network.online){
+		return;
+	}
     var xhr = Ti.Network.createHTTPClient({
         onload: function(e){
             try {
@@ -38,6 +42,10 @@ var update_shelter = function() {
 };
 
 var check_contents = function() {
+	//Double check we have network
+	if(!Ti.Network.online){
+		return;
+	}
     var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "contents_versions.json");
     if(!file.exists()) {
         file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/contents_versions.json");
