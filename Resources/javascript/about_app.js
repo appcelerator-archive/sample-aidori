@@ -74,9 +74,9 @@ cc.bottomContainer.addEventListener('click', function(){
 	if (!Ti.Network.online){
 	 	  noNetworkAlert();
 	} else {
-	   var urlText='http://wiki.appcelerator.org/display/titans/Japan+2011+Quake+Relief';
+	   var urlText='http://wiki.appcelerator.org/display/jq11/Japan+2011+Quake+Relief';
 		if(cc.selectedTabIndex==0){
-		   urlText='http://wiki.appcelerator.org/display/titans/Japan+2011+Quake+Relief';
+		   urlText='http://wiki.appcelerator.org/display/jq11/Japan+2011+Quake+Relief';
 		}
 		if(cc.selectedTabIndex==1){
 		   urlText='http://www.appcelerator.com/';
