@@ -581,7 +581,7 @@ function setNearByAnnotation(){
 	});
 	
 	var nearbyButton = Ti.UI.createButton({
-		title:'near by',
+		title:L('map_near_by'),
 		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
 	});
 	
