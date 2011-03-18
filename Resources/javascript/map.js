@@ -1,5 +1,6 @@
 Ti.include('geohash.js');
 var win = Ti.UI.currentWindow;
+var tab = Ti.UI.currentTab;
 
 /** initialize **/
 var isAndroid = Ti.Platform.osname == 'android';
@@ -21,21 +22,11 @@ var regionState = false;
 var searchState = false;
 var dataState = false;
 
-(function(){
-	var db = Ti.Database.open(dbName);
-	db.execute('create table if not exists geohash (geohash text primary key, lat real, lng real, length integer, center_count integer, neighbor_count integer)');
-	db_rows = db.execute('select count(*) as count from geohash');
-	if(db_rows.isValidRow()){
-		if(db_rows.fieldByName('count') > 0){
-			dataState = true;
-		}
+Ti.App.addEventListener('map_shelter_check', function(){
+	if(Ti.App.Properties.getBool('hasShelterUpdate') && dataState){
+		alert(L('has_shelter_update'));
 	}
-	db_rows.close();
-	db.close();
-	if(!dataState){
-		alert(L('no_local_shelter_info'));
-	}
-})();
+});
 
 function calcHashLevel(delta){
 	if(delta < 0.03){
@@ -71,7 +62,8 @@ mapView.addEventListener('click', function(evt){
 	var annotation = evt.annotation;
 	if(!annotation.isSummary){
 		var subWindow = Ti.UI.createWindow({
-			backgroundColor:'#666666',
+			barColor:"#e62600",
+			backgroundColor:'#f39380',
 			backgroundImage:'../images/back.png',
 			url:'map_detail.js',
 			title:L('map_detail_title')
@@ -111,7 +103,152 @@ var actIndView = Ti.UI.createView({
 	backgroundColor:'#000000',
 	opacity:0.2
 });
+
+actIndView.hide();
 mapView.add(actInd);
+win.add(mapView);
+win.add(actIndView);
+
+/** XHR **/
+var XHR = {
+	getDataFromURL: function(url, callback, error_callback){
+		if(Ti.Network.online	 ==	 false){ 
+			error_callback({message:L('can_not_use_network')});
+			return;
+		}
+
+		var xhr = Ti.Network.createHTTPClient();
+
+		//Loading processing
+		xhr.onreadystatechange = function(){
+			switch (this.readyState) {
+				case 1: // Open
+					Ti.API.info('HTTP Open.');
+					break;
+				case 2: // Sent
+					Ti.API.info('HTTP Sending...');
+					break;
+				case 3: // Receiving
+					Ti.API.info('HTTP Receiving...');
+					break;
+				case 4: // Loaded
+					Ti.API.info('HTTP Loaded.');
+					break;
+			}
+		};
+
+		//After processing
+		xhr.onload = function(){
+			var result = null;
+			var error = null;
+			try{
+				//Ti.API.info(this.responseData);
+				//Ti.API.info(this.responseText);
+				//result = JSON.parse(this.responseText);
+				result = this.responseData;
+			}catch(ex){
+				Ti.API.info(ex);
+				Ti.API.info(this.responseText);
+				error = ex;
+			}
+			
+			xhr.onreadystatchange = null;
+			xhr.onload = null;
+			xhr.onerror = null;
+			xhr = null;
+			
+			if(error != null){
+				error_callback(error);
+			}else{
+				callback(result);
+			}
+			return;
+		};
+
+		//Error processing
+		xhr.onerror = function(e){
+			xhr.onreadystatchange = null;
+			xhr.onload = null;
+			xhr.onerror = null;
+			xhr = null;
+			error_callback(e);
+			return;
+		};
+
+		Ti.API.info('xhr open url:' + url);
+		xhr.open("GET", url);
+		xhr.send();
+	}
+};
+
+/** sync complete callback **/
+function saveDBFile(blobData){
+	var dir = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "data");
+	if(!dir.exists()){
+		dir.createDirectory();
+	}
+	var file = Ti.Filesystem.getFile(dir.nativePath, (dbName + '.db'));
+	if(file.exists()){
+		file.deleteFile();
+	}
+	file.write(blobData);
+	Ti.API.info("saved file path: " + file.nativePath);
+	
+	var temp_db = Ti.Database.open(dbName);
+	temp_db.remove();
+	temp_db.close();
+	
+	var new_db = Ti.Database.install(file.nativePath, dbName);
+	new_db.close();
+	dataState = true;
+	Ti.App.Properties.setBool('hasShelterUpdate', false);
+	actInd.hide();
+	actIndView.hide();
+}
+
+/** sync error callback **/
+function getXHRError(error){
+	alert(L('can_not_use_network'));
+	Ti.API.info(error);
+	actInd.hide();
+	actIndView.hide();
+}
+
+function noDataConfirm(){
+	var confirm = Ti.UI.createAlertDialog({
+		title:'Alert',
+		message:L('no_local_shelter_info'),
+		buttonNames:[L('synchronize_shelter_place'),'Cancel'],
+		cancel:1	
+	});
+	confirm.show();
+	confirm.addEventListener('click', function(e)
+	{
+		if(e.index == 0){
+			actInd.show();
+			actIndView.show();
+			XHR.getDataFromURL(url, saveDBFile, getXHRError);
+		}
+	});
+}
+
+(function(){
+	var db = Ti.Database.open(dbName);
+	db.execute('create table if not exists geohash (geohash text primary key, lat real, lng real, length integer, center_count integer, neighbor_count integer)');
+	db_rows = db.execute('select count(*) as count from geohash');
+	if(db_rows.isValidRow()){
+		if(db_rows.fieldByName('count') > 0){
+			dataState = true;
+		}
+	}
+	db_rows.close();
+	db.close();
+	if(!dataState){
+		noDataConfirm();
+		//alert(L('no_local_shelter_info'));
+	}
+})();
+
 
 function getFitLocation(max_lat, max_lng, min_lat, min_lng){
 	
@@ -212,110 +349,6 @@ function textSearch(search_str){
 	actIndView.hide();
 }
 
-/** XHR **/
-var XHR = {
-	getDataFromURL: function(url, callback, error_callback){
-		if(Ti.Network.online	 ==	 false){ 
-			error_callback({message:L('can_not_use_network')});
-			return;
-		}
-
-		var xhr = Ti.Network.createHTTPClient();
-
-		//Loading processing
-		xhr.onreadystatechange = function(){
-			switch (this.readyState) {
-				case 1: // Open
-					Ti.API.info('HTTP Open.');
-					break;
-				case 2: // Sent
-					Ti.API.info('HTTP Sending...');
-					break;
-				case 3: // Receiving
-					Ti.API.info('HTTP Receiving...');
-					break;
-				case 4: // Loaded
-					Ti.API.info('HTTP Loaded.');
-					break;
-			}
-		};
-
-		//After processing
-		xhr.onload = function(){
-			var result = null;
-			var error = null;
-			try{
-				//Ti.API.info(this.responseData);
-				//Ti.API.info(this.responseText);
-				//result = JSON.parse(this.responseText);
-				result = this.responseData;
-			}catch(ex){
-				Ti.API.info(ex);
-				Ti.API.info(this.responseText);
-				error = ex;
-			}
-			
-			xhr.onreadystatchange = null;
-			xhr.onload = null;
-			xhr.onerror = null;
-			xhr = null;
-			
-			if(error != null){
-				error_callback(error);
-			}else{
-				callback(result);
-			}
-			return;
-		};
-
-		//Error processing
-		xhr.onerror = function(e){
-			xhr.onreadystatchange = null;
-			xhr.onload = null;
-			xhr.onerror = null;
-			xhr = null;
-			error_callback(e);
-			return;
-		};
-
-		Ti.API.info('xhr open url:' + url);
-		xhr.open("GET", url);
-		xhr.send();
-	}
-};
-
-/** sync complete callback **/
-function saveDBFile(blobData){
-	var dir = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "data");
-	if(!dir.exists()){
-		dir.createDirectory();
-	}
-	var file = Ti.Filesystem.getFile(dir.nativePath, (dbName + '.db'));
-	if(file.exists()){
-		file.deleteFile();
-	}
-	file.write(blobData);
-	Ti.API.info("saved file path: " + file.nativePath);
-	
-	var temp_db = Ti.Database.open(dbName);
-	temp_db.remove();
-	temp_db.close();
-	
-	var new_db = Ti.Database.install(file.nativePath, dbName);
-	new_db.close();
-	dataState = true;
-	actInd.hide();
-	actIndView.hide();
-}
-
-/** sync error callback **/
-function getXHRError(error){
-	alert(L('can_not_use_network'));
-	Ti.API.info(error);
-	actInd.hide();
-	actIndView.hide();
-}
-
 function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 	var annotations = [];
 	var geohash = encodeGeoHash(lat, lng);
@@ -352,7 +385,21 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 		}
 		db_rows.close();
 	}else{
-		var db_rows = db.execute('select * from geohash where geohash like ? and length = ?', (geohash.substring(0, hashLevel) + '%'), 4);
+		var neighbors = {}
+		neighbors.center = geohash.substring(0, hashLevel);
+		neighbors.top = calculateAdjacent(neighbors.center, 'top');
+		neighbors.bottom = calculateAdjacent(neighbors.center, 'bottom');
+		neighbors.right = calculateAdjacent(neighbors.center, 'right');
+		neighbors.left = calculateAdjacent(neighbors.center, 'left');
+		neighbors.topleft = calculateAdjacent(neighbors.left, 'top');
+		neighbors.topright = calculateAdjacent(neighbors.right, 'top');
+		neighbors.bottomright = calculateAdjacent(neighbors.right, 'bottom');
+		neighbors.bottomleft = calculateAdjacent(neighbors.left, 'bottom');
+		//Ti.API.info(neighbors);
+		//alert(neighbors);
+		
+		var db_rows = db.execute('select * from geohash where (geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ?) and length = 4 and center_count > 0', 
+								(neighbors.center + '%'), (neighbors.top + '%'), (neighbors.bottom + '%'), (neighbors.right + '%'), (neighbors.left + '%'), (neighbors.topleft + '%'), (neighbors.topright + '%'), (neighbors.bottomleft + '%'), (neighbors.bottomright + '%'));
 		Ti.API.info('count:' + db_rows.getRowCount());
 		while(db_rows.isValidRow()){
 			var annotation = Ti.Map.createAnnotation({
@@ -376,6 +423,8 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 
 function showAnnotation(annotations){
 	if(annotations.length == 0){
+		actInd.hide();
+		actIndView.hide();
 		regionState = true;
 		return;
 	}
@@ -384,6 +433,8 @@ function showAnnotation(annotations){
 		mapView.addAnnotation(annotations[i]);
 	}
 	regionState = true;
+	actInd.hide();
+	actIndView.hide();
 }
 
 /** Search bar **/
@@ -396,11 +447,11 @@ var searchBar = Ti.UI.createSearchBar({
 
 searchBar.addEventListener('return', function(e)
 {
+	searchBar.blur();
 	if(!dataState){
-		alert(L('no_local_shelter_info'));
+		noDataConfirm();
 		return;
 	}
-	searchBar.blur();
 	if(e.value.length == 0){
 		searchState = false;
 		var annotations = createAnnotationByGeohash(currentMapLat, currentMapLng, currentLatDelta, currentLngDelta);
@@ -423,49 +474,6 @@ searchBar.addEventListener('cancel', function(){
 
 searchBar.addEventListener('cancel', function(e){searchBar.blur();});
 win.add(searchBar);
-
-/** Get geolocation **/
-if (Ti.Geolocation.locationServicesEnabled) {
-  
-	Ti.Geolocation.purpose = "Get current position";
-	Ti.Geolocation.showCalibration = false;
-	Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
-	Ti.Geolocation.distanceFilter = 100;
-  
-	Ti.Geolocation.getCurrentPosition(function(e) {
-		if (!e.success || e.error)
-		{
-			alert(L('can_not_get_geolocation'));
-		}else{
-			currentLat = e.coords.latitude;
-			currentLng = e.coords.longitude;
-			mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
-		}
-		mapView.addEventListener('regionChanged', function(evt){
-			currentLatDelta = evt.latitudeDelta;
-			currentLngDelta = evt.longitudeDelta;
-			currentMapLat = evt.latitude;
-			currentMapLng = evt.longitude;
-			Ti.API.info(evt);
-			if(regionState && !searchState && dataState){
-				regionState = false;
-				var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
-				showAnnotation(annotations);
-			}
-		});
-		regionState = true;
-	});
-  
-	Ti.Geolocation.addEventListener("location", function(e) {
-		currentLat = e.coords.latitude;
-		currentLng = e.coords.longitude;
-	});
-  
-} else {
-  alert(L('can_not_get_geolocation'));
-}
-
-win.add(mapView);
 
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
   var distance = 0;
@@ -496,7 +504,7 @@ function geoDistance(lat1, lng1, lat2, lng2, precision) {
 
 function setNearByAnnotation(){
 	if(!dataState){
-		alert(L('no_local_shelter_info'));
+		noDataConfirm();
 		actInd.hide();
 		actIndView.hide();
 		return;
@@ -548,8 +556,6 @@ function setNearByAnnotation(){
 	db_rows.close();
 	db.close();
 	mapView.setLocation({latitude:lat, longitude:lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
-	actInd.hide();
-	actIndView.hide();
 }
 
 /** toolbar **/
@@ -591,9 +597,25 @@ function setNearByAnnotation(){
 	});
 	
 	getPlacesButton.addEventListener('click', function(){
-		actInd.show();
-		actIndView.show();
-		XHR.getDataFromURL(url, saveDBFile, getXHRError);
+		if(!Ti.App.Properties.getBool('hasShelterUpdate') && dataState){
+			alert(L('shelter_newest'));
+			return;
+		}
+		var confirm = Ti.UI.createAlertDialog({
+			title:L('sync_confirm'),
+			message:L('sync_description'),
+			buttonNames:['OK','Cancel'],
+			cancel:1	
+		});
+		confirm.show();
+		confirm.addEventListener('click', function(e)
+		{
+			if(e.index == 0){
+				actInd.show();
+				actIndView.show();
+				XHR.getDataFromURL(url, saveDBFile, getXHRError);
+			}
+		});
 	});
 	
 	if(isAndroid){
@@ -639,9 +661,74 @@ function setNearByAnnotation(){
 	}
 })();
 
-win.add(actIndView);
-actIndView.hide();
-/** win close **/
-win.addEventListener('close', function(){
-	Ti.Geolocation.removeEventListener('location');
+
+/** Get geolocation **/
+if (Ti.Geolocation.locationServicesEnabled) {
+  
+	Ti.Geolocation.purpose = "Get current position";
+	Ti.Geolocation.showCalibration = false;
+	Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+	Ti.Geolocation.distanceFilter = 100;
+  
+	Ti.Geolocation.getCurrentPosition(function(e) {
+		if (!e.success || e.error)
+		{
+			alert(L('can_not_get_geolocation'));
+		}else{
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+			mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
+		}
+		regionState = true;
+	});
+	
+	if(!isAndroid){
+		Ti.Geolocation.addEventListener("location", function(e) {
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+		});
+	}
+} else {
+  alert(L('can_not_get_geolocation'));
+}
+
+mapView.addEventListener('regionChanged', function(evt){
+	currentLatDelta = evt.latitudeDelta;
+	currentLngDelta = evt.longitudeDelta;
+	currentMapLat = evt.latitude;
+	currentMapLng = evt.longitude;
+	
+	if(regionState && !searchState && dataState){
+		regionState = false;
+		var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
+		showAnnotation(annotations);
+	}
 });
+
+/** resume/pause **/
+if(isAndroid) {
+	Ti.Android.currentActivity.addEventListener('resume', function(e) {
+		Ti.Geolocation.addEventListener("location", function(e) {
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+		});
+	});
+	Ti.Android.currentActivity.addEventListener('pause', function(e){
+		Ti.Geolocation.removeEventListener('location', function(){});
+	});
+}else{
+	
+    Ti.App.addEventListener('resumed', function(e) {
+		Ti.API.info('resumed fire');
+		Ti.Geolocation.addEventListener("location", function(e) {
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+		});
+    });
+	Ti.App.addEventListener('pause', function(e){
+		Ti.API.info('pause fire');
+		Ti.Geolocation.removeEventListener("location", function(){});
+	});
+	
+}
+

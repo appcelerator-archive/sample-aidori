@@ -16,7 +16,7 @@
   left:10;
   width:300;
   height:'auto';
-  color:'#fff';
+  color:'#000';
   font-size:16;
   font-weight:'normal';
   textid: 'disclaimer_text'

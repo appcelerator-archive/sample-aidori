@@ -66,12 +66,17 @@ var mapTab = Ti.UI.createTab({
 	title:L('tab_map'),
 	window:mapWin
 });
-
 tabGroup.addTab(newsTab);  
 tabGroup.addTab(mapTab);
 tabGroup.addTab(contributeTab);  
 tabGroup.addTab(socialTab);
 tabGroup.addTab(aboutTab); 
+
+tabGroup.addEventListener('focus', function(e){
+	if(e.index == 1){
+		Ti.App.fireEvent('map_shelter_check');
+	}
+});
 
 var disclaimerTabGroup = Ti.UI.createTabGroup();
 var disclaimerWin = Ti.UI.createWindow({

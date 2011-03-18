@@ -27,6 +27,10 @@
 	<string name="map_detail_title">施設詳細情報</string>
 	<string name="search_result_overflow">100件以上該当します。絞り込んでください。</string>
 	<string name="map_processing">処理中です</string>
+	<string name="sync_confirm">同期の確認</string>
+	<string name="sync_description">この処理には時間がかかります</string>
+	<string name="shelter_newest">避難所情報は最新です。</string>
+	<string name="has_shelter_update">避難所情報が更新されています。通信可能な場所で更新してください。</string>
 	<string name="about_body">Sendai Quake was built by ...</string>
 	<string name="volunteer_info">For more information on how to volunteer, please call (555) 555-1212</string>
 	<string name="twitter_loading">Loading...</string>

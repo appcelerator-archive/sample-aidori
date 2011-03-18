@@ -1,4 +1,5 @@
 var baseurl = "http://masuidrive.jp/tmp/";
+Ti.App.Properties.setBool('hasShelterUpdate', false);
 
 var download = function(path, callback) {
     var xhr = Ti.Network.createHTTPClient({
@@ -33,6 +34,7 @@ var update_contribute = function() {
 
 var update_shelter = function() {
     Ti.API.info("update_shelter");
+	Ti.App.Properties.setBool('hasShelterUpdate', true);
 };
 
 var check_contents = function() {
