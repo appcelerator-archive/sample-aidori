@@ -1,14 +1,9 @@
-#tosButton {
+#okButton {
   left:10;
   right:10;
   bottom:10;
-  height: 57;
-  backgroundImage: '../images/button_dark_off.png';
-  backgroundSelectedImage: '../images/button_dark_on.png';
-  font-size:16;
-  font-weight:'bold';
-  color:"#fff";
-  titleid: 'disclaimer_button_title'
+  height:60;
+  backgroundImage:'../images/buttons/button_spacer.png';
 }
 
 #disclaimerLabel {
@@ -22,17 +17,21 @@
   textid: 'disclaimer_text'
 }
 
-#bgImage {
-  top:0;
-  left:0;
-  height:'auto';
-  width:'auto';
-}
-
 #scrollView {
-  top: 0;
-  left: 0;
+  top:20;
+  left:0;
   bottom:80;
   contentHeight: 'auto';
   contentWidth: 320;
+  showVerticalScrollIndicator:'true';
+}
+
+#okButtonLabel {
+	textid:'disclaimer_button_title';
+	right:10;
+	left:10;
+	text-align:'center';
+	color:'#fff';
+	font-size:20;
+	font-weight:'Bold';
 }
