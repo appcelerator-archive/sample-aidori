@@ -121,3 +121,13 @@
 	left:10;
 	autocorrect:false;
 }
+
+#readmoreButton {
+       borderColor: '#fff';
+	   color:'#000';
+	   font-size:15;
+	   font-weight:'bold';
+	   text-align:'center';
+       title: "Read more";
+       height: 42;
+}
