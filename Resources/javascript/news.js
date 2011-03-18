@@ -62,5 +62,5 @@ cc.tableView.addEventListener('click', function (e) {
 Ti.App.addEventListener('update_news', function() {
     var file = Ti.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "news.json");
     var data = JSON.parse(''+file.read());
-    tableView.setData(data);
+    cc.tableView.setData(data);
 });
