@@ -79,7 +79,7 @@ cc.infoButton.addEventListener('click', function(){
 		navBarHidden:false,
 		title:Ti.Locale.getString('about_main_title'),
 		url:'about_app.js',
-		backgroundImage:'../images/backgrounds/BG_map_gray.png',
+		backgroundColor:'#f39380',
 	    backButtonTitleImage:'../images/icon_arrow_left.png'
 	});		
 
@@ -144,7 +144,7 @@ if(isAndroid()){
 				navBarHidden:false,
 				title:Ti.Locale.getString('about_main_title'),
 				url:'about_app.js',
-				backgroundImage:'../images/backgrounds/BG_map_gray.png',
+				backgroundColor:'#f39380',
 			    backButtonTitleImage:'../images/icon_arrow_left.png'
 			});		
 

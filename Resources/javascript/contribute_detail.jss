@@ -104,7 +104,7 @@
 	width:150;
 	bottom:0;
 	layout:'horizontal';
-	backgroundImage:'../images/buttons/contr_details_left.png';
+	backgroundImage:'../images/buttons/bottom_button_left.png';
 }
 
 #webButton {
@@ -112,5 +112,5 @@
 	width:150;
 	bottom:0;
 	layout:'horizontal';
-	backgroundImage:'../images/buttons/contr_details_right.png';
+	backgroundImage:'../images/buttons/bottom_button_right.png';
 }

@@ -98,7 +98,7 @@ cc.tableView.addEventListener('click', function(e){
 	    barColor:cc.win.barColor,
 		navBarHidden:false,
 		title:Ti.Locale.getString('contribute_detail_title'),
-		backgroundImage:'../images/backgrounds/BG_map_gray.png',
+		backgroundColor:'#f39380',
 		url:'contribute_detail.js',
 		backButtonTitleImage:'../images/icon_arrow_left.png',
 		charity_name:e.rowData.charity_name,

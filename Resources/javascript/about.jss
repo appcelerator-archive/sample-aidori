@@ -60,7 +60,7 @@
 	width:150;
 	bottom:0;
 	layout:'horizontal';
-	backgroundImage:'../images/buttons/contr_details_left.png';
+	backgroundImage:'../images/buttons/bottom_button_left.png';
 }
 
 #webButton {
@@ -68,11 +68,11 @@
 	width:150;
 	bottom:0;
 	layout:'horizontal';
-	backgroundImage:'../images/buttons/contr_details_right.png';
+	backgroundImage:'../images/buttons/bottom_button_right.png';
 }
 
 #phoneImg {
-	backgroundImage:'../images/buttons/ICON_phone.png';
+	backgroundImage:'../images/buttons/navi_address.png';
 	width:25;
 	height:25;
 	top:10;
@@ -92,7 +92,7 @@
 }
 
 #webImg {
-	backgroundImage:'../images/buttons/ICON_www.png';
+	backgroundImage:'../images/buttons/navi_sitelist.png';
 	width:25;
 	height:25;
 	top:10;
@@ -104,7 +104,7 @@
 	height:25;
 	text-align:'center';
 	width:110;
-	font-size:14;
+	font-size:13;
 	color:'#fff';
 	font-weight:'Bold';
 	left:5;

@@ -34,7 +34,7 @@
 }
 
 #webImg {
-	backgroundImage:'../images/buttons/ICON_www.png';
+	backgroundImage:'../images/buttons/navi_sitelist.png';
 	width:25;
 	height:25;
 	top:10;
