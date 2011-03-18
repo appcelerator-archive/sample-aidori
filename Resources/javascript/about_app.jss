@@ -80,8 +80,6 @@
 	text-align:'center';
 	color:'#999';
 	font-size:'13';
-	right:5;
-	left:5;
 }
 
 #infoName {
@@ -96,11 +94,12 @@
 
 #detailInfo {
 	textid:'about_app_team';
-	left:3;
-	right:3;
 	height:'auto';
 	color:'#000';
 	font-size:12;
+	text-align:'left';
+	left:15;
+	right:15;
 }
 
 #bottomContainer {

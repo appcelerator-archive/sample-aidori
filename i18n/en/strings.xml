@@ -78,10 +78,7 @@
 	<string name="about_web_resources">More Resources</string>
 	<string name="about_app_this_app_title">Project Volunteers</string>
 	<string name="about_app_appcelerator_title">Appcelerator</string>
-	<string name="about_appcelerator_desc">
-		The success of iPhone and Android, the emergence of Tablet computing, and the promise of Desktop Linux have created great opportunities for application developers … as well as created a new set of challenges. While the market for applications is larger than ever before, developing and supporting multiple platforms can be complicated and expensive.\n
-		A free and open source application development platform, Titanium lets you create native mobile, tablet and desktop application experiences using existing web skills like Javascript, HTML, CSS, Python, Ruby, and PHP.
-	</string>
+	<string name="about_appcelerator_desc">\nThe success of iPhone and Android, the emergence of Tablet computing, and the promise of Desktop Linux have created great opportunities for application developers..as well as created a new set of challenges. While the market for applications is larger than ever before, developing and supporting multiple platforms can be complicated and expensive.\n\nA free and open source application development platform, Titanium lets you create native mobile, tablet and desktop application experiences using existing web skills like Javascript, HTML, CSS, Python, Ruby, and PHP.</string>
 	<string name="about_learn_more">Learn More</string>
 	<string name="about_main_title">App Overview</string>
 	<string name="about_tab_app_info">App Info</string>
