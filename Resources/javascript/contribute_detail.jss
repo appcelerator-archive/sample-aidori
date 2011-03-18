@@ -82,23 +82,15 @@
 #charityInfo {
 	left:3;
 	right:3;
+	height:'auto';
 	color:'#000';
 	font-size:12;
 }
 
 #moreInfoScroll {
-	height:160;
 	contentHeight:'auto';
 	contentWidth:'auto';
 }
-
-#bottomContainer {
-	top:0;
-	height:75;
-	layout:'horizontal';
-	backgroundColor:'transparent';
-}
-
 #phoneButton {
 	height:50;
 	width:150;
