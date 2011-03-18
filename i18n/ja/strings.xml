@@ -19,6 +19,8 @@
 	<string name="show_current_position_button_title">現在地を表示</string>
 	<string name="synchronize_shelter_place">避難所情報を同期</string>
 	<string name="map_near_by">最寄</string>
+	<string name="near_by_not_found">最寄の避難所がありませんでした</string>
+	<string name="shelter_info_notice">同期が終了しました。この避難所リストは必ずしも現時点で稼働している場所のリストではないことがありますのでご注意下さい。</string>
 	<string name="can_not_get_geolocation">現在地を取得できませんでした</string>
 	<string name="can_not_use_network">ネットワークに接続できませんでした</string>
 	<string name="no_local_shelter_info">「避難所情報を同期」ボタンを押して、情報を取得してからご利用ください。</string>
@@ -79,4 +81,24 @@
 	<string name="social_tab_name">ソーシャル</string>
 	<string name="social_page_title">ソーシャル</string>
 	<string name="title_instagram">Instagram</string>
+	<string name="about_phone_iwate">岩手県: 0120-801-471</string>
+	<string name="about_phone_miyagi">宮城県: 022-221-2000</string>
+	<string name="about_phone_fukushima1">福島県: 0120-510-186</string>
+	<string name="about_phone_fukushima2">福島県: 090-8424-4207</string>
+	<string name="about_phone_fukushima3">福島県: 090-8424-4208</string>
+	<string name="about_resource_header_alarm">警報・注意報</string>
+	<string name="about_resource_JMATW">気象庁 津波情報・注意報</string>
+	<string name="about_resource_NISA">原子力安全・保安院</string>
+	<string name="about_resource_PTWC">Pacific Tsunami Warning Center</string>
+	<string name="about_resource_PMJHC">首相官邸ホームページ</string>
+	<string name="about_resource_header_disaster">災害掲示板</string>
+	<string name="about_resource_DOCOMO">NTT Docomo 災害掲示板</string>
+	<string name="about_resource_KDDI">KDDI/au 災害掲示板</string>
+	<string name="about_resource_SB">SoftBank 災害掲示板</string>
+	<string name="about_resource_EMOBILE">EMOBILE 災害掲示板</string>
+	<string name="about_resource_WILCOM">WILLCOM 災害掲示板</string>
+	<string name="about_resource_header_shelter">避難所情報</string>
+	<string name="about_resource_SL">東日本大震災・避難所情報</string>
+	<string name="about_resource_EWFDC">給水、炊き出し場所一覧</string>
+	<string name="about_resource_EWFDCVM">炊き出しまっぷ、緊急避難場所</string>
 </resources>
