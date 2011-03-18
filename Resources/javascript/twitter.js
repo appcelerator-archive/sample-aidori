@@ -4,13 +4,45 @@ var cc ={win:Ti.UI.currentWindow};
 Ti.App.fireEvent('show_indicator');
 
 (function(){
-	cc.refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
 	if (Ti.Platform.name != 'android') {
-		Ti.UI.currentWindow.setLeftNavButton(cc.refreshButton);
-		cc.configButton = Ti.UI.createButton({
-			image: '../images/light_gear.png'
+		// view to hold the refresh and config buttons
+		cc.moreOptionsView = Ti.UI.createView({
+			top:0,
+			right:0,
+			width:201,
+			height:119,
+			backgroundImage:'../images/menubox_2.png',
+			visible:false,
+			zIndex:99
 		});
-		Ti.UI.currentWindow.setRightNavButton(cc.configButton);
+		cc.refreshButton = Ti.UI.createButton({
+			width:50,
+			height:50,
+			top:44,
+			right:120,
+			image:'../images/navi-reload.png'
+		});
+		cc.refreshButton.addEventListener('click',function(){
+			cc.retrieveTwitterFeed();
+			cc.moreOptionsView.hide();
+		});
+		cc.moreOptionsView.add(cc.refreshButton);
+		cc.configButton = Ti.UI.createButton({
+			image: '../images/navi-settings.png',
+			width:50,
+			top:44,
+			height:50,
+			right:40
+		});
+		cc.moreOptionsView.add(cc.configButton);
+		cc.moreOptionsButton = Ti.UI.createButton({
+			image:'../images/icon_arrow_down.png'
+		});
+		cc.moreOptionsButton.addEventListener('click',function() {
+			cc.moreOptionsView.show();
+		});
+		Ti.UI.currentWindow.setRightNavButton(cc.moreOptionsButton);
+		cc.win.add(cc.moreOptionsView);
 	};
 	cc.tableView = Ti.UI.createTableView({
 		backgroundColor:'#fff',
@@ -203,6 +235,7 @@ Ti.App.fireEvent('show_indicator');
 	//--------------------------------------------
 if (Ti.Platform.name != 'android') {
 	cc.refreshButton.addEventListener('click', function(){
+			
 		if (!Ti.Network.online) {
 			Ti.App.fireEvent('hide_indicator', {});
 			noNetworkAlert();
@@ -215,6 +248,7 @@ if (Ti.Platform.name != 'android') {
 	
 	cc.configButton.addEventListener('click', function(){
 		twConfigWrapper.show();
+		cc.moreOptionsView.hide();
 	});
 };
 
