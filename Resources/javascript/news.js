@@ -6,7 +6,6 @@ Ti.include('./keys.js','./application.js');
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
 	];
-
 	
 	cc.refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
 		
@@ -21,22 +20,27 @@ Ti.include('./keys.js','./application.js');
 	   file = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data/news.json");
 	}
 
-	var tableData = JSON.parse(''+file.read());
-
-	var template = {
-	    selectedBackgroundColor: '#000',
-	    backgroundColor: '#000',
-	    rowHeight: 100,
-	    layout: [
-	        {type:'image', left:10, top:5, width:50, height:50, name:'photo'},
-	        {type:'text', fontSize:16, fontWeight:'bold', fontFamily:'Arial', left:70, top:2, width:200, height:30, color:'#000000', name:'user'},
-	        {type:'image', right:5, top:35, width:36, height:34, name:'button'}
-	   ]
+	var dataContent = JSON.parse(''+file.read());
+	
+	cc.getTableData=function(){
+		var tableData=[];
+		var itemCount = dataContent.length;
+		for (var iLoop=0;iLoop<itemCount;iLoop++){
+			tableData.push({title:dataContent[iLoop].title,
+						    hasChild:true,
+						    color:'#000',
+						  	backgroundColor:'#fff',
+						    height:'auto',
+						    controller:dataContent[iLoop].controller,
+						    rss:dataContent[iLoop].rss
+				});
+		}
+		
+		return tableData;
 	};
 
 	cc.tableView = Ti.UI.createTableView({
-	    data: tableData,
-	    template: template
+	    data: cc.getTableData()
 	});
 
 	cc.win.add(cc.tableView);
@@ -57,7 +61,7 @@ cc.tableView.addEventListener('click', function (e) {
             title:e.rowData.title,
 		    barColor:cc.win.barColor,
 		    fullscreen:false,
-			backgroundImage:'../images/backgrounds/BG_map_gray.png',
+			backgroundColor:'#f39380',
 			backButtonTitleImage:'../images/icon_arrow_left.png'
         });
 

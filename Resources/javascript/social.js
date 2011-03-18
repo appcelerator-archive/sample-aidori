@@ -7,7 +7,8 @@ var cc ={win:Ti.UI.currentWindow};
 	];
 	
 	cc.mainContainer = Ti.UI.createView({
-		height:isAndroid() ? 370 : 340,
+		height:250,
+		top:45,
 		borderRadius:isAndroid() ? 10 : 5,
 		id:'mainContainer'
 		});
@@ -15,10 +16,11 @@ var cc ={win:Ti.UI.currentWindow};
 	
 	
 	cc.twitterContainer = Ti.UI.createView({
-		borderRadius:isAndroid() ? 10 : 5,
-		borderWidth:1,
-		borderColor:'#999',
-		height:125,
+//		borderRadius:isAndroid() ? 10 : 5,
+//		borderWidth:1,
+//		borderColor:'#999',
+		backgroundColor:'#fff',
+		height:70,
 		left:10,
 		right:10,
 		top:25
@@ -45,15 +47,25 @@ var cc ={win:Ti.UI.currentWindow};
 	  });
 	
 	cc.twitterContainer.add(cc.twitterLogoMore);
-		
+
+	cc.vwLine = Ti.UI.createView({
+		top:20,
+		height:1,
+		right:25,
+		left:25,
+		borderColor:'#000'
+	  });				
+	cc.mainContainer.add(cc.vwLine);
+	
 	cc.instagramContainer = Ti.UI.createView({
-		borderRadius:isAndroid() ? 10 : 5,
-		borderWidth:1,
-		borderColor:'#999',
-		height:125,
+//		borderRadius:isAndroid() ? 10 : 5,
+//		borderWidth:1,
+//		borderColor:'#999',
+		backgroundColor:'#fff',
+		height:70,
 		left:10,
 		right:10,
-		top:50
+		top:20
 	});
 	
 	cc.mainContainer.add(cc.instagramContainer);
@@ -93,10 +105,8 @@ cc.twitterContainer.addEventListener('click', function(){
 	//Handle by correct platform
 	if (isAndroid()) {
 		wPage.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
-		wPage.open();
-	}else{
-		Ti.UI.currentTab.open(wPage,{animated:true});	
 	}
+	Ti.UI.currentTab.open(wPage,{animated:true});	
 });
 
 cc.instagramContainer.addEventListener('click', function(){
@@ -112,8 +122,7 @@ cc.instagramContainer.addEventListener('click', function(){
 	//Handle by correct platform
 	if (isAndroid()) {
 		wPage.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
-		wPage.open();
-	}else{
-		Ti.UI.currentTab.open(wPage,{animated:true});	
 	}
+	Ti.UI.currentTab.open(wPage,{animated:true});	
+
 });

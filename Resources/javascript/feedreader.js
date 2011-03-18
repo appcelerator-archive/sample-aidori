@@ -1,8 +1,6 @@
 Ti.API.info("Loaded feedreader.js");
 
 Ti.include('./strip_tags.js');
-    backgroundColor: '#000'
-
 var i = 0;
 var feedTableView;
 var feedTitle = '';

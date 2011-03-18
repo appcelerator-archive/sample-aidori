@@ -15,7 +15,7 @@ Ti.include('./application.js');
 	
 	cc.getDataRow=function(article,countItem){
 		var row = Ti.UI.createTableViewRow({
-			height:120,
+			height:90,
 			hasChild:true,
 			className:'article_' + countItem,  //Add unique to force new template
 			web_link:article.link,
