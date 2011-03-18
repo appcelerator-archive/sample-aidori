@@ -350,7 +350,7 @@ function textSearch(search_str){
 }
 
 function getNeighbors(geohash){
-	var neighbors = {}
+	var neighbors = {};
 	neighbors.center = geohash;
 	neighbors.top = calculateAdjacent(neighbors.center, 'top');
 	neighbors.bottom = calculateAdjacent(neighbors.center, 'bottom');
@@ -525,7 +525,7 @@ function setNearByAnnotation(){
 		if(hashLevel > 3){
 			db_rows = db.execute(sql1, neighbors.center, neighbors.top, neighbors.bottom, neighbors.right, neighbors.left, neighbors.topleft, neighbors.topright, neighbors.bottomleft, neighbors.bottomright, hashLevel);
 		}else{
-			db_rows = db.execute(sql2, (neighbors.center + '%'), (neighbors.top + '%'), (neighbors.bottom + '%'), (neighbors.right + '%'), (neighbors.left + '%'), (neighbors.topleft + '%'), (neighbors.topright + '%'), (neighbors.bottomleft + '%'), (neighbors.bottomright + '%'))
+			db_rows = db.execute(sql2, (neighbors.center + '%'), (neighbors.top + '%'), (neighbors.bottom + '%'), (neighbors.right + '%'), (neighbors.left + '%'), (neighbors.topleft + '%'), (neighbors.topright + '%'), (neighbors.bottomleft + '%'), (neighbors.bottomright + '%'));
 		}
 		if(db_rows.getRowCount() != 0){
 			break;
@@ -716,29 +716,29 @@ mapView.addEventListener('regionChanged', function(evt){
 });
 
 /** resume/pause **/
-if(isAndroid) {
-	Ti.Android.currentActivity.addEventListener('resume', function(e) {
-		Ti.Geolocation.addEventListener("location", function(e) {
-			currentLat = e.coords.latitude;
-			currentLng = e.coords.longitude;
+if (Ti.Geolocation.locationServicesEnabled) {
+	if(isAndroid) {
+		Ti.Android.currentActivity.addEventListener('resume', function(e) {
+			Ti.Geolocation.addEventListener("location", function(e) {
+				currentLat = e.coords.latitude;
+				currentLng = e.coords.longitude;
+			});
 		});
-	});
-	Ti.Android.currentActivity.addEventListener('pause', function(e){
-		Ti.Geolocation.removeEventListener('location', function(){});
-	});
-}else{
-	
-    Ti.App.addEventListener('resumed', function(e) {
-		Ti.API.info('resumed fire');
-		Ti.Geolocation.addEventListener("location", function(e) {
-			currentLat = e.coords.latitude;
-			currentLng = e.coords.longitude;
+		Ti.Android.currentActivity.addEventListener('pause', function(e){
+			Ti.Geolocation.removeEventListener('location', function(){});
 		});
-    });
-	Ti.App.addEventListener('pause', function(e){
-		Ti.API.info('pause fire');
-		Ti.Geolocation.removeEventListener("location", function(){});
-	});
-	
+	}else{
+		Ti.App.addEventListener('resumed', function(e) {
+			Ti.API.info('resumed fire');
+			Ti.Geolocation.addEventListener("location", function(e) {
+				currentLat = e.coords.latitude;
+				currentLng = e.coords.longitude;
+			});
+    	});
+		Ti.App.addEventListener('pause', function(e){
+			Ti.API.info('pause fire');
+			Ti.Geolocation.removeEventListener("location", function(){});
+		});
+	}
 }
 
