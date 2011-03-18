@@ -72,6 +72,20 @@ Ti.include('./application.js');
 	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
 	cc.webButton.add(cc.webButtonLabel);
 
+	Ti.API.info('mainContainer width=' + cc.mainContainer.width);
+	Ti.API.info('bottom width=' + cc.bottomContainer.width);
+			
+	if(isAndroid()){
+		var estMainContWidth=(Ti.Platform.displayCaps.platformWidth-20);
+		//Divide by zero check
+		if(estMainContWidth<1){
+			estMainContWidth=300;
+		}
+		cc.bottomContainer.width=estMainContWidth;
+		Ti.API.info('estMainContWidth=' + estMainContWidth);
+		cc.phoneButton.width=((estMainContWidth/2));
+		cc.webButton.width=((estMainContWidth/2));
+	}
 })();
 
 //------------------------------
