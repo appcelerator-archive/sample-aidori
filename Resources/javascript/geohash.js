@@ -26,10 +26,12 @@ BORDERS.left.odd = BORDERS.bottom.even;
 BORDERS.right.odd = BORDERS.top.even;
 
 function refine_interval(interval, cd, mask) {
-	if (cd&mask)
+	if (cd&mask) {
 		interval[0] = (interval[0] + interval[1])/2;
-  else
+    }
+    else {
 		interval[1] = (interval[0] + interval[1])/2;
+    }
 }
 
 function calculateAdjacent(srcHash, dir) {
@@ -37,8 +39,9 @@ function calculateAdjacent(srcHash, dir) {
 	var lastChr = srcHash.charAt(srcHash.length-1);
 	var type = (srcHash.length % 2) ? 'odd' : 'even';
 	var base = srcHash.substring(0,srcHash.length-1);
-	if (BORDERS[dir][type].indexOf(lastChr)!=-1)
+	if (BORDERS[dir][type].indexOf(lastChr)!=-1) {
 		base = calculateAdjacent(base, dir);
+    }
 	return base + BASE32[NEIGHBORS[dir][type].indexOf(lastChr)];
 }
 
@@ -88,20 +91,24 @@ function encodeGeoHash(latitude, longitude) {
 	    if (longitude > mid) {
 				ch |= BITS[bit];
 				lon[0] = mid;
-	    } else
+	    }
+          else {
 				lon[1] = mid;
+          }
 	  } else {
 			mid = (lat[0] + lat[1]) / 2;
 	    if (latitude > mid) {
 				ch |= BITS[bit];
 				lat[0] = mid;
-	    } else
+	    } else {
 				lat[1] = mid;
+        }
 	  }
 
 		is_even = !is_even;
-	  if (bit < 4)
+	  if (bit < 4) {
 			bit++;
+      }
 	  else {
 			geohash += BASE32[ch];
 			bit = 0;
