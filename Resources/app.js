@@ -18,6 +18,12 @@ var newsTab = Ti.UI.createTab({
   window:newsWin
 });
 
+var socialWin = Ti.UI.createWindow({  
+  url:'javascript/social.js',
+  backgroundColor:'#f39380',
+  title:L('social_page_title'),
+  barColor:"#e62600"
+});
 var socialTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_social.png',
   title:L('social_tab_name'),
