@@ -50,14 +50,14 @@ Ti.include('./application.js');
 
 	cc.moreInfoScroll = Ti.UI.createScrollView({
 		id:'moreInfoScroll',
-		height:isAndroid() ? 160 : 155
+		height:isAndroid() ? 185 : 155
 		});
 
 	cc.moreInfoScroll.add(cc.charityInfo);
 	cc.mainContainer.add(cc.moreInfoScroll);
 	
 	cc.bottomContainer = Ti.UI.createView({
-		top:isAndroid() ? 23 : 0,
+		top:isAndroid() ? 1 : 0,
 		height: isAndroid() ? 50 : 75,
 		layout:'horizontal',
 		backgroundColor:'transparent'
