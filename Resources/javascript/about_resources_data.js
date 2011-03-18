@@ -1,76 +1,76 @@
 cc.resourceData=[
 	{
 		 hasHeader:true,
-		 header:Ti.Locale.getString('about_resource_header_alarm'),
-		 title:Ti.Locale.getString('about_resource_JMATW'),
+		 header:'about_resource_header_alarm',
+		 title:'about_resource_JMATW',
 		 ref_en_url:'http://www.jma.go.jp/en/tsunami/',
 		 ref_ja_url:'http://www.jma.go.jp/jp/tsunami/'
 	},
 	{
 		 hasHeader:false,
-		 title:Ti.Locale.getString('about_resource_NISA'),
+		 title:'about_resource_NISA',
 		 ref_ja_url:'http://www.nisa.meti.go.jp/',
 		 ref_en_url:'http://www.nisa.meti.go.jp/english/index.html'
 	},	
 	{
 		 hasHeader:false,
-		 title:Ti.Locale.getString('about_resource_PTWC'),
+		 title:'about_resource_PTWC',
 		 ref_ja_url:'',
 		 ref_en_url:'http://ptwc.weather.gov/?region=1&id=pacific.2011.03.11.073000'
 	},	
 	{
 		 hasHeader:false,
-		 title:Ti.Locale.getString('about_resource_PMJHC'),
+		 title:'about_resource_PMJHC',
 		 ref_ja_url:'http://www.kantei.go.jp/jp/kikikanri/jisin/20110311miyagi/index.html',
 		 ref_en_url:''
 	},	
 	{
 		 hasHeader:true,
-		 header:Ti.Locale.getString('about_resource_header_disaster'),
-		 title:Ti.Locale.getString('about_resource_DOCOMO'),
+		 header:'about_resource_header_disaster',
+		 title:'about_resource_DOCOMO',
 		 ref_en_url:'http://dengon.docomo.ne.jp/Einoticelist.cgi?es=0',
 		 ref_ja_url:''
 	},	
 	{
 		 hasHeader:false,		
-		 title:Ti.Locale.getString('about_resource_KDDI'),
+		 title:'about_resource_KDDI',
 		 ref_ja_url:'',
 		 ref_en_url:'http://dengon.ezweb.ne.jp/E/service.do'
 	},				
 	{
 		 hasHeader:false,		
-		 title:Ti.Locale.getString('about_resource_SB'),
+		 title:'about_resource_SB',
 		 ref_ja_url:'',
 		 ref_en_url:'http://dengon.softbank.ne.jp/pc-e1.jsp'
 	},	
 	{
 		 hasHeader:false,		
-		 title:Ti.Locale.getString('about_resource_EMOBILE'),
+		 title:'about_resource_EMOBILE',
 		 ref_ja_url:'',
 		 ref_en_url:'http://dengon.emnet.ne.jp/en/service.do'
 	},		
 	{
 		 hasHeader:false,		
-		 title:Ti.Locale.getString('about_resource_WILCOM'),
+		 title:'about_resource_WILCOM',
 		 ref_ja_url:'http://dengon.willcom-inc.com/dengon/Top.do?language=J',
 		 ref_en_url:'http://dengon.willcom-inc.com/dengon/Top.do?language=E'
 	},
 	{
 		 hasHeader:true,
-		 header:Ti.Locale.getString('about_resource_header_shelter'),
-		 title:Ti.Locale.getString('about_resource_SL'),
+		 header:'about_resource_header_shelter',
+		 title:'about_resource_SL',
 		 ref_en_url:'',
 		 ref_ja_url:'http://www.google.com/intl/ja/crisisresponse/japanquake2011_shelter.html'
 	},	
 	{
 		 hasHeader:false,		
-		 title:Ti.Locale.getString('about_resource_EWFDC'),
+		 title:'about_resource_EWFDC',
 		 ref_en_url:'',
 		 ref_ja_url:'https://spreadsheets2.google.com/pub?hl=ja&hl=ja&key=0An_bfTU7s7XHdGxhazkyeExVTDV2TmZfM28tdHRUcVE&output=html&ndplr=1'
 	},	
 	{
 		 hasHeader:false,		
-		 title:Ti.Locale.getString('about_resource_EWFDCVM'),
+		 title:'about_resource_EWFDCVM',
 		 ref_en_url:'',
 		 ref_ja_url:'http://maps.google.co.jp/maps/ms?hl=ja&ie=UTF8&brcurrent=3%2C0x5f8a281688bb7435%3A0x5a71ac24ed513392%2C0%2C0x5f8a2815e538e245%3A0xb1632cc050d2f733&msa=0&msid=216614052816461214939.00049e49594f07450fe63&z=8'
 	}

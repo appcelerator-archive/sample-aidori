@@ -21,7 +21,7 @@ Ti.include('./application.js','./about_resources_data.js');
 			isRowElement:true //hack for android touch event
 		});
 		
-		var resName = Ti.UI.createLabel({text:itemR.header, 
+		var resName = Ti.UI.createLabel({text:Ti.Locale.getString(itemR.header), 
 											 color:'#fff',
 											 height:'auto',
 											 left:5,
@@ -46,7 +46,7 @@ Ti.include('./application.js','./about_resources_data.js');
 			isRowElement:true //hack for android touch event
 		});
 		
-		var resName = Ti.UI.createLabel({text:itemR.title, 
+		var resName = Ti.UI.createLabel({text:Ti.Locale.getString(itemR.title), 
 											 color:'#000',
 											 height:'auto',
 											 left:5,
