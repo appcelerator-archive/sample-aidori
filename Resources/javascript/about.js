@@ -32,7 +32,6 @@ var cc ={win:Ti.UI.currentWindow};
 		height:240,
 		contentHeight:'auto',
 		contentWidth:'auto'
-			//id:'moreInfoScroll'
 		});
 
 	cc.moreInfoScroll.add(cc.crisisInfo);
@@ -57,6 +56,18 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.webButton.add(cc.webImg);
 	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
 	cc.webButton.add(cc.webButtonLabel);
+	
+		if(isAndroid()){
+			var estMainContWidth=(Ti.Platform.displayCaps.platformWidth-20);
+			//Divide by zero check
+			if(estMainContWidth<1){
+				estMainContWidth=300;
+			}
+			cc.bottomContainer.width=estMainContWidth;
+	//		Ti.API.info('estMainContWidth=' + estMainContWidth);
+			cc.phoneButton.width=((estMainContWidth/2));
+			cc.webButton.width=((estMainContWidth/2));
+		}
 })();
 
 //-----------------------------------
