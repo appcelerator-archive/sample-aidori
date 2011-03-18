@@ -193,12 +193,10 @@ Ti.App.addEventListener('hide_indicator', function(e) {
 
 Ti.include("javascript/check_contents.js");
 
-if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
-  tabGroup.open();
-} else {
-  if (Ti.Platform.name == 'android') {
-    disclaimerWin.open();
-  } else {
-    disclaimerTabGroup.open();
-  }
+tabGroup.open();
+
+//For some reason we need to case into a property before doing a check against the value
+var welcomeMsgCheck = Ti.App.Properties.hasProperty('disclaimerViewed');
+if (!welcomeMsgCheck) {
+	disclaimerWin.open({modal:true});
 }
