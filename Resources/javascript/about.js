@@ -103,7 +103,7 @@ cc.phoneNumberList=function(){
 			 Ti.Locale.getString('about_phone_miyagi'),
 			 Ti.Locale.getString('about_phone_fukushima1'),
 			 Ti.Locale.getString('about_phone_fukushima2'),
-			 Ti.Locale.getString('about_phone_fukushima3'),
+			 Ti.Locale.getString('about_phone_fukushima3')
 	];
 	
 	if(!isAndroid()){
