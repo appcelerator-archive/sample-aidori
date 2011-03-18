@@ -20,7 +20,8 @@ Ti.include('./application.js');
 	cc.chartiyLogo = Ti.UI.createImageView({
 		    image:cc.win.charity_logo,
 			defaultImage:'../images/cont_placeholder.png',
-			height:75, width:75
+			height:75, width:75,
+			left:5,top:3
 	});
 	cc.topContainer.add(cc.chartiyLogo);
 
@@ -47,12 +48,20 @@ Ti.include('./application.js');
 		id:'charityInfo'
 	});
 
-	cc.moreInfoScroll = Ti.UI.createScrollView({id:'moreInfoScroll'});
+	cc.moreInfoScroll = Ti.UI.createScrollView({
+		id:'moreInfoScroll',
+		height:isAndroid() ? 160 : 155
+		});
 
 	cc.moreInfoScroll.add(cc.charityInfo);
 	cc.mainContainer.add(cc.moreInfoScroll);
 	
-	cc.bottomContainer = Ti.UI.createView({id:'bottomContainer'});
+	cc.bottomContainer = Ti.UI.createView({
+		top:isAndroid() ? 23 : 0,
+		height: isAndroid() ? 50 : 75,
+		layout:'horizontal',
+		backgroundColor:'transparent'
+		});
 	cc.mainContainer.add(cc.bottomContainer);
 	
 	cc.phoneButton = Ti.UI.createView({id:'phoneButton'});	
@@ -71,9 +80,6 @@ Ti.include('./application.js');
 	cc.webButton.add(cc.webImg);
 	cc.webButtonLabel = Ti.UI.createLabel({id:'webButtonLabel'});
 	cc.webButton.add(cc.webButtonLabel);
-
-	Ti.API.info('mainContainer width=' + cc.mainContainer.width);
-	Ti.API.info('bottom width=' + cc.bottomContainer.width);
 			
 	if(isAndroid()){
 		var estMainContWidth=(Ti.Platform.displayCaps.platformWidth-20);
@@ -82,7 +88,7 @@ Ti.include('./application.js');
 			estMainContWidth=300;
 		}
 		cc.bottomContainer.width=estMainContWidth;
-		Ti.API.info('estMainContWidth=' + estMainContWidth);
+//		Ti.API.info('estMainContWidth=' + estMainContWidth);
 		cc.phoneButton.width=((estMainContWidth/2));
 		cc.webButton.width=((estMainContWidth/2));
 	}
