@@ -9,7 +9,7 @@ var tabGroup = Ti.UI.createTabGroup();
 var newsWin = Ti.UI.createWindow({  
   url:'javascript/news.js',
   barColor:"#e62600",
-  backgroundColor:'#f39380',
+  backgroundColor:(Ti.Platform.name == 'android') ? '#fff' :'#f39380',
   titleid:L('crisis_title')
 });
 var newsTab = Ti.UI.createTab({  
@@ -103,17 +103,6 @@ Ti.App.addEventListener('remove_disclaimer', function() {
   tabGroup.open();
 });
 
-if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
-  tabGroup.open();
-} else {
-  if (Ti.Platform.name == 'android') {
-    disclaimerWin.open();
-  } else {
-    disclaimerTabGroup.open();
-  }
-}
-
-
 // ---------------------------------------------------------------
 // Create custom loading indicator
 // ---------------------------------------------------------------
@@ -202,4 +191,14 @@ Ti.App.addEventListener('hide_indicator', function(e) {
 	hideIndicator();
 });
 
-Titanium.include("javascript/check_contents.js");
+Ti.include("javascript/check_contents.js");
+
+if (Ti.App.Properties.hasProperty('disclaimerViewed')) {
+  tabGroup.open();
+} else {
+  if (Ti.Platform.name == 'android') {
+    disclaimerWin.open();
+  } else {
+    disclaimerTabGroup.open();
+  }
+}
