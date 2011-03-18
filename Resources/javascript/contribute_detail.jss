@@ -96,7 +96,7 @@
 	top:0;
 	height:75;
 	layout:'horizontal';
-	backgrounImage:'..images/backgrounds/BG_gray.png';
+	backgroundColor:'transparent';
 }
 
 #phoneButton {

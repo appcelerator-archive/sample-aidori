@@ -17,6 +17,9 @@
 	<string name="title_map">Shelter Map</string>
 	<string name="show_current_position_button_title">Current position</string>
 	<string name="synchronize_shelter_place">Sync</string>
+	<string name="map_near_by">Near by</string>
+	<string name="near_by_not_found">No result</string>	
+	<string name="shelter_info_notice">Sync done. Please note that this information may not be updated.</string>
 	<string name="can_not_get_geolocation">Can't get geolocation</string>
 	<string name="can_not_use_network">Can't use network</string>
 	<string name="no_local_shelter_info">Press Sync button and get shelter place information.</string>
@@ -40,7 +43,7 @@
 	<string name="twitter_no_network_title">Connection Required</string>
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
 	<string name="disclaimer_title">Notice</string>
-	<string name="disclaimer_text">On Friday, March 11 2011, a 9.0-magnitude earthquake occurred near the east coast of Honshu, Japan. The earthquake generated a massive tsunami that caused widespread destruction across the region.\n\n We hope the thousands who have lost their lives rest in peace, and hope anyone who are waiting for rescue are saved as many as possible.\n\n 'Aidori' is developed for all the people who have lost their families and homes and we hope the app will be of help as much as possible. </string>
+	<string name="disclaimer_text">On Friday, March 11 2011, a 9.0-magnitude earthquake occurred near the east coast of Honshu, Japan. The earthquake generated a massive tsunami that caused widespread destruction across the region.\n\n We hope the thousands who have lost their lives rest in peace, and hope anyone who are waiting for rescue are saved as many as possible.\n\n 'Aidori' is developed for all the people who have lost their families and homes and we hope the app will be of help as much as possible.\n\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titan</string>
 	<string name="disclaimer_button_title">Ok</string>
 	<string name="twitter_time_lessminute">less than a minute ago</string>
 	<string name="twitter_minuteago">a minute ago</string>
@@ -91,4 +94,24 @@
 	<string name="refresh_list">Refresh</string>
 	<string name="social_tab_name">Social</string>
 	<string name="social_page_title">Social</string>
+	<string name="about_phone_iwate">Iwate: 0120-801-471</string>
+	<string name="about_phone_miyagi">Miyagi: 022-221-2000</string>
+	<string name="about_phone_fukushima1">Fukushima: 0120-510-186</string>
+	<string name="about_phone_fukushima2">Fukushima: 090-8424-4207</string>
+	<string name="about_phone_fukushima3">Fukushima: 090-8424-4208</string>
+	<string name="about_resource_header_alarm">Alarm and warning</string>
+	<string name="about_resource_JMATW">Japan Meteorological Agency Tsunami Warnings/Advisories</string>
+	<string name="about_resource_NISA">Nuclear and Industrial Safety Agency</string>
+	<string name="about_resource_PTWC">Pacific Tsunami Warning Center</string>
+	<string name="about_resource_PMJHC">Prime Minister of Japan and His Cabinet</string>
+	<string name="about_resource_header_disaster">Disaster message boards</string>
+	<string name="about_resource_DOCOMO">NTT Docomo disaster message board</string>
+	<string name="about_resource_KDDI">KDDI/au disaster message board</string>
+	<string name="about_resource_SB">SoftBank disaster message board</string>
+	<string name="about_resource_EMOBILE">EMOBILE disaster message board</string>
+	<string name="about_resource_WILCOM">WILLCOM disaster message board</string>
+	<string name="about_resource_header_shelter">Shelter information</string>
+	<string name="about_resource_SL">Shelter locations</string>
+	<string name="about_resource_EWFDC">Emergency water and food distribution centers</string>
+	<string name="about_resource_EWFDCVM">Emergency water and food distribution centers via My Maps</string>
 </resources>

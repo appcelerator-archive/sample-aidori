@@ -10,7 +10,31 @@ Ti.include('./application.js','./about_resources_data.js');
 	Ti.API.info('currentCountry=' +  Ti.Locale.currentCountry);
 	Ti.API.info('currentLanguage=' +  Ti.Locale.currentLanguage);
 	Ti.API.info('currentLocale=' +  Ti.Locale.currentLocale);	
-				
+
+	cc.getDataRowHeader=function(itemR,itemCount){
+		var row = Ti.UI.createTableViewRow({
+			height:20,
+			hasChild:false,
+			className:'header_' + itemCount,  //Add unique to force new template
+			allowClick:false,
+			backgroundColor: '#666',
+			isRowElement:true //hack for android touch event
+		});
+		
+		var resName = Ti.UI.createLabel({text:Ti.Locale.getString(itemR.header), 
+											 color:'#fff',
+											 height:'auto',
+											 left:5,
+											 width:(Ti.Platform.displayCaps.platformWidth-20),
+											 textAlign:'left',
+											 font:{
+												fontSize:16,fontWeight:'Bold'
+											}
+											});	
+		row.add(resName);
+		
+		return row;
+	};				
 	cc.getDataRow=function(itemR,itemCount){
 		var row = Ti.UI.createTableViewRow({
 			height:50,
@@ -18,13 +42,11 @@ Ti.include('./application.js','./about_resources_data.js');
 			className:'res_' + itemCount,  //Add unique to force new template
 			ja_url:itemR.ref_ja_url,
 			en_url:itemR.ref_en_url,
+			allowClick:true,
 			isRowElement:true //hack for android touch event
 		});
 		
-		if(itemR.hasHeader){
-			row.header=itemR.header;
-		}
-		var resName = Ti.UI.createLabel({text:itemR.title, 
+		var resName = Ti.UI.createLabel({text:Ti.Locale.getString(itemR.title), 
 											 color:'#000',
 											 height:'auto',
 											 left:5,
@@ -43,6 +65,9 @@ Ti.include('./application.js','./about_resources_data.js');
 		var tableData=[];
 		var itemCount = cc.resourceData.length;
 		for (var iLoop=0;iLoop<itemCount;iLoop++){
+			if(cc.resourceData[iLoop].hasHeader){
+				tableData.push(cc.getDataRowHeader(cc.resourceData[iLoop],iLoop));
+			}
 			tableData.push(cc.getDataRow(cc.resourceData[iLoop],iLoop));
 		}
 		return tableData;
@@ -67,7 +92,10 @@ Ti.include('./application.js','./about_resources_data.js');
 //	Events
 //-------------------------------
 cc.tableView.addEventListener('click', function(e){
-
+	//Stop them from clicking on headers
+	if(!e.rowData.allowClick){
+		return;
+	}
 	//If japan then try to load the japanese link first
 	if(Ti.Locale.currentLanguage=='ja'){
 		if(e.rowData.ja_url.length>0){
