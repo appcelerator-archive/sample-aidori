@@ -21,22 +21,6 @@ var regionState = false;
 var searchState = false;
 var dataState = false;
 
-(function(){
-	var db = Ti.Database.open(dbName);
-	db.execute('create table if not exists geohash (geohash text primary key, lat real, lng real, length integer, center_count integer, neighbor_count integer)');
-	db_rows = db.execute('select count(*) as count from geohash');
-	if(db_rows.isValidRow()){
-		if(db_rows.fieldByName('count') > 0){
-			dataState = true;
-		}
-	}
-	db_rows.close();
-	db.close();
-	if(!dataState){
-		alert(L('no_local_shelter_info'));
-	}
-})();
-
 function calcHashLevel(delta){
 	if(delta < 0.03){
 		return 6;
@@ -71,7 +55,8 @@ mapView.addEventListener('click', function(evt){
 	var annotation = evt.annotation;
 	if(!annotation.isSummary){
 		var subWindow = Ti.UI.createWindow({
-			backgroundColor:'#666666',
+			barColor:"#e62600",
+			backgroundColor:'#f39380',
 			backgroundImage:'../images/back.png',
 			url:'map_detail.js',
 			title:L('map_detail_title')
@@ -111,106 +96,11 @@ var actIndView = Ti.UI.createView({
 	backgroundColor:'#000000',
 	opacity:0.2
 });
+
+actIndView.hide();
 mapView.add(actInd);
-
-function getFitLocation(max_lat, max_lng, min_lat, min_lng){
-	
-	var average_lat = (parseFloat(max_lat) + parseFloat(min_lat)) / 2.0;
-	var average_lng = (parseFloat(max_lng) + parseFloat(min_lng)) / 2.0;
-	var calcLatitudeDelta = max_lat - min_lat;
-	var calcLongitudeDelta = max_lng - min_lng;
-	
-	if(calcLatitudeDelta < defaultLatDelta){
-		calcLatitudeDelta = defaultLatDelta;
-	}
-	
-	if(calcLongitudeDelta < defaultLatDelta){
-		calcLongitudeDelta = defaultLngDelta;
-	}
-	return {latitude:average_lat, longitude:average_lng, latitudeDelta:calcLatitudeDelta, longitudeDelta:calcLongitudeDelta};
-}
-
-function textSearch(search_str){
-	preSearchKey = search_str;
-	searchState = true;
-	
-	var db = Ti.Database.open(dbName);
-	var condition = '%' + search_str + '%';
-	var db_rows = db.execute('select * from places where name like ? or detail like ?', condition, condition);
-	var count = db_rows.getRowCount();
-	
-	if(count >= 100){
-		searchState = false;
-		actInd.hide();
-		actIndView.hide();
-		alert(L('search_result_overflow'));
-		return;
-	}
-	
-	var max_lat = 0.0;
-	var min_lat = 0.0;
-	var max_lng = 0.0;
-	var min_lng = 0.0;
-	var i = 0;
-	var annotations = [];
-
-	while(db_rows.isValidRow()){
-		var lat = db_rows.fieldByName('lat');
-		var lng = db_rows.fieldByName('lng');
-		if(i == 0){
-			max_lat = lat;
-			max_lng = lng;
-			min_lat = lat;
-			min_lng = lng;
-		}else{
-			max_lat = (max_lat > lat) ? max_lat : lat;
-			max_lng = (max_lng > lng) ? max_lng : lng;
-			min_lat = (min_lat < lat) ? min_lat : lat;
-			min_lng = (min_lng < lng) ? min_lng : lng;
-			Ti.API.info('max_lat:' + max_lat + ',max_lng:' + max_lng + ',min_lat:' + min_lat + ',min_lng:' + min_lng);
-		}
-		
-		var annotation = Ti.Map.createAnnotation({
-			title:db_rows.fieldByName('name'),
-			latitude:lat,
-			longitude:lng,
-			detail:db_rows.fieldByName('detail'),
-			animate:true,
-			isSummary:false
-		});
-		
-		if(isAndroid){
-			annotation.pinImage = "../images/map-pin.png";
-		}else{
-			annotation.pincolor = Ti.Map.ANNOTATION_GREEN;
-		}
-		
-		annotations.push(annotation);
-		db_rows.next();
-		i++;
-	}
-	
-	db_rows.close();
-	db.close();
-	
-	if(count == 0){
-		alert('nothing');
-	}else {
-		this.mapView.removeAllAnnotations();
-		//this.mapView.addAnnotations(annotations);
-		//Android not implement Ti.Map.addAnnotations
-		for(var j = 0; j < annotations.length; j++){
-			mapView.addAnnotation(annotations[j]);
-		}
-		if(count == 1){
-			mapView.setLocation({latitude: max_lat,longitude: max_lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
-		}else{
-			mapView.setLocation(getFitLocation(max_lat, max_lng, min_lat, min_lng));
-		}
-	}
-	actInd.hide();
-	actIndView.hide();
-}
+win.add(mapView);
+win.add(actIndView);
 
 /** XHR **/
 var XHR = {
@@ -316,6 +206,141 @@ function getXHRError(error){
 	actIndView.hide();
 }
 
+function noDataConfirm(){
+	var confirm = Ti.UI.createAlertDialog({
+		title:'Alert',
+		message:L('no_local_shelter_info'),
+		buttonNames:[L('synchronize_shelter_place'),'Cancel'],
+		cancel:1	
+	});
+	confirm.show();
+	confirm.addEventListener('click', function(e)
+	{
+		if(e.index == 0){
+			actInd.show();
+			actIndView.show();
+			XHR.getDataFromURL(url, saveDBFile, getXHRError);
+		}
+	});
+}
+
+(function(){
+	var db = Ti.Database.open(dbName);
+	db.execute('create table if not exists geohash (geohash text primary key, lat real, lng real, length integer, center_count integer, neighbor_count integer)');
+	db_rows = db.execute('select count(*) as count from geohash');
+	if(db_rows.isValidRow()){
+		if(db_rows.fieldByName('count') > 0){
+			dataState = true;
+		}
+	}
+	db_rows.close();
+	db.close();
+	if(!dataState){
+		noDataConfirm();
+		//alert(L('no_local_shelter_info'));
+	}
+})();
+
+
+function getFitLocation(max_lat, max_lng, min_lat, min_lng){
+	
+	var average_lat = (parseFloat(max_lat) + parseFloat(min_lat)) / 2.0;
+	var average_lng = (parseFloat(max_lng) + parseFloat(min_lng)) / 2.0;
+	var calcLatitudeDelta = max_lat - min_lat;
+	var calcLongitudeDelta = max_lng - min_lng;
+	
+	if(calcLatitudeDelta < defaultLatDelta){
+		calcLatitudeDelta = defaultLatDelta;
+	}
+	
+	if(calcLongitudeDelta < defaultLatDelta){
+		calcLongitudeDelta = defaultLngDelta;
+	}
+	return {latitude:average_lat, longitude:average_lng, latitudeDelta:calcLatitudeDelta, longitudeDelta:calcLongitudeDelta};
+}
+
+function textSearch(search_str){
+	preSearchKey = search_str;
+	searchState = true;
+	
+	var db = Ti.Database.open(dbName);
+	var condition = '%' + search_str + '%';
+	var db_rows = db.execute('select * from places where name like ? or detail like ?', condition, condition);
+	var count = db_rows.getRowCount();
+	
+	if(count >= 100){
+		searchState = false;
+		actInd.hide();
+		actIndView.hide();
+		alert(L('search_result_overflow'));
+		return;
+	}
+	
+	var max_lat = 0.0;
+	var min_lat = 0.0;
+	var max_lng = 0.0;
+	var min_lng = 0.0;
+	var i = 0;
+	var annotations = [];
+
+	while(db_rows.isValidRow()){
+		var lat = db_rows.fieldByName('lat');
+		var lng = db_rows.fieldByName('lng');
+		if(i == 0){
+			max_lat = lat;
+			max_lng = lng;
+			min_lat = lat;
+			min_lng = lng;
+		}else{
+			max_lat = (max_lat > lat) ? max_lat : lat;
+			max_lng = (max_lng > lng) ? max_lng : lng;
+			min_lat = (min_lat < lat) ? min_lat : lat;
+			min_lng = (min_lng < lng) ? min_lng : lng;
+			Ti.API.info('max_lat:' + max_lat + ',max_lng:' + max_lng + ',min_lat:' + min_lat + ',min_lng:' + min_lng);
+		}
+		
+		var annotation = Ti.Map.createAnnotation({
+			title:db_rows.fieldByName('name'),
+			latitude:lat,
+			longitude:lng,
+			detail:db_rows.fieldByName('detail'),
+			animate:true,
+			isSummary:false
+		});
+		
+		if(isAndroid){
+			annotation.pinImage = "../images/map-pin.png";
+		}else{
+			annotation.pincolor = Ti.Map.ANNOTATION_GREEN;
+		}
+		
+		annotations.push(annotation);
+		db_rows.next();
+		i++;
+	}
+	
+	db_rows.close();
+	db.close();
+	
+	if(count == 0){
+		alert('nothing');
+	}else {
+		this.mapView.removeAllAnnotations();
+		//this.mapView.addAnnotations(annotations);
+		//Android not implement Ti.Map.addAnnotations
+		for(var j = 0; j < annotations.length; j++){
+			mapView.addAnnotation(annotations[j]);
+		}
+		if(count == 1){
+			mapView.setLocation({latitude: max_lat,longitude: max_lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
+		}else{
+			mapView.setLocation(getFitLocation(max_lat, max_lng, min_lat, min_lng));
+		}
+	}
+	actInd.hide();
+	actIndView.hide();
+}
+
 function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 	var annotations = [];
 	var geohash = encodeGeoHash(lat, lng);
@@ -376,6 +401,8 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 
 function showAnnotation(annotations){
 	if(annotations.length == 0){
+		actInd.hide();
+		actIndView.hide();
 		regionState = true;
 		return;
 	}
@@ -384,6 +411,8 @@ function showAnnotation(annotations){
 		mapView.addAnnotation(annotations[i]);
 	}
 	regionState = true;
+	actInd.hide();
+	actIndView.hide();
 }
 
 /** Search bar **/
@@ -396,11 +425,11 @@ var searchBar = Ti.UI.createSearchBar({
 
 searchBar.addEventListener('return', function(e)
 {
+	searchBar.blur();
 	if(!dataState){
-		alert(L('no_local_shelter_info'));
+		noDataConfirm();
 		return;
 	}
-	searchBar.blur();
 	if(e.value.length == 0){
 		searchState = false;
 		var annotations = createAnnotationByGeohash(currentMapLat, currentMapLng, currentLatDelta, currentLngDelta);
@@ -423,49 +452,6 @@ searchBar.addEventListener('cancel', function(){
 
 searchBar.addEventListener('cancel', function(e){searchBar.blur();});
 win.add(searchBar);
-
-/** Get geolocation **/
-if (Ti.Geolocation.locationServicesEnabled) {
-  
-	Ti.Geolocation.purpose = "Get current position";
-	Ti.Geolocation.showCalibration = false;
-	Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
-	Ti.Geolocation.distanceFilter = 100;
-  
-	Ti.Geolocation.getCurrentPosition(function(e) {
-		if (!e.success || e.error)
-		{
-			alert(L('can_not_get_geolocation'));
-		}else{
-			currentLat = e.coords.latitude;
-			currentLng = e.coords.longitude;
-			mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
-		}
-		mapView.addEventListener('regionChanged', function(evt){
-			currentLatDelta = evt.latitudeDelta;
-			currentLngDelta = evt.longitudeDelta;
-			currentMapLat = evt.latitude;
-			currentMapLng = evt.longitude;
-			Ti.API.info(evt);
-			if(regionState && !searchState && dataState){
-				regionState = false;
-				var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
-				showAnnotation(annotations);
-			}
-		});
-		regionState = true;
-	});
-  
-	Ti.Geolocation.addEventListener("location", function(e) {
-		currentLat = e.coords.latitude;
-		currentLng = e.coords.longitude;
-	});
-  
-} else {
-  alert(L('can_not_get_geolocation'));
-}
-
-win.add(mapView);
 
 function geoDistance(lat1, lng1, lat2, lng2, precision) {
   var distance = 0;
@@ -496,7 +482,7 @@ function geoDistance(lat1, lng1, lat2, lng2, precision) {
 
 function setNearByAnnotation(){
 	if(!dataState){
-		alert(L('no_local_shelter_info'));
+		noDataConfirm();
 		actInd.hide();
 		actIndView.hide();
 		return;
@@ -548,8 +534,6 @@ function setNearByAnnotation(){
 	db_rows.close();
 	db.close();
 	mapView.setLocation({latitude:lat, longitude:lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
-	actInd.hide();
-	actIndView.hide();
 }
 
 /** toolbar **/
@@ -591,9 +575,21 @@ function setNearByAnnotation(){
 	});
 	
 	getPlacesButton.addEventListener('click', function(){
-		actInd.show();
-		actIndView.show();
-		XHR.getDataFromURL(url, saveDBFile, getXHRError);
+		var confirm = Ti.UI.createAlertDialog({
+			title:L('sync_confirm'),
+			message:L('sync_description'),
+			buttonNames:['OK','Cancel'],
+			cancel:1	
+		});
+		confirm.show();
+		confirm.addEventListener('click', function(e)
+		{
+			if(e.index == 0){
+				actInd.show();
+				actIndView.show();
+				XHR.getDataFromURL(url, saveDBFile, getXHRError);
+			}
+		});
 	});
 	
 	if(isAndroid){
@@ -639,9 +635,74 @@ function setNearByAnnotation(){
 	}
 })();
 
-win.add(actIndView);
-actIndView.hide();
-/** win close **/
-win.addEventListener('close', function(){
-	Ti.Geolocation.removeEventListener('location');
+
+/** Get geolocation **/
+if (Ti.Geolocation.locationServicesEnabled) {
+  
+	Ti.Geolocation.purpose = "Get current position";
+	Ti.Geolocation.showCalibration = false;
+	Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+	Ti.Geolocation.distanceFilter = 100;
+  
+	Ti.Geolocation.getCurrentPosition(function(e) {
+		if (!e.success || e.error)
+		{
+			alert(L('can_not_get_geolocation'));
+		}else{
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+			mapView.setLocation({latitude:e.coords.latitude, longitude:e.coords.longitude});
+		}
+		regionState = true;
+	});
+	
+	if(!isAndroid){
+		Ti.Geolocation.addEventListener("location", function(e) {
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+		});
+	}
+} else {
+  alert(L('can_not_get_geolocation'));
+}
+
+mapView.addEventListener('regionChanged', function(evt){
+	currentLatDelta = evt.latitudeDelta;
+	currentLngDelta = evt.longitudeDelta;
+	currentMapLat = evt.latitude;
+	currentMapLng = evt.longitude;
+	
+	if(regionState && !searchState && dataState){
+		regionState = false;
+		var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
+		showAnnotation(annotations);
+	}
 });
+
+/** resume/pause **/
+if(isAndroid) {
+	Ti.Android.currentActivity.addEventListener('resume', function(e) {
+		Ti.Geolocation.addEventListener("location", function(e) {
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+		});
+	});
+	Ti.Android.currentActivity.addEventListener('pause', function(e){
+		Ti.Geolocation.removeEventListener('location', function(){});
+	});
+}else{
+	
+    Ti.App.addEventListener('resumed', function(e) {
+		Ti.API.info('resumed fire');
+		Ti.Geolocation.addEventListener("location", function(e) {
+			currentLat = e.coords.latitude;
+			currentLng = e.coords.longitude;
+		});
+    });
+	Ti.App.addEventListener('pause', function(e){
+		Ti.API.info('pause fire');
+		Ti.Geolocation.removeEventListener("location", function(){});
+	});
+	
+}
+
