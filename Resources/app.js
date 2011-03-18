@@ -18,34 +18,10 @@ var newsTab = Ti.UI.createTab({
   window:newsWin
 });
 
-var twitterWin = Ti.UI.createWindow({  
-  url:'javascript/twitter.js',
-  titleid:L('title_twitter'),
-  barColor:"#e62600",
-  backgroundColor:'#f39380'
-});
-
-// Avoid keyboard overlapping the text fields
-if (Ti.Platform.name == 'android') {
-	twitterWin.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
-}
-
-var twitterTab = Ti.UI.createTab({  
-  icon:'images/tabs/TAB_twitter.png',
-  title:L('tab_twitter'),
-  window:twitterWin
-});
-
-var instagramWin = Ti.UI.createWindow({  
-  url:'javascript/instagram.js',
-  titleid:L('title_instagram'),
-  barColor:"#e62600",
-  backgroundColor:'#f39380'
-});
-var instagramTab = Ti.UI.createTab({  
-  icon:'images/icon_instagram.png',
-  title:L('tab_instagram'),
-  window: instagramWin
+var socialTab = Ti.UI.createTab({  
+  icon:'images/tabs/TAB_social.png',
+  title:L('social_tab_name'),
+  window:socialWin
 });
 
 var contributeWin = Ti.UI.createWindow({  
@@ -86,11 +62,10 @@ var mapTab = Ti.UI.createTab({
 });
 
 tabGroup.addTab(newsTab);  
-tabGroup.addTab(twitterTab);
-tabGroup.addTab(instagramTab);
-tabGroup.addTab(contributeTab);  
 tabGroup.addTab(mapTab);
-tabGroup.addTab(aboutTab);  
+tabGroup.addTab(contributeTab);  
+tabGroup.addTab(socialTab);
+tabGroup.addTab(aboutTab); 
 
 var disclaimerTabGroup = Ti.UI.createTabGroup();
 var disclaimerWin = Ti.UI.createWindow({

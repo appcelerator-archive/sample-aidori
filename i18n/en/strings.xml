@@ -85,4 +85,6 @@
 	<string name="new_reader_error_title">Sorry</string>
 	<string name="new_reader_error_msg">News Feed is currently unavailable. Please try again later.</string>
 	<string name="refresh_list">Refresh</string>
+	<string name="social_tab_name">Social</string>
+	<string name="social_page_title">Social</string>
 </resources>
