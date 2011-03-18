@@ -49,15 +49,6 @@ Ti.App.fireEvent('show_indicator');
 		separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE,
 		separatorColor:'#6e6e6e'
 	});
-    cc.tableView.footerView = Ti.UI.createButton({
-        id: "readmoreButton",
-        borderColor: '#fff',
-        borderRadius: 0
-	});
-    cc.tableView.footerView.addEventListener('click', function() {
-        cc.retrieveTwitterFeed(cc.current_page+1);
-    });
-    
 	cc.win.add(cc.tableView);
 	cc.buildData=function(tweet) {
 		var row = Ti.UI.createTableViewRow({
@@ -98,11 +89,7 @@ Ti.App.fireEvent('show_indicator');
 
 	};
 
-	cc.retrieveTwitterFeed=function(page) {
-        if(!page) {
-            page = 0;
-        }
-        cc.current_page = page;
+	cc.retrieveTwitterFeed=function() {
 		// get saved hashtags:
 		if(!Ti.App.Properties.hasProperty('hashtag1')){
 			Ti.App.Properties.setString("hashtag1", HASHTAG1);
@@ -137,22 +124,19 @@ Ti.App.fireEvent('show_indicator');
 		if (ht4 != '') {
 			hashTags += ('&' + encodeURIComponent('#' + ht4));
 		}
-		var url = "http://search.twitter.com/search.json?q="+hashTags+"&page="+(page+1);
+		var url = "http://search.twitter.com/search.json?q="+hashTags;
 		var xhr = Ti.Network.createHTTPClient();
-		var tableData = [];
-        if(page > 0) {
-            tableData = cc.tableView.data;
-        }
+		var tableData =[];
 	  	Ti.API.info(url);
 		xhr.open("GET",url);
 		xhr.onreadystatechange = function() {
-		    Ti.API.info(this.readyState);
-		    Ti.API.info(this.status);
+		  // Ti.API.info(this.readyState);
+		  // Ti.API.info(this.status);
 		    if (this.readyState == 4) {
-				var tweets = eval('(' + this.responseText + ')');
-				Ti.API.debug(this.responseText);
-				var results = tweets.results;
-                
+					var tweets = eval('(' + this.responseText + ')');
+				// Ti.API.debug(this.responseText);
+					var results = tweets.results;
+
 		  		for(var index in results) {
 		    		if(results[index] != null) {
 		    		  try{
@@ -162,8 +146,9 @@ Ti.App.fireEvent('show_indicator');
 		    		  }
 		    		}
 		  		}
-			    cc.tableView.setData(tableData,{animationStyle:Ti.UI.iPhone.RowAnimationStyle.UP});
-	      	    Ti.App.fireEvent('hide_indicator',{});
+
+			cc.tableView.setData(tableData,{animationStyle:Ti.UI.iPhone.RowAnimationStyle.UP});
+	      	Ti.App.fireEvent('hide_indicator',{});
 			}
 		};
 		xhr.send();
