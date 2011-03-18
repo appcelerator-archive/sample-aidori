@@ -1,5 +1,6 @@
 Ti.include('geohash.js');
 var win = Ti.UI.currentWindow;
+var tab = Ti.UI.currentTab;
 
 /** initialize **/
 var isAndroid = Ti.Platform.osname == 'android';
@@ -20,6 +21,12 @@ var preSearchKey = '';
 var regionState = false;
 var searchState = false;
 var dataState = false;
+
+Ti.App.addEventListener('map_shelter_check', function(){
+	if(Ti.App.Properties.getBool('hasShelterUpdate') && dataState){
+		alert(L('has_shelter_update'));
+	}
+});
 
 function calcHashLevel(delta){
 	if(delta < 0.03){
@@ -194,6 +201,7 @@ function saveDBFile(blobData){
 	var new_db = Ti.Database.install(file.nativePath, dbName);
 	new_db.close();
 	dataState = true;
+	Ti.App.Properties.setBool('hasShelterUpdate', false);
 	actInd.hide();
 	actIndView.hide();
 }
@@ -223,6 +231,10 @@ function noDataConfirm(){
 		}
 	});
 }
+
+win.addEventListener('focus', function(){
+	alert('focus');
+});
 
 (function(){
 	var db = Ti.Database.open(dbName);
@@ -377,7 +389,21 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 		}
 		db_rows.close();
 	}else{
-		var db_rows = db.execute('select * from geohash where geohash like ? and length = ?', (geohash.substring(0, hashLevel) + '%'), 4);
+		var neighbors = {}
+		neighbors.center = geohash.substring(0, hashLevel);
+		neighbors.top = calculateAdjacent(neighbors.center, 'top');
+		neighbors.bottom = calculateAdjacent(neighbors.center, 'bottom');
+		neighbors.right = calculateAdjacent(neighbors.center, 'right');
+		neighbors.left = calculateAdjacent(neighbors.center, 'left');
+		neighbors.topleft = calculateAdjacent(neighbors.left, 'top');
+		neighbors.topright = calculateAdjacent(neighbors.right, 'top');
+		neighbors.bottomright = calculateAdjacent(neighbors.right, 'bottom');
+		neighbors.bottomleft = calculateAdjacent(neighbors.left, 'bottom');
+		//Ti.API.info(neighbors);
+		//alert(neighbors);
+		
+		var db_rows = db.execute('select * from geohash where (geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ? or geohash like ?) and length = 4 and center_count > 0', 
+								(neighbors.center + '%'), (neighbors.top + '%'), (neighbors.bottom + '%'), (neighbors.right + '%'), (neighbors.left + '%'), (neighbors.topleft + '%'), (neighbors.topright + '%'), (neighbors.bottomleft + '%'), (neighbors.bottomright + '%'));
 		Ti.API.info('count:' + db_rows.getRowCount());
 		while(db_rows.isValidRow()){
 			var annotation = Ti.Map.createAnnotation({
@@ -575,6 +601,10 @@ function setNearByAnnotation(){
 	});
 	
 	getPlacesButton.addEventListener('click', function(){
+		if(!Ti.App.Properties.getBool('hasShelterUpdate') && dataState){
+			alert(L('shelter_newest'));
+			return;
+		}
 		var confirm = Ti.UI.createAlertDialog({
 			title:L('sync_confirm'),
 			message:L('sync_description'),
