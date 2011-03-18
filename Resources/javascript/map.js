@@ -404,8 +404,8 @@ function createAnnotationByGeohash(lat, lng, latDelta, lngDelta){
 		while(db_rows.isValidRow()){
 			var annotation = Ti.Map.createAnnotation({
 				title:'Click to Zoom',
-				latitude:db_rows.fieldByName('lat'),
-				longitude:db_rows.fieldByName('lng'),
+				latitude:db_rows.fieldByName('glat'),
+				longitude:db_rows.fieldByName('glng'),
 				hashLevel:hashLevel,
 				isSummary:true,
 				geoHash:geohash,
