@@ -71,7 +71,7 @@
 	<string name="hashtags">Hashtags</string>
 	<string name="hashtags_droidmenu">Hashtags</string>
 	<string name="about_app_more">Learn More About The Project</string>
-	<string name="about_app_team">Tony to put something here</string>
+    <string name="about_app_team">Appcelerator is working with the Appcelerator Developer Community and many other volunteers to help with the Japan 2011 earthquake and tsunami disasters. \n\nWe hope that this application can assist the people of Japan as well as raise awareness of the seriousness of the situation.\n\nThe following volunteers spent a lot of their personal time either designing, coding or testing Aidori and we'd like to recognize them here.\n\nTony Guntharp - USA\nYuichiro MASUI - Japan\nJeff Haynie - USA\nBen Bahrenburg - USA\nTim Poulsen - USA\nIvan Mathy - France\nJustin Lee - Taiwan\nKazuaki Konno - Japan\nAtsushi KATAOKA - Japan\nElyse Phillips - USA\nTyrus Smalley - USA\nScott Schwarzhoff - USA\nMaria Iu - USA\nToru KOBAYASHI - Japan\nYoshinori Ehara - Japan\nHironori Hashimo - Japan\nYuya Nishioka - Japan\nAtsushi Wada - Japan\nGo Ando - Japan\nTAKEDA hiroyuki - Japan\nE-WA（いーわ - Japan\nKanwa Nagafuji - Japan\nSeiji Miyazawa - Japan\nKazuhiro ODA - Japan\n</string>
 	<string name="about_phone_title">Consult about missing persons</string>
 	<string name="about_resource_link_title">Helpful Resources</string>
 	<string name="about_resources_page_title">Helpful Resources</string>
@@ -85,7 +85,7 @@
 	<string name="about_appcelerator_desc">\nThe success of iPhone and Android, the emergence of Tablet computing, and the promise of Desktop Linux have created great opportunities for application developers..as well as created a new set of challenges. While the market for applications is larger than ever before, developing and supporting multiple platforms can be complicated and expensive.\n\nA free and open source application development platform, Titanium lets you create native mobile, tablet and desktop application experiences using existing web skills like Javascript, HTML, CSS, Python, Ruby, and PHP.</string>
 	<string name="about_learn_more">Learn More</string>
 	<string name="about_main_title">App Overview</string>
-	<string name="about_tab_app_info">App Info</string>
+	<string name="about_tab_app_info">Info</string>
 	<string name="new_reader_error_title">Sorry</string>
 	<string name="new_reader_error_msg">News Feed is currently unavailable. Please try again later.</string>
 	<string name="refresh_list">Refresh</string>
