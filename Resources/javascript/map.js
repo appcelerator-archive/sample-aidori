@@ -232,10 +232,6 @@ function noDataConfirm(){
 	});
 }
 
-win.addEventListener('focus', function(){
-	alert('focus');
-});
-
 (function(){
 	var db = Ti.Database.open(dbName);
 	db.execute('create table if not exists geohash (geohash text primary key, lat real, lng real, length integer, center_count integer, neighbor_count integer)');
