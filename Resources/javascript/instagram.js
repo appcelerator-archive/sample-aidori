@@ -4,18 +4,18 @@ Ti.App.fireEvent('show_indicator');
 var cc ={win:Ti.UI.currentWindow};
 (function(){
 	cc.refreshButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.REFRESH});
-	if (Ti.Platform.name != 'android') {
-		Ti.UI.currentWindow.setLeftNavButton(cc.refreshButton);
+	if (!isAndroid()) {
+		Ti.UI.currentWindow.setRightNavButton(cc.refreshButton);
 	};
 	
-	var xhr = Titanium.Network.createHTTPClient();
+	var xhr = Ti.Network.createHTTPClient();
 
-	var containerView = Titanium.UI.createView({
+	var containerView = Ti.UI.createView({
 		width: '100%',
 		height: '100%'
 	});	
 
-	var scrollView = Titanium.UI.createScrollView({
+	var scrollView = Ti.UI.createScrollView({
 		width: '100%',
 		layout:'horizontal',
 		contentWidth: Ti.Platform.displayCaps.platformWidth,
@@ -36,8 +36,7 @@ var cc ={win:Ti.UI.currentWindow};
 	containerView.add(scrollView);
 	//containerView.add(detailView);
 
-	cc.retrieveInstagramFeed = function()
-	{
+	cc.retrieveInstagramFeed = function(){
 		xhr.onload = function()
 		{
             var views = [];
