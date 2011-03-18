@@ -43,7 +43,7 @@
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
 	<string name="disclaimer_title">피재지역의 여러분에게</string>
 	<string name="disclaimer_button_title">OK</string>
-	<string name="disclaimer_text">2011년3월11일(금）에 발생한 동북지방(東北地方) 태평양 앞바다지진、및 해일피해에 의해 돌아가셔진 여러분의 명복을 기도하는 동시에, 피해를 당한 여러분, 가족의 여러분에게 마음으로부터 병문안드립니다 . 그리고 현재도 구조를 기다리고 계시는 여러분가 하루라도 빨리 구제되는 것을 기원하고 있습니다。\n\n이 어플리케이션이,불안을 안으면서 부자유한 생활을 강요당하고 있는 많은 피재자의 여러분에게、조금이라도 도움이 되면 다행입니다.\n\n개발자일동\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titan</string>
+	<string name="disclaimer_text">2011년3월11일(금）에 발생한 동북지방(東北地方) 태평양 앞바다지진、및 해일피해에 의해 돌아가셔진 여러분의 명복을 기도하는 동시에, 피해를 당한 여러분, 가족의 여러분에게 마음으로부터 병문안드립니다 . 그리고 현재도 구조를 기다리고 계시는 여러분가 하루라도 빨리 구제되는 것을 기원하고 있습니다。\n\n이 어플리케이션이,불안을 안으면서 부자유한 생활을 강요당하고 있는 많은 피재자의 여러분에게、조금이라도 도움이 되면 다행입니다.\n\n개발자일동\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titans</string>
 	<string name="twitter_time_lessminute">몇초전</string>
 	<string name="twitter_minuteago">몇초전</string>
 	<string name="twitter_minutesago"> 분전</string>
