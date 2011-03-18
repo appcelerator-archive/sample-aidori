@@ -26,6 +26,8 @@
 	<string name="map_detail_title">Shelter detail</string>
 	<string name="search_result_overflow">There are more than 100 results. Narrow down please.</string>
 	<string name="map_processing">Processing..</string>
+	<string name="sync_confirm">Confirm</string>
+	<string name="sync_description">It takes a long time.</string>
 	<string name="tab_about">About</string>
 	<string name="tab_contribute">Contribute</string>
 	<string name="title_about">About Sendai Quake</string>
