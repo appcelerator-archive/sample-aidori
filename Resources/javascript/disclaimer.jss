@@ -14,7 +14,7 @@
 #disclaimerLabel {
   top:10;
   left:10;
-  width:300;
+  width:'auto';
   height:'auto';
   color:'#000';
   font-size:16;
