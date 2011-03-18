@@ -6,6 +6,7 @@ var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirect
 if(!file.exists()) {
    file = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, "data/contribute.json");
 }
+
 cc.charityData = JSON.parse(''+file.read());
 
 (function(){
@@ -50,9 +51,9 @@ cc.charityData = JSON.parse(''+file.read());
 		var logoImg = Ti.UI.createImageView({
 		    image:charityItem.logo,
 			defaultImage:'../images/cont_placeholder.png',
-		  	preventDefaultImage:true,
 			height:75,
-			width:75
+			width:75,
+			canScale:false
 	    });
 		vwCol1.add(logoImg);
 			
