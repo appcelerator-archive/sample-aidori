@@ -43,7 +43,7 @@
 	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
 	<string name="disclaimer_title">被災地の皆様へ</string>
 	<string name="disclaimer_button_title">OK</string>
-	<string name="disclaimer_text">2011年3月11日(金)に発生した東北地方太平洋沖地震、及び津波被害により亡くなられた方々のご冥福をお祈りするとともに、被災された皆様、ご家族の方々に心よりお見舞い申し上げます。そして現在も救助を待っている方々が一日も早く救われることを願っております。\n\nこのアプリが、不安を抱えながら不自由な生活を強いられている多くの被災者の皆様に、少しでもお役に立てたら幸いです。\n\n開発者一同より\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titan</string>
+	<string name="disclaimer_text">2011年3月11日(金)に発生した東北地方太平洋沖地震、及び津波被害により亡くなられた方々のご冥福をお祈りするとともに、被災された皆様、ご家族の方々に心よりお見舞い申し上げます。そして現在も救助を待っている方々が一日も早く救われることを願っております。\n\nこのアプリが、不安を抱えながら不自由な生活を強いられている多くの被災者の皆様に、少しでもお役に立てたら幸いです。\n\n開発者一同より\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titans</string>
 	<string name="twitter_time_lessminute">数秒前</string>
 	<string name="twitter_minuteago">1 分前</string>
 	<string name="twitter_minutesago"> 分前</string>

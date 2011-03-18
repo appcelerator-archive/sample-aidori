@@ -4,7 +4,8 @@ var cc ={win:Ti.UI.currentWindow};
 Ti.App.fireEvent('show_indicator');
 
 (function(){
-	if (Ti.Platform.name != 'android') {
+	var dropDownMenuOpen = false;
+	if (!isAndroid()) {
 		// view to hold the refresh and config buttons
 		cc.moreOptionsView = Ti.UI.createView({
 			top:0,
@@ -23,6 +24,7 @@ Ti.App.fireEvent('show_indicator');
 			image:'../images/navi-reload.png'
 		});
 		cc.refreshButton.addEventListener('click',function(){
+			dropDownMenuOpen=false;
 			cc.retrieveTwitterFeed();
 			cc.moreOptionsView.hide();
 		});
@@ -39,7 +41,13 @@ Ti.App.fireEvent('show_indicator');
 			image:'../images/icon_arrow_down.png'
 		});
 		cc.moreOptionsButton.addEventListener('click',function() {
-			cc.moreOptionsView.show();
+			if(dropDownMenuOpen){
+				dropDownMenuOpen=false;
+				cc.moreOptionsView.hide();
+			}else{
+				dropDownMenuOpen=true;
+				cc.moreOptionsView.show();
+			}
 		});
 		Ti.UI.currentWindow.setRightNavButton(cc.moreOptionsButton);
 		cc.win.add(cc.moreOptionsView);
@@ -233,7 +241,7 @@ Ti.App.fireEvent('show_indicator');
 	//--------------------------------------------
 	//		Events
 	//--------------------------------------------
-if (Ti.Platform.name != 'android') {
+if (!isAndroid()) {
 	cc.refreshButton.addEventListener('click', function(){
 			
 		if (!Ti.Network.online) {
@@ -247,6 +255,7 @@ if (Ti.Platform.name != 'android') {
 	});
 	
 	cc.configButton.addEventListener('click', function(){
+		dropDownMenuOpen=false;
 		twConfigWrapper.show();
 		cc.moreOptionsView.hide();
 	});
