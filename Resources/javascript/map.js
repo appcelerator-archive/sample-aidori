@@ -388,7 +388,7 @@ function showAnnotation(annotations){
 
 /** Search bar **/
 var searchBar = Ti.UI.createSearchBar({
-	barColor:'#000000',
+	barColor:win.barColor,
 	showCancel:true,
 	height:40,
 	top:0
@@ -631,6 +631,7 @@ function setNearByAnnotation(){
 			systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
 		});
 		var toolbar = Ti.UI.createToolbar({
+			barColor:win.barColor,
 			items:[currentPositionButton, flexSpace, nearbyButton, flexSpace, getPlacesButton],
 			bottom:0
 		});
