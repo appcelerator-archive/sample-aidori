@@ -1,3 +1,4 @@
+Ti.include('./application.js');
 Ti.App.fireEvent('show_indicator');
 
 var cc ={win:Ti.UI.currentWindow};
@@ -18,10 +19,10 @@ var cc ={win:Ti.UI.currentWindow};
 		width: '100%',
 		layout:'horizontal',
 		contentWidth: Ti.Platform.displayCaps.platformWidth,
-		contentHeight:'auto',
+		contentHeight:Ti.Platform.displayCaps.platformWidth*5,
 		backgroundColor: '#000'
 	});
-	
+	/*
 	var detailView = Titanium.UI.createScrollableView({
 		top: 0,
 		left: 0,
@@ -30,13 +31,10 @@ var cc ={win:Ti.UI.currentWindow};
 		backgroundColor: 'red',
 		visible: false
 	});
-	scrollView.addEventListener('singletap',function(e)
-	{
-		Ti.API.log(e);
-	});
+    */
 	Ti.UI.currentWindow.add(containerView);
 	containerView.add(scrollView);
-	containerView.add(detailView);
+	//containerView.add(detailView);
 
 	cc.retrieveInstagramFeed = function()
 	{
@@ -55,6 +53,7 @@ var cc ={win:Ti.UI.currentWindow};
 				picture = data.data[i];
 				//Ti.API.log(picture);
 				var thumbnail = Ti.UI.createImageView({
+                    top: 0,
 					width: Ti.Platform.displayCaps.platformWidth/2,
 					height: Ti.Platform.displayCaps.platformWidth/2,
 					defaultImage: '../images/default_image.png',
@@ -71,7 +70,7 @@ var cc ={win:Ti.UI.currentWindow};
 				// detailView.views[i] = standard_resolution;
                 views.push(standard_resolution);
 			}
-            detailView.views = views;
+            //detailView.views = views;
 			Ti.App.fireEvent('hide_indicator',{});
 			
 		};
