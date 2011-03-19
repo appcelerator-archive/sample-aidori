@@ -101,5 +101,5 @@
 	<string name="about_resource_header_shelter">避難所情報</string>
 	<string name="about_resource_SL">東日本大震災・避難所情報</string>
 	<string name="about_resource_EWFDC">給水、炊き出し場所一覧</string>
-	<string name="about_resource_EWFDCVM">炊き出しまっぷ、緊急避難場所</string>
+	<string name="about_resource_EWFDCVM">炊き出しマップ、緊急避難場所</string>
 </resources>
