@@ -2,8 +2,6 @@ Ti.include('./application.js');
 var cc ={win:Ti.UI.currentWindow};
 (function(){
 
-	cc.win.backgroundColor ='#CCCCCC';
-
 	cc.win.orientationModes = [
 		Ti.UI.PORTRAIT,
 		Ti.UI.UPSIDE_PORTRAIT
@@ -11,8 +9,8 @@ var cc ={win:Ti.UI.currentWindow};
 
 	cc.infoButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.INFO_LIGHT});
 
+	cc.win.backgroundColor ='#CCCCCC';
 	if(!isAndroid()){
-		cc.win.backgroundColor ='#CCCCCC';
 		cc.win.rightNavButton=cc.infoButton;
 	}
 	
