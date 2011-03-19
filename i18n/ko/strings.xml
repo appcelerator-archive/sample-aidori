@@ -17,9 +17,9 @@
 	<string name="tab_contribute">협력</string>
 	<string name="tab_map">대피소</string>
 	<string name="title_map">대피소</string>
-	<string name="show_current_position_button_title">현재 위치를 표시</string>
-	<string name="synchronize_shelter_place">대피소 정보를 동기</string>
-	<string name="map_near_by">가까운</string>
+	<string name="show_current_position_button_title">현재위치 표시</string>
+	<string name="synchronize_shelter_place">대피소정보 동기</string>
+	<string name="map_near_by">가까운 곳</string>
 	<string name="near_by_not_found">가까운 곳에서는 대피소가 없습니다</string>
 	<string name="shelter_info_notice">동기가 종료했습니다.이 대피소 리스트는 반드시 현시점으로 가동하고 있는 장소의 리스트가 아닌 것이 있으므로 주의해 주십시오.</string>	
 	<string name="can_not_get_geolocation">현재 위치을 취득할 수 없었습니다</string>
