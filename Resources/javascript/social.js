@@ -93,36 +93,44 @@ var cc ={win:Ti.UI.currentWindow};
 })();
 
 cc.twitterContainer.addEventListener('click', function(){
-	var wPage = Ti.UI.createWindow({  
-	    barColor:cc.win.barColor,
-		navBarHidden:false,
-		title:Ti.Locale.getString('title_twitter'),
-		backgroundColor:'#f39380',
-		url:'twitter.js',
-		backButtonTitleImage:'../images/icon_arrow_left.png'
-	});
-	
-	//Handle by correct platform
-	if (isAndroid()) {
-		wPage.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
+	if (!Ti.Network.online) {
+		noNetworkAlert();
+	}else{
+		var wPage = Ti.UI.createWindow({  
+		    barColor:cc.win.barColor,
+			navBarHidden:false,
+			title:Ti.Locale.getString('title_twitter'),
+			backgroundColor:'#f39380',
+			url:'twitter.js',
+			backButtonTitleImage:'../images/icon_arrow_left.png'
+		});
+
+		//Handle by correct platform
+		if (isAndroid()) {
+			wPage.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
+		}
+		Ti.UI.currentTab.open(wPage,{animated:true});		
 	}
-	Ti.UI.currentTab.open(wPage,{animated:true});	
+
 });
 
 cc.instagramContainer.addEventListener('click', function(){
-	var wPage = Ti.UI.createWindow({  
-	    barColor:cc.win.barColor,
-		navBarHidden:false,
-		title:Ti.Locale.getString('title_instagram'),
-		backgroundColor:'#f39380',
-		url:'instagram.js',
-		backButtonTitleImage:'../images/icon_arrow_left.png'
-	});
+	if (!Ti.Network.online) {
+		noNetworkAlert();
+	}else{
+		var wPage = Ti.UI.createWindow({  
+		    barColor:cc.win.barColor,
+			navBarHidden:false,
+			title:Ti.Locale.getString('title_instagram'),
+			backgroundColor:'#f39380',
+			url:'instagram.js',
+			backButtonTitleImage:'../images/icon_arrow_left.png'
+		});
 	
-	//Handle by correct platform
-	if (isAndroid()) {
-		wPage.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
+		//Handle by correct platform
+		if (isAndroid()) {
+			wPage.windowSoftInputMode=Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE;
+		}
+		Ti.UI.currentTab.open(wPage,{animated:true});	
 	}
-	Ti.UI.currentTab.open(wPage,{animated:true});	
-
 });

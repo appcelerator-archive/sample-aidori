@@ -46,19 +46,23 @@ Ti.include('./keys.js','./application.js');
 
 // Create tableView row event listener
 cc.tableView.addEventListener('click', function (e) {
-    if (e.rowData.controller) {
-        var win = Titanium.UI.createWindow({
-            url:e.rowData.controller,
-			rss_url:e.rowData.rss,
-            title:e.rowData.title,
-		    barColor:cc.win.barColor,
-		    fullscreen:false,
-			backgroundColor:'#f39380',
-			backButtonTitleImage:'../images/icon_arrow_left.png'
-        });
+	if (!Ti.Network.online) {
+		noNetworkAlert();
+	}else{
+	    if (e.rowData.controller) {
+	        var win = Titanium.UI.createWindow({
+	            url:e.rowData.controller,
+				rss_url:e.rowData.rss,
+	            title:e.rowData.title,
+			    barColor:cc.win.barColor,
+			    fullscreen:false,
+				backgroundColor:'#f39380',
+				backButtonTitleImage:'../images/icon_arrow_left.png'
+	        });
 
-        Ti.UI.currentTab.open(win,{animated:true});
-    }
+	        Ti.UI.currentTab.open(win,{animated:true});
+	    }
+	}
 });
 
 Ti.App.addEventListener('update_news', function() {
