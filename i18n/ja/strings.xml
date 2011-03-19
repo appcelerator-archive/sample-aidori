@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<string name="aidori">アイドリ</string>
 	<string name="crisis_title">最新ニュース</string>
 	<string name="btn_clear">クリア</string>
 	<string name="btn_save">保存</string>
