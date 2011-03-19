@@ -2,7 +2,7 @@
   left:10;
   right:10;
   bottom:10;
-  height:60;
+  height:40;
   backgroundImage:'../images/buttons/button_spacer.png';
 }
 
