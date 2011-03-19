@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<string name="aidori">Aidori</string>
 	<string name="crisis_title">Sendai Quake</string>
 	<string name="btn_clear">Clear</string>
 	<string name="btn_save">Save</string>
