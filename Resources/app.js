@@ -4,7 +4,7 @@ if(Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad') {
 
 Ti.include('javascript/application.js');
 var indicatorShowing = false;
-var useThisBackgroundColor='#f39380';
+var useThisBackgroundColor='#FFFFFF';
 var useThisBarColor='#e62600';
 
 //For some reason we need to case into a property before doing a check against the value
