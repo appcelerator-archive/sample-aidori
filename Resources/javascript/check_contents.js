@@ -1,4 +1,4 @@
-var baseurl = "http://masuidrive.jp/tmp/";
+var baseurl = "http://aidori.s3.amazonaws.com/";
 Ti.App.Properties.setBool('hasShelterUpdate', false);
 
 var download = function(path, callback) {

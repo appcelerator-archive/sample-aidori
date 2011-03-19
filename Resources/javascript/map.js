@@ -13,7 +13,7 @@ var defaultLngDelta = 0.1;
 var currentLatDelta = defaultLatDelta;
 var currentLngDelta = defaultLngDelta;
 
-var url = 'http://s3-ap-northeast-1.amazonaws.com/yehara.tokyo/JapanQuake2011/shelter.db';
+var url = 'http://aidori.s3.amazonaws.com/shelter.db';
 
 var dbName = 'map';
 var dbFileName = 'map.db';
