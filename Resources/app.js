@@ -1,15 +1,21 @@
 if(Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad') {
-    Titanium.UI.iPhone.showStatusBar({'animated': false});
+    Ti.UI.iPhone.showStatusBar({'animated': false});
 }
 
-Titanium.include('javascript/application.js');
+Ti.include('javascript/application.js');
 var indicatorShowing = false;
+var useThisBackgroundColor='#f39380';
+var useThisBarColor='#e62600';
+
+//For some reason we need to case into a property before doing a check against the value
+var welcomeMsgCheck = Ti.App.Properties.hasProperty('disclaimerViewed');
 
 var tabGroup = Ti.UI.createTabGroup();
 var newsWin = Ti.UI.createWindow({  
   url:'javascript/news.js',
-  barColor:"#e62600",
-  backgroundColor:(Ti.Platform.name == 'android') ? '#fff' :'#f39380',
+  barColor:useThisBarColor,
+  welcomeMsgOpen:!(welcomeMsgCheck),
+  backgroundColor:(Ti.Platform.name == 'android') ? '#fff' :useThisBackgroundColor,
   titleid:L('crisis_title')
 });
 var newsTab = Ti.UI.createTab({  
@@ -20,9 +26,9 @@ var newsTab = Ti.UI.createTab({
 
 var socialWin = Ti.UI.createWindow({  
   url:'javascript/social.js',
-  backgroundColor:'#f39380',
+  backgroundColor:useThisBackgroundColor,
   title:L('social_page_title'),
-  barColor:"#e62600"
+  barColor:useThisBarColor
 });
 var socialTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_social.png',
@@ -32,22 +38,22 @@ var socialTab = Ti.UI.createTab({
 
 var contributeWin = Ti.UI.createWindow({  
   url:'javascript/contribute.js',
-  backgroundColor:'#f39380',
+  backgroundColor:useThisBackgroundColor,
   title:L('contribute_page_title'),
-  barColor:"#e62600"
+  barColor:useThisBarColor
 });
 var contributeTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_contribute.png',
-  backgroundColor:'#f39380',
+  backgroundColor:useThisBackgroundColor,
   title:L('tab_contribute'),
   window:contributeWin
 });
 
 var aboutWin = Ti.UI.createWindow({  
   url:'javascript/about.js',
-  backgroundColor:'#f39380',
+  backgroundColor:useThisBackgroundColor,
   title:L('about_page_title'),
-  barColor:"#e62600"
+  barColor:useThisBarColor
 });
 var aboutTab = Ti.UI.createTab({  
   icon:'images/tabs/TAB_about.png',
@@ -57,8 +63,8 @@ var aboutTab = Ti.UI.createTab({
 
 var mapWin = Ti.UI.createWindow({
 	url:'javascript/map.js',
-    backgroundColor:'#f39380',
-	barColor:"#e62600",
+    backgroundColor:useThisBackgroundColor,
+	barColor:useThisBarColor,
 	title:L('title_map')
 });
 var mapTab = Ti.UI.createTab({
@@ -80,9 +86,9 @@ tabGroup.addEventListener('focus', function(e){
 
 var disclaimerWin = Ti.UI.createWindow({
   url:'javascript/disclaimer.js',
-  backgroundColor:'#f39380',
+  backgroundColor:useThisBackgroundColor,
   title:L('disclaimer_title'),
-  barColor:'#e62600',
+  barColor:useThisBarColor,
   backTitle:'Close',
   tabBarHidden:true
 });
@@ -180,8 +186,7 @@ Ti.include("javascript/check_contents.js");
 
 tabGroup.open();
 
-//For some reason we need to case into a property before doing a check against the value
-var welcomeMsgCheck = Ti.App.Properties.hasProperty('disclaimerViewed');
+
 if (!welcomeMsgCheck) {
 	disclaimerWin.open({modal:true});
 }
