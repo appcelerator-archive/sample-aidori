@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<string name="aidori">아이도리</string>
 	<string name="crisis_title">최신 뉴스</string>
 	<string name="btn_clear">clear</string>
 	<string name="btn_save">보존</string>
