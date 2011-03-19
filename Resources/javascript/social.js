@@ -2,9 +2,7 @@ Ti.include('./application.js');
 var cc ={win:Ti.UI.currentWindow};
 (function(){
 
-	if(!isAndroid()){
-		cc.win.backgroundColor ='#CCCCCC';
-	}
+	cc.win.backgroundColor ='#CCCCCC';
 
 	cc.win.orientationModes = [
 		Ti.UI.PORTRAIT,
