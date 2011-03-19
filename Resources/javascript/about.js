@@ -10,6 +10,7 @@ var cc ={win:Ti.UI.currentWindow};
 	cc.infoButton = Ti.UI.createButton({systemButton:Ti.UI.iPhone.SystemButton.INFO_LIGHT});
 
 	if(!isAndroid()){
+		cc.win.backgroundColor ='#CCCCCC';
 		cc.win.rightNavButton=cc.infoButton;
 	}
 	
