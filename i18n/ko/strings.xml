@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<string name="crisis_title">최신 뉴스</string>
-	<string name="btn_clear">clear</string>
+	<string name="btn_clear">초기화</string>
 	<string name="btn_save">보존</string>
-	<string name="btn_send">송신</string>
-	<string name="add_photo">Add a Photo</string>
-	<string name="share">Share with us what you\'re seeing</string>
+	<string name="btn_send">보내기</string>
+	<string name="add_photo">사진첨부</string>
+	<string name="share">제보 내용을 공유</string>
 	<string name="tab_report">리포트</string>
 	<string name="tab_news">뉴스</string>
 	<string name="tab_twitter">트위터</string>
-	<string name="title_twitter">Twitter</string>
+	<string name="title_twitter">트위터</string>
 	<string name="title_contribute">협력</string>
 	<string name="contribute_page_title">협력</string>
 	<string name="tab_about">아이도리</string>
@@ -34,15 +34,15 @@
 	<string name="sync_confirm">동기확인</string>
 	<string name="sync_description">이 처리는 시간이 걸립니다</string>
 	<string name="shelter_newest">이 대피소 정보는 최신입니다.</string>
-	<string name="has_shelter_update">갱신가능한 대피소 정보가 있습니다.통신가능한 장소에서 갱신해 주십시오.</string>
+	<string name="has_shelter_update">갱신가능한 대피소 정보가 있습니다. 통신가능한 장소에서 갱신해 주십시오.</string>
 	<string name="about_body">Sendai Quake was built by ...</string>
-	<string name="volunteer_info">For more information on how to volunteer, please call (555) 555-1212</string>
-	<string name="twitter_loading">Loading...</string>
-	<string name="title_organization">Organization</string>
-	<string name="twitter_no_network_title">네트워크 접속이 필요합니다.</string>
-	<string name="twitter_no_network_msg">We cannot detect a network connection.  You need an active network connection to be able to continue using Nature Nearby features.</string>
-	<string name="disclaimer_title">피해지역의 여러분게</string>
-	<string name="disclaimer_button_title">OK</string>
+	<string name="volunteer_info">지진 피해복구를 위한 자원봉사 문의는, (555) 555-1212 으로 연락 바랍니다.</string>
+	<string name="twitter_loading">로딩중...</string>
+	<string name="title_organization">단체/기관</string>
+	<string name="twitter_no_network_title">네트워크 접속 오류</string>
+	<string name="twitter_no_network_msg">연결 가능한 네트워크를 찾을 수가 없습니다. 네트워크 환경설정을 확인 바랍니다.
+	<string name="disclaimer_title">피해지역의 여러분께</string>
+	<string name="disclaimer_button_title">확인</string>
 	<string name="disclaimer_text">2011년3월11일(금）에서 발생한 동북지방(東北地方) 태평양 앞바다대지진 으로 인해 돌아가신 분들의 명복을 빌며,등시에 피해를 입으신 분들과 가족 여러분에게 진심으로 위로의 뜻을 전합니다.\n\n그리고 현재도 구조를 기다리고 계시는 분들의 하루빠른 구조를 기원하고 있습니다. \n\n이 어플리케이션이,불안속에서 불편한 생활을 하고 계시는 많은 피해자 여러분께 조금이라도 도움이 되었으면 합니다.\n\n개발자일동\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titan</string>
 	<string name="twitter_time_lessminute">몇초전</string>
 	<string name="twitter_minuteago">몇초전</string>
@@ -63,7 +63,7 @@
 	<string name="about_d_visit">Read More At Wikipedia</string>
 	<string name="about_d_desc">On 11 March 2011, the Sendal earthquake and tsunami struck the T-hoku region, it was an 8.9-9.0 megathrust earthquake.  The estimates of the Sendai earthquake's magnitude made it the most powerful earthquake to hit Japan and one of the five most powerful earthquakes in the world since modern recording time.  The earthquake and tsunami impacted at least 20 countries as far away as North and South America.  Japanese Prime Minister Naoto Kan stated In the 65 years after the World War II this is the toughest and most difficult crisis for Japan</string>
 	<string name="about_app_more">Learn More About The Project</string>
-	<string name="about_app_team">저희Appcelerator사는 이번 발생한 동북지방(東北地方) 태평양 앞바다지진,및 쓰나미피해로 불편한 생활을 강요당하고 계시는 많은 피해자 여러분께「우리들이 할 수 있는 일을 하자」를 슬로건으로 개발자 커뮤니티와 자원봉사활동자 여러분과 함께,「Japan 2011 Quake Relief」프로젝트를 시작했습니다./n이 어플리케이션이, 지금 현재 곤경에 처하계시는 일본의 여러분께 도움이 되기를 바랍니다.\n\n이하의 자원봉사자들이 많은 시간을 쓰여 「아이도리」어플리케이션의 디자인,프로그래밍,그리고 테스트에 협력해 주였습니다. 그들의 분투에 대해 경의를 표합니다.\n\nTony Guntharp - USA\nYuichiro MASUI - Japan\nJeff Haynie - USA\nBen Bahrenburg - USA\nTim Poulsen - USA\nIvan Mathy - France\nJustin Lee - Taiwan\nKazuaki Konno - Japan\nAtsushi KATAOKA - Japan\nElyse Phillips - USA\nTyrus Smalley - USA\nScott Schwarzhoff - USA\nMaria Iu - USA\nToru KOBAYASHI - Japan\nYoshinori Ehara - Japan\nHironori Hashimo - Japan\nYuya Nishioka - Japan\nAtsushi Wada - Japan\nGo Ando - Japan\nTAKEDA hiroyuki - Japan\nE-WA(이ー와 - Japan\nKanwa Nagafuji - Japan\nSeiji Miyazawa - Japan\nKazuhiro ODA - Japan\nYoko Okada - Japan\n</string>
+	<string name="about_app_team">저희Appcelerator사는 이번 발생한 동북지방(東北地方) 태평양 앞바다지진,및 쓰나미피해로 불편한 생활을 강요당하고 계시는 많은 피해자 여러분께「우리들이 할 수 있는 일을 하자」를 슬로건으로 개발자 커뮤니티와 자원봉사활동자 여러분과 함께,「Japan 2011 Quake Relief」프로젝트를 시작했습니다./n이 어플리케이션이, 지금 현재 곤경에 처하계시는 일본의 여러분께 도움이 되기를 바랍니다.\n\n이하의 자원봉사자들이 많은 시간을 쓰여 「아이도리」어플리케이션의 디자인,프로그래밍,그리고 테스트에 협력해 주였습니다. 그들의 분투에 대해 경의를 표합니다.\n\nTony Guntharp - USA\nYuichiro MASUI - Japan\nJeff Haynie - USA\nBen Bahrenburg - USA\nTim Poulsen - USA\nIvan Mathy - France\nJustin Lee - Taiwan\nKazuaki Konno - Japan\nAtsushi KATAOKA - Japan\nElyse Phillips - USA\nTyrus Smalley - USA\nScott Schwarzhoff - USA\nMaria Iu - USA\nToru KOBAYASHI - Japan\nYoshinori Ehara - Japan\nHironori Hashimo - Japan\nYuya Nishioka - Japan\nAtsushi Wada - Japan\nGo Ando - Japan\nTAKEDA hiroyuki - Japan\nE-WA(이ー와 - Japan\nKanwa Nagafuji - Japan\nSeiji Miyazawa - Japan\nKazuhiro ODA - Japan\nYoko Okada - Japan\nJaewang Lee - Korea</string>
 	<string name="about_phone_title">행방불명자에 관한 전화 상담창구</string>
 	<string name="about_resource_link_title">관련 정보 사이트</string>
 	<string name="about_resources_page_title">관련 정보 사이트</string>
