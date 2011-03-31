@@ -40,7 +40,7 @@
 	<string name="twitter_loading">로딩중...</string>
 	<string name="title_organization">단체/기관</string>
 	<string name="twitter_no_network_title">네트워크 접속 오류</string>
-	<string name="twitter_no_network_msg">연결 가능한 네트워크를 찾을 수가 없습니다. 네트워크 환경설정을 확인 바랍니다.
+	<string name="twitter_no_network_msg">연결 가능한 네트워크를 찾을 수가 없습니다. 네트워크 환경설정을 확인 바랍니다.</string>
 	<string name="disclaimer_title">피해지역의 여러분께</string>
 	<string name="disclaimer_button_title">확인</string>
 	<string name="disclaimer_text">2011년3월11일(금）에서 발생한 동북지방(東北地方) 태평양 앞바다대지진 으로 인해 돌아가신 분들의 명복을 빌며,등시에 피해를 입으신 분들과 가족 여러분에게 진심으로 위로의 뜻을 전합니다.\n\n그리고 현재도 구조를 기다리고 계시는 분들의 하루빠른 구조를 기원하고 있습니다. \n\n이 어플리케이션이,불안속에서 불편한 생활을 하고 계시는 많은 피해자 여러분께 조금이라도 도움이 되었으면 합니다.\n\n개발자일동\nAppcelerator, Inc.\nAppcelerator JP\nAppcelerator Titan</string>
