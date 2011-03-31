@@ -147,8 +147,14 @@ function hideIndicator() {
 	if(Ti.Platform.name == 'android'){
 		droidActInd.hide();
 	}else{
-	  	actInd.hide();
-	  	indWin.close({opacity:0,duration:500});
+	    if (actInd && actInd !== null) {
+	       actInd.hide();
+	    }
+	    
+	    if (indWin && indWin !== null) {
+	       indWin.close({opacity:0,duration:500});
+	    }
+	  	
 	  	indicatorShowing = false;		
 	}
 };
