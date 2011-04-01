@@ -133,7 +133,7 @@ var XHR = {
 				max: 100,
 				value: 0,
 				style: Titanium.UI.iPhone.ProgressBarStyle.PLAIN,
-				message: "Downloading...",
+				message: "Downloading..."
 			});
 		}
 		progress.show();
@@ -541,6 +541,7 @@ function setNearByAnnotation(){
 		actIndView.hide();
 		return;
 	}
+
 	var geohash = encodeGeoHash(currentLat, currentLng);
 	
 	var sql1 = 'select * from places where id in (select places_id from place_geohashes where geohash in(select geohash from geohash where (geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ? or geohash = ?) and length = ?) group by places_id)';
@@ -596,6 +597,8 @@ function setNearByAnnotation(){
 	db_rows.close();
 	db.close();
 	mapView.setLocation({latitude:lat, longitude:lng, latitudeDelta:defaultLatDelta, longitudeDelta:defaultLngDelta});
+	actInd.hide();
+	actIndView.hide();
 }
 
 /** toolbar **/
@@ -735,17 +738,26 @@ if (Ti.Geolocation.locationServicesEnabled) {
   alert(L('can_not_get_geolocation'));
 }
 
+var lastTimer = null;
 mapView.addEventListener('regionChanged', function(evt){
-	currentLatDelta = evt.latitudeDelta;
-	currentLngDelta = evt.longitudeDelta;
-	currentMapLat = evt.latitude;
-	currentMapLng = evt.longitude;
-	
-	if(regionState && !searchState && dataState){
-		regionState = false;
-		var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
-		showAnnotation(annotations);
+	if(lastTimer){
+		clearTimeout(lastTimer);
 	}
+	
+	lastTimer = setTimeout(function(){
+		
+		currentLatDelta = evt.latitudeDelta;
+		currentLngDelta = evt.longitudeDelta;
+		currentMapLat = evt.latitude;
+		currentMapLng = evt.longitude;
+	
+		if(regionState && !searchState && dataState){
+			regionState = false;
+			var annotations = createAnnotationByGeohash(evt.latitude, evt.longitude, evt.latitudeDelta, evt.longitudeDelta);
+			showAnnotation(annotations);
+		}
+		lastTimer = null;
+	}, 500);
 });
 
 /** resume/pause **/
