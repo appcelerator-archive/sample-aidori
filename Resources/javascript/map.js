@@ -29,11 +29,11 @@ Ti.App.addEventListener('map_shelter_check', function(){
 });
 
 function calcHashLevel(delta){
-	if(delta < 0.03){
+	if(delta < 0.06){
 		return 6;
-	}else if(0.03 <= delta && delta < 0.2){
+	}else if(0.06 <= delta && delta < 0.08){
 		return 5;
-	}else if(0.2 <= delta && delta < 0.4){
+	}else if(0.08 <= delta && delta < 0.4){
 		return 4;
 	}else if(0.4 <= delta && delta < 5.0){
 		return 3;
@@ -85,7 +85,7 @@ mapView.addEventListener('click', function(evt){
 		isAndroid ? subWindow.open({fullscreen:true}) : Ti.UI.currentTab.open(subWindow, {animated: true});
 	}else{
 		mapView.removeAllAnnotations();
-		mapView.setLocation({latitude:annotation.latitude, longitude:annotation.longitude, latitudeDelta:0.1, longitudeDelta:0.1});
+		mapView.setLocation({latitude:annotation.latitude, longitude:annotation.longitude, latitudeDelta:0.03, longitudeDelta:0.03});
 	}
 });
 
@@ -116,13 +116,26 @@ var XHR = {
 			error_callback({message:L('can_not_use_network')});
 			return;
 		}
-		var progress = Titanium.UI.createActivityIndicator({
-		    message: "Downloading...",
-		    type: 1,
-		    min: 0,
-		    max: 100,
-		    value: 0
-		});
+		var progress = null;
+		if(isAndroid){
+			progress = Ti.UI.createActivityIndicator({
+		    	message: "Downloading...",
+		    	type: 1,
+		    	min: 0,
+		    	max: 100,
+		    	value: 0
+			});
+		}else{
+			progress = Ti.UI.createProgressBar({
+				width: 200,
+				height: 50,
+				min: 0,
+				max: 100,
+				value: 0,
+				style: Titanium.UI.iPhone.ProgressBarStyle.PLAIN,
+				message: "Downloading...",
+			});
+		}
 		progress.show();
 		mapView.add(progress);
 		
