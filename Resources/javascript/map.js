@@ -116,7 +116,16 @@ var XHR = {
 			error_callback({message:L('can_not_use_network')});
 			return;
 		}
-
+		var progress = Titanium.UI.createActivityIndicator({
+		    message: "Downloading...",
+		    type: 1,
+		    min: 0,
+		    max: 100,
+		    value: 0
+		});
+		progress.show();
+		mapView.add(progress);
+		
 		var xhr = Ti.Network.createHTTPClient();
 
 		//Loading processing
@@ -136,7 +145,10 @@ var XHR = {
 					break;
 			}
 		};
-
+		
+		xhr.ondatastream = function(e){
+			progress.value = e.progress * 100;
+		};
 		//After processing
 		xhr.onload = function(){
 			var result = null;
@@ -152,6 +164,7 @@ var XHR = {
 				error = ex;
 			}
 			
+			xhr.ondatastream = null;
 			xhr.onreadystatchange = null;
 			xhr.onload = null;
 			xhr.onerror = null;
@@ -160,6 +173,7 @@ var XHR = {
 			if(error != null){
 				error_callback(error);
 			}else{
+				progress.hide();
 				callback(result);
 			}
 			return;
@@ -167,6 +181,7 @@ var XHR = {
 
 		//Error processing
 		xhr.onerror = function(e){
+			xhr.ondatastream = null;
 			xhr.onreadystatchange = null;
 			xhr.onload = null;
 			xhr.onerror = null;
@@ -200,6 +215,7 @@ function saveDBFile(blobData){
 	
 	var new_db = Ti.Database.install(file.nativePath, dbName);
 	new_db.close();
+
 	dataState = true;
 	Ti.App.Properties.setBool('hasShelterUpdate', false);
 	actInd.hide();
@@ -672,6 +688,12 @@ function setNearByAnnotation(){
 	}
 })();
 
+function locationCallback(e){
+	if(e.success){
+		currentLat = e.coords.latitude;
+		currentLng = e.coords.longitude;
+	}
+}
 
 /** Get geolocation **/
 if (Ti.Geolocation.locationServicesEnabled) {
@@ -694,12 +716,7 @@ if (Ti.Geolocation.locationServicesEnabled) {
 	});
 	
 	if(!isAndroid){
-		Ti.Geolocation.addEventListener("location", function(e) {
-			if(e.success){
-				currentLat = e.coords.latitude;
-				currentLng = e.coords.longitude;
-			}
-		});
+		Ti.Geolocation.addEventListener("location", locationCallback);
 	}
 } else {
   alert(L('can_not_get_geolocation'));
@@ -722,29 +739,19 @@ mapView.addEventListener('regionChanged', function(evt){
 if (Ti.Geolocation.locationServicesEnabled) {
 	if(isAndroid) {
 		Ti.Android.currentActivity.addEventListener('resume', function(e) {
-			Ti.Geolocation.addEventListener("location", function(e) {
-				if(e.success){
-					currentLat = e.coords.latitude;
-					currentLng = e.coords.longitude;
-				}
-			});
+			Ti.Geolocation.addEventListener("location", locationCallback);
 		});
 		Ti.Android.currentActivity.addEventListener('pause', function(e){
-			Ti.Geolocation.removeEventListener('location', function(){});
+			Ti.Geolocation.removeEventListener('location', locationCallback);
 		});
 	}else{
 		Ti.App.addEventListener('resumed', function(e) {
 			Ti.API.info('resumed fire');
-			Ti.Geolocation.addEventListener("location", function(e) {
-				if(e.success){
-					currentLat = e.coords.latitude;
-					currentLng = e.coords.longitude;
-				}
-			});
+			Ti.Geolocation.addEventListener("location", locationCallback);
     	});
 		Ti.App.addEventListener('pause', function(e){
 			Ti.API.info('pause fire');
-			Ti.Geolocation.removeEventListener("location", function(){});
+			Ti.Geolocation.removeEventListener("location", locationCallback);
 		});
 	}
 }
