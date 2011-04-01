@@ -21,6 +21,7 @@
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid/>
+    <property name="ti.android.google.map.api.key.production">0oGs5qJ9r-L259eArkhQ9-dA0_ZGJGWb8Wk89Bg</property>
 	<iphone>
 		<orientations device="iphone">
 			<orientation>Ti.UI.PORTRAIT</orientation>

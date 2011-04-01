@@ -11,10 +11,7 @@
 		android:largeScreens="true"
 		android:anyDensity="false"
 	/>
-	
-	<application android:name="Aidori" >
-   	<uses-library android:name="com.google.android.maps" />
-	
+
 	<!-- TI_MANIFEST -->
     
 	<application
