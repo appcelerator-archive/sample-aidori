@@ -74,7 +74,7 @@ var cc ={win:Ti.UI.currentWindow};
 			
 		};
 		// open the client
-		xhr.open('GET','https://api.instagram.com/v1/tags/prayforjapan/media/recent?client_id=067b035e96cf459a9d0db4b66d6d1cf3');
+		xhr.open('GET','http://api.instagram.com/v1/tags/prayforjapan/media/recent?client_id=067b035e96cf459a9d0db4b66d6d1cf3');
 
 		// send the data
 		xhr.send();
