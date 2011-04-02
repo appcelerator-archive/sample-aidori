@@ -7,7 +7,7 @@
     </deployment-targets>
 <id>com.appcelerator.aidori</id>
 <name>Aidori</name>
-<version>1.0</version>
+<version>1.4</version>
 <publisher>Appcelerator</publisher>
 <url>http://developer.appcelerator.com</url>
 <description>Crisis App for Sendai Earthquake</description>
